@@ -17,5 +17,9 @@ Route::get('/', function () {
     return view('checkin');
 });
 
+Route::get('/client/{hash}', 'Controller@client'); 
+
 Route::get('/list', 'Controller@list');
 Route::post('/guest', 'Controller@guest');
+
+

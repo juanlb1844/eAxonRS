@@ -18,6 +18,12 @@ class Controller extends BaseController
     	return view('list', ['guests' => $guests]);  
     }
 
+    public function client( $hash ) { 
+    	$user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
+       
+    	return view('client', ['hash' => $hash, 'user' => $user]);  
+    }
+
     public function guest(Request $data) {
     	$name = $data->input('name'); 
     	$phone = $data->input('phone');  
