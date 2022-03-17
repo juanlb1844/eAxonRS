@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('checkin');
 });
+
+Route::get('/list', 'Controller@list');
+Route::post('/guest', 'Controller@guest');
