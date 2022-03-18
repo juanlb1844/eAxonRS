@@ -1,8 +1,7 @@
 @extends('layout') 
 
 @section('page')
-<div class="container-fluid">
-    <div class="container">
+  
         <div class="col-lg-12 pd1">
             <h1>Check in</h1>
         </div>
@@ -41,8 +40,8 @@
         <div class="col-lg-12 pd1">
             <button class="btn btn-primary" onclick="save()">guardar</button>
         </div>
-    </div>
-</div>
+ 
+ 
 
 <script type="text/javascript">
     function save() {

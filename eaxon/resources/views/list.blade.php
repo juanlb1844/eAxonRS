@@ -1,8 +1,11 @@
 @extends('layout') 
 
 @section('page')
-<div class="container-fluid">
-    <div class="container">
+ 
+    <div class="col-lg-12 col-sm-12"> 
+        <div class="col-lg-12 pd1">
+            <h1>Lista de huéspedes</h1>
+        </div>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
@@ -24,10 +27,7 @@
             </tbody>
         </table>
     </div>
-</div>
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+ 
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">

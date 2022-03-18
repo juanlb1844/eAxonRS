@@ -1,17 +1,8 @@
- 
- 
-
-
- 
-
- 
- <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --> 
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Latest compiled and minified CSS  --> 
  
 <!-- <script type="" src="https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"></script>   --> 
-
- 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
 
@@ -20,7 +11,7 @@
 <!-- <script src="../dist/gridstack.js"></script>--> 
  
 
- <!-- include summernote css/js -->
+<!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
@@ -28,12 +19,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Checkin</title>
-        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<title>Checkin</title>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
@@ -43,15 +34,14 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <!-- Styles -->
-       
-       <style type="text/css">
-           .pd1 {
-            padding: 10px; 
-           }
-       </style>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+<!-- Styles -->
+ <style type="text/css">
+     .pd1 {
+      padding: 10px; 
+     }
+ </style>
 
 </head>
 
@@ -69,15 +59,12 @@
 
   td span { font-size: 15px; font-weight: 600; }
      td:hover{ cursor: pointer; }
-
      table.dataTable.no-footer {
          border-bottom: 1px solid #dddddd; 
     }
-  
     @if ( isset($extra['selected-option']) ) 
         .selected-{{$extra['selected-option']}} { background-color: lightgrey; }
     @endif  
-
     .np-l { padding-left: 0px!important; }
     .np   { padding: 0px!important; }
     .np-r { padding-right: 0px!important; }
@@ -86,161 +73,9 @@
 
     .title-field { font-weight: 600; font-size: 15px; }
  </style>
+ 
 
- <style type="text/css">
-  :root {
-  --color-blue-100: #f5faff;
-    --color-blue-200: #b8dcff;
-    --color-blue-300: #7ab8ff;
-    --color-blue-400: #3d90ff;
-    --color-blue-500: #0064fe;
-    --color-blue-600: #0046d1;
-    --color-blue-700: #002ba3;
-    --color-blue-800: #001575;
-    --color-blue-900: #000647;
-    --color-green-100: #f0fcf5;
-    --color-green-200: #b4eece;
-    --color-green-300: #78e0a7;
-    --color-green-400: #3cd180;
-    --color-green-500: #00c159;
-    --color-green-600: #009645;
-    --color-green-700: #006a31;
-    --color-green-800: #003f1d;
-    --color-green-900: #001309;
-    --color-gray-100: #f3f5f6;
-    --color-gray-200: #d0d8dd;
-    --color-gray-300: #aebac2;
-    --color-gray-400: #8d9ca7;
-    --color-gray-500: #6c7d8b;
-    --color-gray-600: #576674;
-    --color-gray-700: #424e5c;
-    --color-gray-800: #2e3843;
-    --color-gray-900: #1c212a;
-    --color-white: white;
-    --color-black: black;
-    --color-border: var(--color-gray-200);
-    --space-0: 0;
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: .8rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-20: 5rem;
-    --space-24: 6rem;
-    --text-sm: 0.875rem;
-    --text-md: 2rem;
-    --text-lg: 1.25rem;
-    --text-xl: 1.5rem;
-    --radius: 6px;
-    --round: 1000px;
-    --border: 1px solid var(--color-border);
-    --shadow: 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.05);
-    --shadow-large: 0px 5px 18px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.05);
-    --shadow-focus: 0 0 0 var(--space-1) var(--color-blue-200);
-    --transition-curve: cubic-bezier(0.2, 0.7, 0.3, 1);
-    --transition-curve-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --transition-speed: 0.25s;
-    --transition-speed-slow: 1s;
-    --transition: all var(--transition-speed) var(--transition-curve);
-    --transition-bounce: all var(--transition-speed) var(--transition-curve-bounce);
-    --opacity-25: 0.25;
-    --opacity-50: 0.5;
-    --opacity-75: 0.75;
-    --opacity-100: 1;
-}
-
-.notification {
-  z-index: 999999;
-  position: fixed;
-  display: flex;
-  width: var(--notification-size);
-  right: var(--space-4);
-  border: var(--border);
-  background-color: var(--color-white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-large);
-  transition: var(--transition);
-  animation: slide-in var(--transition-speed) var(--transition-curve);
-}
-.content {
-  padding: var(--space-4);
-}
-.content .title {
-  font-size: var(--text-md);
-  margin-bottom: var(--space-1);
-  font-weight: bold;
-  color: var(--color-gray-800);
-}
-.description {
-  color: var(--color-gray-600);
-}
-.close-not {
-  font-size: 15px;
-  margin-left: auto;
-  padding: 12px; 
-  border: 0;
-  border-left: var(--border);
-  background-color: transparent;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  color: var(--color-gray-400);
-  cursor: pointer;
-}
-.close-not:hover {
-  background-color: var(--color-gray-100);
-}
-.close-not:active {
-  color: var(--color-gray-700);
-}
-.close-not:focus,
-.close-not:active {
-  outline: none;
-  box-shadow: var(--shadow-focus);
-}
-.add {
-  padding: var(--space-3) var(--space-5);
-  border: 0;
-  font-weight: bold;
-  background-color: var(--color-blue-500);
-  color: var(--color-white);
-  border-radius: var(--round);
-  cursor: pointer;
-  outline: none;
-}
-.add:hover {
-  background-color: var(--color-blue-400);
-}
-.add:focus {
-  box-shadow: var(--shadow-focus);
-}
-.add:active {
-  background-color: var(--color-blue-500);
-}
-.animate-out {
-  animation: fade-out var(--transition-speed) var(--transition-curve);
-}
-@keyframes fade-out {
-  to {
-    opacity: 0;
-    transform: translateX(var(--notification-size));
-  }
-}
-@keyframes slide-in {
-  from {
-    transform: translateX(var(--notification-size));
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-</style>
-
-    <style type="text/css">
+<style type="text/css">
   #overlay{ 
   position: fixed;
   top: 0;
@@ -274,39 +109,39 @@
 }
 </style>
      
-    <style type="text/css">
-         
-        html, body{ 
-            font-family: 'Rajdhani'!important;   
-        } 
-        .menu-options li {
-            display: block;
-            margin: 0px 0px; 
-            color: #434b69; 
-        } 
-        .menu-options li a {
-            color: #434b69;  
-        }
-        .menu-options li a:hover {
-            text-decoration: none; 
-        }
-        .menu-options {
-            font-size: 12px;  
-            padding-top: 20px;
-            font-weight: 500!important;
-            list-style: none; 
-            padding-left: 10px;  
-        }
-        .container-side {
-            height: 100vh;
-            background: #f5f5f5;
-            position: fixed; 
-            z-index: 99;
-        }
-        .panel-right {
-            padding: 45px 0px; width: 120%; padding-left: 25vh
-        }
-    </style>
+<style type="text/css">
+   
+  html, body{ 
+      font-family: 'Rajdhani'!important;   
+  } 
+  .menu-options li {
+      display: block;
+      margin: 0px 0px; 
+      color: #434b69; 
+  } 
+  .menu-options li a {
+      color: #434b69;  
+  }
+  .menu-options li a:hover {
+      text-decoration: none; 
+  }
+  .menu-options {
+      font-size: 12px;  
+      padding-top: 20px;
+      font-weight: 500!important;
+      list-style: none; 
+      padding-left: 10px;  
+  }
+  .container-side {
+      height: 100vh;
+      background: #f5f5f5;
+      /*position: fixed;*/
+      z-index: 99;
+  }
+  .panel-right {
+      padding: 45px 0px; width: 120%; padding-left: 25vh
+  }
+</style>
 
     <style type="text/css">
         .option-side-conteainer {
@@ -618,11 +453,11 @@ const removeNotification = (event) => {
                             </div>
                         </li>
                         <li> 
-                                <div class="container-avatar">
-                                    <div class="avatar-content">
-                                        
-                                    </div>
-                                </div>
+                          <div class="container-avatar">
+                              <div class="avatar-content">
+                                  
+                              </div>
+                          </div>
                         </li>
                     </ul>
                 </div>
@@ -630,51 +465,13 @@ const removeNotification = (event) => {
             
         </div> 
 
-        <div style="padding-top: 70px;">
+        <div class="col-lg-10 col-md-10" style="padding-top: 70px;">
             @yield('page')   
         </div>
    
 
     </div>
-
- 
-
-<style type="text/css">
-    .prev-img { width: 120px; }
-    .hover:hover { cursor: pointer; color: green; }
-    .sub-info { 
-        display: inline-block;
-        right: 0vw; 
-        transition-property: all;
-        transition-duration: .5s;
-        height: 100vh;
-        width: 80vw; 
-        position: fixed;
-        background-color: white;
-        border-left: 2px solid gray;
-        z-index: 99999;
-    }
-    .sub-info-2 { 
-        display: inline-block;
-        right: 0vw; 
-        transition-property: all;
-        transition-duration: .5s;
-        height: 100vh;
-        width: 80vw; 
-        position: fixed;
-        background-color: white;
-        border-left: 2px solid gray;
-        z-index: 99999;
-    } 
-    .hidden-sub { 
-        position: fixed;
-        transition-property: all;
-        transition-duration: .5s; 
-        right: -100vw; 
-    }
-</style>
- 
- 
+  
  
 </body>
 </html>
