@@ -148,8 +148,8 @@
 				</li> 
 			</ul>
 		</div>
-		<div class="banner-img-text">
-			<span>Hotkakes a la memonié $30</span>
+		<div class="banner-img-text"> 
+			<span style="display: block;">Hotkakes a la memonié $30</span>
 			<button class="btn btn-primary btn-s1">ordenar</button>
 		</div>
 	</div>
