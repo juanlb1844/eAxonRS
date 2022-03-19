@@ -53,7 +53,7 @@
     <span class="spinner"></span>
   </div>
 </div>
- 
+  
  
  <style type="text/css">
 
@@ -70,7 +70,6 @@
     .np-r { padding-right: 0px!important; }
     .np-t { padding-top: 0px!important; }
     .np-b { padding-bottom: 0px!important; }
-
     .title-field { font-weight: 600; font-size: 15px; }
  </style>
  
@@ -131,12 +130,14 @@
       font-weight: 500!important;
       list-style: none; 
       padding-left: 10px;  
+      margin-right: 10px; 
   }
   .container-side {
       height: 100vh;
-      background: #f5f5f5;
+      background: #212228;
       /*position: fixed;*/
       z-index: 99;
+      border-right: 1px solid gray; 
   }
   .panel-right {
       padding: 45px 0px; width: 120%; padding-left: 25vh
@@ -177,15 +178,17 @@
         .txt-option {
             padding: 10px; 
             font-weight: 600;
+            color: white;
+            font-size: 20px; 
         }
         .menu-options li {
             border-radius: 10px; 
             padding: 5px; 
             transition-property: all; transition-duration: .2s; 
-      margin-top: 5px;
+            margin-top: 5px;
         } 
         .menu-options li:hover {
-            background-color: #e8e8e8; 
+            background-color: #333333; 
             cursor: pointer;
             transition-property: all; transition-duration: .2s;  
         }
@@ -238,232 +241,50 @@
           .label-sucess {
             background-color: #39b67c; 
           }
+          .inter-menu li { display: inline-block; }
+
+
+          html, body{
+            background-color: #212228;
+            color: white; 
+          }
 </style>
-
-
- <script type="text/javascript">
-
  
-
-  function notification(n_body, n_header, n_location) {
-          // Let's check if the browser supports notifications
-          if (!("Notification" in window)) {
-            alert("This browser does not support desktop notification");
-          }
-
-          // Let's check if the user is okay to get some notification
-          else if (Notification.permission === "granted") {
-            // If it's okay let's create a notification
-            var notification = new Notification(n_header, {
-                icon: 'https://begima.com.mx/public/media/begima%20logotipo-01%20web-simple-medium.png',
-                body: n_body,
-          }); 
-            notification.onclick = function() {
-             window.open(n_location);
-            };
-          }
-
-          // Otherwise, we need to ask the user for permission
-          // Note, Chrome does not implement the permission static property
-          // So we have to check for NOT 'denied' instead of 'default'
-          else if (Notification.permission !== 'denied') {
-            Notification.requestPermission(function (permission) {
-
-              // Whatever the user answers, we make sure we store the information
-              if(!('permission' in Notification)) {
-                Notification.permission = permission;
-              }
- 
-              // If the user is okay, let's create a notification
-              if (permission === "granted") {
-                const notification = new Notification("Hi there!");
-              }
-            });
-          } else {
-            alert(`Permission is ${Notification.permission}`);
-          }
-        }
-
-
-  const notificationTexts = [
-  "Hey Jussi! If you're recording your screen, I just wanted to tell that...",
-  "Congratulations, you've found the meaning of life, which by the way is being present.",
-  "You looked super today! Where's that smile from?",
-  "COME HOME ALREADY! -MOM",
-  "How are you doing? Dismiss this message to tell me that you've seen it.",
-  "Dude, I've never slided so smoothly into anything before! Well, that sounded a bit weird to be honest.",
-  "Did you know that LASER is an abbreviation for Light Amplification by the Stimulated Emission of Radiation?"
-];
-
-const addButton = document.querySelector(".add");
-const notificationPosition = document.body.querySelector("div");
-const margin = 16;
-
-const addNotification = ( mge, title ) => {
-  // Create notification
-  
-  const notification = document.createElement("div");
-  // Add class "notification"
-  notification.classList.add("notification");
-  // Pick random content for notification
-  const randomMessage = mge; 
-  // Insert random content and close button
-  notification.innerHTML = `
-                    <div class="content">
-            <h4 class="title">${title}</h4>
-            <p class="description">${randomMessage}</p>
-          </div>
-          <button class="close-not" aria-label="Dismiss notification">ok</button>
-        `;
-  // Get close button within notification
-  const closeButton = notification.querySelector(".close-not");
-  // Listen for the button and attach "removeNotification" function to it
-  closeButton.addEventListener("click", removeNotification);
-  // Position notification
-  notification.style.bottom = `${margin}px`;
-  // Add notification on the page
-  notificationPosition.prepend(notification);
-  // Move other notifications down
-  // 1. Get height of the newly added notification
-  const currentHeight = notification.offsetHeight;
-  // 2. Get the rest of the notifications and turn them into an array
-  const restNotifications = Array.from(
-    document.querySelectorAll(".notification")
-  ).slice(1);
-  // 3. Add the currently added notification's height to the rest of the notifications
-  restNotifications.forEach((item) => {
-    item.style.bottom = `${parseInt(item.style.bottom) + currentHeight + margin}px`;
-  });  
-};
-
-const removeNotification = (event) => {
-  // Get clicked close button
-  const closeButton = event.currentTarget;
-  // Get the notification
-  const notification = closeButton.parentNode;
-  // Get the height of the clicked notification
-  const currentHeight = notification.offsetHeight;
-  // Define rest of the notifications
-  let restNotifications = [];
-  let next = notification.nextElementSibling;
-  // Loop always the next notification until none is found
-  while (next) {
-    // If the next element doesn't have 'notification' class, break the while loop
-    if (!next.matches(".notification")) {
-      break;
-    }
-    // Add the notification to the array
-    restNotifications.push(next);
-    // Set the next to be the next element
-    next = next.nextElementSibling;
-  }
-  // Se the new height for each of the notifications below the removed one
-  restNotifications.forEach((item) => {
-    item.style.bottom = `${parseInt(item.style.bottom) - currentHeight - margin}px`;
-  });
-  // Animate removed notification
-  notification.classList.add("animate-out");
-  // Remove notification once animation has ended
-  notification.addEventListener("animationend", () => {
-    notification.parentNode.removeChild(notification);
-  });
-};
-
-</script>
-
-
     <div class="container-fluid" style="padding-left: 0px;">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side" style="padding: 0px!important; width: 190px; overflow-y: auto;">
             <div>  
                 <div style="text-align: center; padding-top: 0px!important;">
-                    <h3 style="font-weight: 900; margin: 5px; color: #777777; ">eAxon</h3>
+                    <h3 style="font-weight: 900; margin: 5px; color: #ffffff; ">eA<span style="color: white; font-size: 40px;">x</span>ón</h3>
                 </div>
                 <ul class="menu-options">
                     <li class="col-lg-12 selected-admin-pedidos">
                         <a href="{{asset('')}}"> 
                             <div class="col-lg-6 option-side-conteainer opt-dashboard">
-                                
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Checkin</span>
-                <span class="notify" id="cantSalesNotify">0</span>
                             </div>
                         </a> 
+                        <ul class="inter-menu">
+                          <li><a href="{{asset('list')}}"><span>--Huespedes</span></a></li>
+                          <li><a href="{{asset('catalogues')}}"><span>--Catálogos</span></a></li>
+                        </ul>
                     </li> 
-                    <li class="col-lg-12 selected-admin-home">
-                        <a href="{{asset('list')}}"> 
+                    <li class="col-lg-12 selected-admin-pedidos">
+                        <a href="{{asset('')}}"> 
                             <div class="col-lg-6 option-side-conteainer opt-dashboard">
-                            </div>
+                            </div>  
                             <div class="col-lg-6 txt-option">
-                                <span>Huespedes</span>
+                                <span>Checkin</span>
                             </div>
-                        </a>
-                    </li> 
-                    
-                   
-                     
-
-            <style type="text/css">
-              .notify { background-color: black; color: white; display: inline-block; opacity: 0;  
-                        height: 20px; width: auto; padding: 3px 8px; border-radius: 12px; }
-            </style> 
-  
-                    
+                        </a> 
+                        <ul class="inter-menu">
+                          <li><a href="{{asset('list')}}"><span>--Huespedes</span></a></li>
+                        </ul>
+                    </li>  
                 </ul>
-                
             </div> 
         </div>
-
-        <style type="text/css">
-            .container-avatar {
-                display: inline-block; 
-                margin-top: 3px; 
-            }
-            .avatar-content {
-                border: 1px solid #eaeaea;;
-                height: 45px;  
-                width: 45px; 
-                background-color: gray; 
-                border-radius: 50%; 
-                background-image: url({{asset('media/avatars/avatar-1.jpg')}}); 
-                background-size: cover;
-            }
-            .content-submenu ul li {
-                display: inline-block; 
-                margin-top: 3px; 
-            }
-            .content-submenu .option-submenu {
-                margin-top: 3px; 
-                width: 150px; 
-                display: table;
-                height: 45px;  
-                text-align: left;
-                padding-top: 10px; 
-            }
-        </style>  
-         
-        <div style="position: fixed; width:  100%; z-index: 9; height: 50px; border-bottom: 1px solid #eaeaea; text-align: right; padding-right: 20px; ">  
-            <div class="top-submenu">
-                <div class="content-submenu">
-                    <ul> 
-                        @yield('content-submenu')
-                         <li>
-                            <div class="option-submenu" style="text-align: right;">
-                                <p>Admin</p> 
-                            </div>
-                        </li>
-                        <li> 
-                          <div class="container-avatar">
-                              <div class="avatar-content">
-                                  
-                              </div>
-                          </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div> 
 
         <div class="col-lg-10 col-md-10" style="padding-top: 70px;">
             @yield('page')   

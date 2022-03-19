@@ -17,9 +17,18 @@ Route::get('/', function () {
     return view('checkin');
 });
 
+
+Route::get('/catalogues', function () {
+    return "hola"; 
+});
+ 
 Route::get('/client/{hash}', 'Controller@client'); 
+Route::get('/client/{hash}/perfil/{p}', 'Controller@clientHome'); 
+
 
 Route::get('/list', 'Controller@list');
 Route::post('/guest', 'Controller@guest');
+
+
 
 

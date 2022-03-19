@@ -24,6 +24,13 @@ class Controller extends BaseController
     	return view('client', ['hash' => $hash, 'user' => $user]);  
     }
 
+     public function clientHome( $hash, $p) { 
+        $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
+          
+        return view('clientHome', ['hash' => $hash, 'user' => $user, 'perfil' => $p]);  
+    }
+  
+
     public function guest(Request $data) {
     	$name = $data->input('name'); 
     	$phone = $data->input('phone');  
@@ -31,6 +38,9 @@ class Controller extends BaseController
 
     	$random_base64 = base64_encode(random_bytes(18));
 		$hash = serialize($random_base64);
+
+        $hash = str_replace( array('"', '/'), array("", ""), $hash); 
+ 
     	DB::select("INSERT INTO guest(name, hash, phone, room) VALUES('$name', '$hash', '$phone', '$room')"); 
     }
 }
