@@ -117,6 +117,7 @@
 		color: white; 
 		padding-top: 100px;
 		line-height: 12px; 
+		border-radius: 10px;
 	}
 
 	h2 { font-weight: 900; }
