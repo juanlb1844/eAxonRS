@@ -138,7 +138,7 @@
 		<div class="second-menu col-xs-12">
 			<ul>
 				<li>
-					<span>cominda</span>
+					<span>comida</span>
 				</li>
 				<li>
 					<span>servicios</span>
