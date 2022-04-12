@@ -1,6 +1,5 @@
-  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --> 
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Latest compiled and minified CSS  --> 
  
 <!-- <script type="" src="https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"></script>   --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
@@ -10,14 +9,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> 
 <!-- <script src="../dist/gridstack.js"></script>--> 
  
-
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 
 <head>
 <meta charset="utf-8">
@@ -38,21 +35,40 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 <!-- Styles -->
  <style type="text/css">
-     .pd1 {
-      padding: 10px; 
-     }
- </style>
+   .pd1 {
+    padding: 10px; 
+   }
+   .btn-delete {
+      border: 1px solid red!important;
+   }
+   .form-control {
+        background-color: #212228;
+        color: white; 
+        font-size: 20px; 
+   }
+   .panel-default {
+              background-color: transparent; 
+          }
+    .title-panel {
+        font-size: 20px; 
+        font-weight: 800; 
+    } 
+</style>
+
+
 
 </head>
 
 
 <body>
 
- <div id="overlay">
-  <div class="cv-spinner">
-    <span class="spinner"></span>
+  <!-- cargar --> 
+   <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
   </div>
-</div>
+  <!-- // cargar --> 
   
  
  <style type="text/css">
@@ -117,9 +133,10 @@
       display: block;
       margin: 0px 0px; 
       color: #434b69; 
+      font-size: 15px; 
   } 
   .menu-options li a {
-      color: #434b69;  
+      color: white;  
   }
   .menu-options li a:hover {
       text-decoration: none; 
@@ -153,27 +170,30 @@
             border-radius: 14px;
             background-color: #ffffff;  
             box-shadow: 0px 7px 6px 0px #8080803b; 
-            background-size: 40%;
+            background-size: 75%;
             background-position: center;
             background-repeat: no-repeat;
         }
-        .opt-unidades {
-            background-image: url({{asset('media/icons/etiqueta.svg')}}); 
+        .opt-hotels {
+            background-image: url({{asset('media-admin/hotel.svg')}}); 
         }
-        .opt-contactos {
-            background-image: url({{asset('media/icons/item.svg')}}); 
+        .opt-clock {
+            background-image: url({{asset('media-admin/clock.svg')}}); 
         }
-        .opt-directorio {
-            background-image: url({{asset('media/icons/cupon.svg')}}); 
+        .opt-misc {
+            background-image: url({{asset('media-admin/duck.svg')}}); 
+            background-size: 85%; 
         } 
-        .opt-usuarios {
-            background-image: url({{asset('media/icons/portapapeles.svg')}}); 
+        .opt-activities {
+            background-image: url({{asset('media-admin/activities.svg')}}); 
+            background-size: 65%; 
         }
         .opt-dashboard {
-            background-image: url({{asset('media/icons/cuentakilometros.svg')}}); 
+            background-image: url({{asset('media-admin/checkin.svg')}}); 
         }
-        .opt-apartados {
-            background-image: url({{asset('media-root/apartados.svg')}}); 
+        .opt-dish {
+            background-image: url({{asset('media-admin/dish-2.svg')}}); 
+            background-size: 95%; 
         }
         .txt-option {
             padding: 10px; 
@@ -187,10 +207,14 @@
             transition-property: all; transition-duration: .2s; 
             margin-top: 5px;
         } 
-        .menu-options li:hover {
-            background-color: #333333; 
+        .inter-menu li:hover {
+            background-color: #333333;  
             cursor: pointer;
             transition-property: all; transition-duration: .2s;  
+        }
+
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+          background-color: #242424;
         }
     </style>
 
@@ -241,7 +265,8 @@
           .label-sucess {
             background-color: #39b67c; 
           }
-          .inter-menu li { display: inline-block; }
+          
+          .inter-menu li { display: inline-block; width: 100%; }
 
 
           html, body{
@@ -254,7 +279,7 @@
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side" style="padding: 0px!important; width: 190px; overflow-y: auto;">
             <div>  
                 <div style="text-align: center; padding-top: 0px!important;">
-                    <h3 style="font-weight: 900; margin: 5px; color: #ffffff; ">eA<span style="color: white; font-size: 40px;">x</span>ón</h3>
+                    <h3 style="font-weight: 900; margin: 5px; font-size: 35px; letter-spacing: 1px; margin-top: 35px; color: #3fbf92; background-color: black; border-radius: 4px; display: inline-block; padding: 4px 20px; border: 2px solid gray;">eAx</span>ón</h3>
                 </div>
                 <ul class="menu-options">
                     <li class="col-lg-12 selected-admin-pedidos">
@@ -272,14 +297,73 @@
                     </li> 
                     <li class="col-lg-12 selected-admin-pedidos">
                         <a href="{{asset('')}}"> 
-                            <div class="col-lg-6 option-side-conteainer opt-dashboard">
+                            <div class="col-lg-6 option-side-conteainer opt-dish">
                             </div>  
                             <div class="col-lg-6 txt-option">
-                                <span>Checkin</span>
+                                <span>Cocina</span>
                             </div>
                         </a> 
                         <ul class="inter-menu">
-                          <li><a href="{{asset('list')}}"><span>--Huespedes</span></a></li>
+                          <li><a href="{{asset('restaurantsList')}}"><span>--Restaurantes</span></a></li>
+                          <li><a href="{{asset('menuList')}}"><span>--Menús</span></a></li>
+                          <li><a href="{{asset('dishList')}}"><span>--Platillos</span></a></li>
+                          <li><a href="{{asset('categoriesDishList')}}"><span>--Categorías</span></a></li>
+                          <li><a href="{{asset('ingredientList')}}"><span>--Ingredientes</span></a></li>
+                        </ul>
+                    </li>   
+                     <li class="col-lg-12 selected-admin-pedidos">
+                        <a href="{{asset('')}}"> 
+                            <div class="col-lg-6 option-side-conteainer opt-activities">
+                            </div>  
+                            <div class="col-lg-6 txt-option">
+                                <span>Actividades</span>
+                            </div>
+                        </a> 
+                        <ul class="inter-menu">
+                          <li><a href="{{asset('list')}}"><span>--Actividades</span></a></li>
+                        </ul>
+                    </li>  
+                     <li class="col-lg-12 selected-admin-pedidos">
+                        <a href="{{asset('')}}"> 
+                            <div class="col-lg-6 option-side-conteainer opt-misc">
+                            </div>  
+                            <div class="col-lg-6 txt-option">
+                                <span>Miscelanea</span>
+                            </div>
+                        </a> 
+                        <ul class="inter-menu">
+                          <li><a href="{{asset('list')}}"><span>--Productos</span></a></li>
+                          <li><a href="{{asset('list')}}"><span>--Categorías</span></a></li>
+                        </ul>
+                    </li>  
+                     <li class="col-lg-12 selected-admin-pedidos">
+                        <a href="{{asset('')}}"> 
+                            <div class="col-lg-6 option-side-conteainer opt-hotels">
+                            </div>  
+                            <div class="col-lg-6 txt-option">
+                                <span>Hoteles</span>
+                            </div>
+                        </a> 
+                        <ul class="inter-menu">
+                          <li><a href="{{asset('hotelList')}}"><span>--Lista</span></a></li>
+                          <li><a href="{{asset('list')}}"><span>--Grupos</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="col-lg-12 selected-admin-pedidos">
+                        <a href="{{asset('')}}"> 
+                            <div class="col-lg-6 option-side-conteainer opt-clock">
+                            </div>  
+                            <div class="col-lg-6 txt-option">
+                                <span>Home</span>
+                            </div>
+                        </a> 
+                        <ul class="inter-menu">
+                          <li>
+                            <a href="{{asset('configHome')}}"><span>--Sliders home</span></a>
+                          </li>
+                          <li>
+                            <a href="{{asset('list')}}"><span>--Status</span></a>
+                          </li>
                         </ul>
                     </li>  
                 </ul>
