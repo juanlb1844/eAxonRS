@@ -16,8 +16,8 @@
     margin: 1em 0px!important;
   }
   /* CUSTOM DROPZONE */ 
-  .dropzone { border: 2px dotted red; height: 170px; width: 100%; padding: 0px!important; display: inline-block; margin-top: 20px; 
-              background-color: transparent; margin-bottom: 20px; font-size: 20px; }
+  .dropzone { border: 4px dotted red; height: 170px; width: 100%; padding: 0px!important; display: inline-block; margin-top: 20px; 
+              background-color: transparent; margin-bottom: 20px; font-size: 35px; }
   .dropzone:hover { border: 4px solid #60d192; }
 
   .delete-img {
@@ -31,19 +31,34 @@
     margin-top: 10px!important; 
     opacity: .6;
   }
+    .content-prev-image {
+    padding-top: 10px; 
+    margin-bottom: 20px; 
+  }
+  .prev-image {
+    display: inline-block; 
+    width: 350px; 
+    height: 300px; 
+    border-radius: 12px; 
+    background-color: black; 
+    background-position: center;
+    background-size: cover;
+    background-image: url('https://nuevascsensaludocupacional.com/modules/iblog/img/post/default.jpg');
+  }
 </style>
 
 @section('page')
-        
         
         <div class="col-lg-12 pd1">
             <h1>Editar hotel</h1>  
         </div> 
         <div class="col-lg-12 pd1">
-            <div class="col-lg-4 np">
-                <img id="img-prev" style="border-radius: 16px;" src="{{$entity->url_img}}">
+            <div class="col-lg-4 col-md-4 np">
+                <div class="content-prev-image">
+                    <div class="prev-image" style="background-image: url('{{$entity->url_img}}')"></div>
+                </div>
             </div>
-            <div class="col-lg-8 np">
+            <div class="col-lg-8 col-md-8 np">
                  <div class="dropzone col-lg-12" id="dropzone-1"></div> 
             </div>
         </div>

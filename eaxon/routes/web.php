@@ -29,8 +29,10 @@ Route::get('/newDishCategory', 'AdminController@newDishCategory');
 Route::get('/editCategorieDish/{id}', 'AdminController@editCategorieDish');   
  
 Route::post('updateListImgs', 'AdminController@updateListImgs'); 
+ 
+// admin    
+Route::get('ticket-list', 'AdminController@ticketList');   
 
-// admin 
 Route::get('/', 'AdminController@checkin'); 
 Route::get('/list', 'AdminController@list');
 Route::get('/dishList', 'AdminController@dishList'); 
@@ -42,8 +44,11 @@ Route::get('/newRestaurant', 'AdminController@newRestaurant');
 Route::get('/editRestaurant/{id}', 'AdminController@editRestaurant');  
 Route::get('/menuList', 'AdminController@menuList'); 
 Route::get('/hotelList', 'AdminController@hotelList');  
-Route::get('/newHotel', 'AdminController@newHotel');  
- 
+Route::get('/newHotel', 'AdminController@newHotel');   
+Route::get('/listClientTypes', 'AdminController@listClientTypes');     
+Route::get('/newClientType', 'AdminController@newClientType');     
+Route::get('/editClientType/{id}', 'AdminController@editClientType');      
+   
 Route::get('/editHotel/{id}', 'AdminController@editHotel'); 
 Route::post('/uploadPhotoHotel', 'AdminController@uploadPhotoHotel');  
  
@@ -67,14 +72,29 @@ Route::post('/newEntityPost', 'AdminController@newEntityPost');
 Route::post('/updateEntityPost', 'AdminController@updateEntityPost'); 
 Route::post('/uploadPhoto', 'AdminController@uploadPhoto');  
   
+
+
 //------------------------------------------
 //------------------------------------------
 // cliente 
- 
+
+//try session  
+Route::get('trys', 'Controller@try'); 
+
 Route::get('/client/{hash}', 'Controller@client'); 
 Route::get('/client/{hash}/perfil/{p}', 'Controller@clientHome'); 
 Route::get('/dish/{id}/hash/{hash}/perfil/{p}', 'Controller@clientDish');  
-  
+
+Route::get('/order/{id}/hash/{hash}/perfil/{p}', 'Controller@clientOrder');  
+Route::get('/cart/{id}/hash/{hash}/perfil/{p}', 'Controller@cart');  
+
+Route::post('/createTicket', 'Controller@createTicket'); 
+
+Route::post('/addToCart', 'Controller@addToCart');  
+   
+
+// import 
+Route::get('/import', 'ImportController@ImportBasicCatalogues'); 
 
 
  

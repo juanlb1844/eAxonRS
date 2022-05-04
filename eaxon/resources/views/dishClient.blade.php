@@ -1,40 +1,102 @@
 @extends('layout-home') 
 
-
 @section('page')
-
 <!-- 
-	
 	-Programar 
 	-Calificar 
 	-Compartir 
 	-Configurar 
-
 --> 
-
 <style type="text/css">
 		.mobile-content {
-		background-image: url('{{$gallery[0]->url}}'); 
-		min-height: 40vh; 
 		padding: 0px; 
 		background-position: center;
-    	background-size: cover;
+    background-size: cover;
+    background-color: #363530;
 	}
   .container-description {
-    min-height: 25vh; 
-    padding-top: 20px; 
+    min-height: 10vh; 
+    padding-top: 5px; 
+  }
+  .gallery-entiti .gallery-element {
+    width: 100%;
+    border-radius: 12px; 
+    height: 40vh; 
+    background-position: center;
+    background-size: cover;
+  }
+
+  .btn-style-1 {
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 5px 20px; 
+  }
+
+  .name-dish {
+    font-size: 22px; 
+    font-weight: 700;
+    margin-bottom: 0px;  
+  }
+
+  .control-cant-main { background-color: #ad2; border-radius: 12px; display: inline-block; width: 100%;
+    padding: 5px 0px;
+    color: black;
+  }
+  .controls-cant {
+    width: 30px; 
+    height: 30px; 
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 22px; 
+  }
+  .control-main-cant {
+    padding-top: 5px;
+    font-size: 21px;
+  }
+  #cant-m-plus {
+    padding-right: 10px;
+  }
+  #cant-m-less {
+    padding-left: 10px;
+    font-size: 20px;
+  }
+  #cant-m-plus:active, #cant-m-less:active {
+    transform: scale(1.5);
+    color: white;
+    transition-property: all; 
+    transition-duration: .2s; 
   }
 </style>
-<div class="col-xs-12" style="background-color: #363530; color: white!important; min-height: 70vh;">
-	<div class="col-xs-9">
-	   <h2>{{$dish->name}}</h2>		 
+
+<div class="col-xs-12" style="background-color: #363530; color: white!important; min-height: 50vh;">
+    <div class="col-lg-12 col-xs-12">
+      <div class="gallery-entiti">
+        <div class="gallery-element" style="background-image:url('{{$gallery[0]->url}}');">
+          
+        </div>
+      </div>
+    </div>
+  <div class="col-xs-12">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6" style="text-align: center;">
+      <div class="control-cant-main">
+        <span id="cant-m-less" onclick="updateCant('-')" class="controls-cant pull-left">-</span>
+        <span class="control-main-cant">1</span>
+        <span id="cant-m-plus" onclick="updateCant('+')" class="controls-cant pull-right">+</span>
+      </div>
+    </div>
+    <div class="col-xs-3"></div>
   </div>
-  <div class="col-xs-3">
+	<div class="col-xs-8">
+	   <p class="name-dish">{{$dish->name}}</p>		 
+  </div>
+  <div class="col-xs-4">
     <h2></h2>
-    <button class="btn btn-primary" onclick="config()">pedir</button>
   </div>
   <div class="col-xs-12">
     <div class="container-description">
+       <p style="margin: 0px; font-weight: 700; font-size: 17px;">descripción</p>
   	   <p>{{$dish->description}}</p>
     </div>
   </div>
@@ -54,6 +116,45 @@
 		<h2>+</h2>
 		<p>configurar</p>
 	</div>
+</div>
+
+
+<style type="text/css">
+  .btn-add {
+    width: 100%; 
+    border-radius: 12px; 
+    padding: 10px 20px;
+    background-color: #ad2; 
+    font-size: 17px; 
+    color: black;
+    font-weight: 700;
+  }
+  .price-product {
+    font-size: 22px; 
+    color: white;
+    font-weight: 700;
+  }
+  .container-controls-to-add {
+    padding-top: 20px;
+  }
+  .container-controls {
+    position: fixed;
+    position: fixed;
+    bottom: 0px;
+    padding-bottom: 20px;
+    background-color: #3e3e3e;
+  }
+</style>
+
+<div class="col-xs-12 container-controls"> 
+  <div class="container-controls-to-add">
+    <div class="col-xs-5" style="text-align: center; padding-top: 10px;">
+      <span class="price-product">$200</span>
+    </div>
+    <div class="col-xs-7">
+      <button class="btn btn-primary btn-add" onclick="config()">ordenar</button>
+    </div>
+  </div>
 </div>
 
 
@@ -78,6 +179,11 @@
 	.raiting-stars img {
 		width: 30px; 
 	}
+
+  body {
+    min-height: 100vh;
+    background-color: #363530;
+  }
 </style>
  
 <!-- Modal -->
@@ -112,7 +218,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button> 
       </div>
     </div>
 
@@ -197,7 +303,6 @@
 		width: 70px;
 	}
 	.row-ingredient {
-		border: 1px solid gray;
 		background-color: #dedede; 
 		border-radius: 12px; 
 		margin-bottom: 10px; 
@@ -208,9 +313,7 @@
 		font-weight: bolder; 
 		margin: 0px;
 	}
-	.np {
-		padding: 0px!important;
-	}
+	
 	.control-amount {
 		    padding: 8px!important;
 		    padding-bottom: -6px;
@@ -221,6 +324,49 @@
 		    line-height: 1px;
 	}
 </style>
+
+  <!-- cargar --> 
+   <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <!-- // cargar -->  
+
+  <style type="text/css">
+  #overlay{ 
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  width: 100%;
+  height:100%;
+  display: none;
+  background: rgba(0,0,0,0.6);
+}
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px #ddd solid;
+  border-top: 4px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}
+@keyframes sp-anime {
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+.is-hide{
+  display:none;
+}
+</style>
+
 <!-- Modal -->
 <div id="config" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -297,7 +443,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary btn-style-1" onclick="addToCart()">añadir</button>
       </div>
     </div>
 
@@ -305,6 +452,35 @@
 </div>
 
 <script type="text/javascript">
+  let cant = 1; 
+  function updateCant( res ) {
+    cant = parseInt( $('.control-main-cant').html() ); 
+    if( res == '-') {
+      if( cant > 1 ) {
+        cant--;
+        $('.control-main-cant').html(cant);   
+      }
+    } else {
+        cant++;
+        $('.control-main-cant').html(cant);   
+    }
+  }
+
+  function addToCart() {
+    $("#overlay").fadeIn(); 
+    $.ajax({
+      'url' : '{{asset("addToCart")}}', 
+      'method' : 'post', 
+      'data' : { 
+        'type' : 'dish', 
+        'cant' : cant, 
+        'id' : '{{$id}}' 
+      }, 
+      'success' : function( resp ) {
+        $("#overlay").fadeOut();  
+      }
+    }); 
+  }
 	function programming() {
 		$('#programming').modal('toggle'); 
 	}

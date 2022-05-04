@@ -12,7 +12,22 @@ use Illuminate\Support\Facades\DB;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-     
+    
+    public function createTicket( Request $data ) {
+        $hash = $data->get('hash'); 
+        $idguest = DB::table('guest')->where('hash', $hash)->get()[0]->idguest; 
+        
+        $to = date("Y-m-d H:m:s"); 
+        DB::table('ticket')->insert([
+            'hora_de_peticion' => $to, 
+            'id_client' => $idguest, 
+            'to_time' => $to]); 
+        return; 
+        foreach( \Session::get('dishes') as $k ) {
+            print_r( $k );  
+        }
+    }
+
     public function client( $hash ) { 
     	$user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
     	return view('client', ['hash' => $hash, 'user' => $user]);  
@@ -24,8 +39,8 @@ class Controller extends BaseController
         $to_create = DB::table('sliders_home')->orderBy('order')->get(); 
         $portada = null; 
         foreach ($to_create as $key => $c) {
-            if( $c->type == 'slider' ) {
-                $sliders[] = $this->injectGallery($this->getRowSlider($c->idsource), $c->layout);
+            if( $c->type == 'slider' ) { 
+                $sliders[] = $this->injectGallery($this->getRowSlider($c->idsource), $c->layout, $c->name);
             } else if( trim($c->type) == 'producto de portada' ) {
                 if( $c->idsource2 ) {
                     $portada = DB::table('dish')->where('iddish', $c->idsource2 )->get()[0]; 
@@ -41,7 +56,7 @@ class Controller extends BaseController
                                    'portada' => $portada ]);      
     }
 
-    private function injectGallery ( $array, $l ) {
+    private function injectGallery ( $array, $l, $nameSlider ) {
         $cn = ""; 
         foreach ($array as $key => $value) { 
             $id = $value->iddish; 
@@ -49,7 +64,7 @@ class Controller extends BaseController
             $gallery = DB::table('galery_dish')->where('dish_iddish', $id)->orderBy('order')->get(); 
             $array[$key]->gallery = $gallery; 
         }
-        return ( array('products' => $array, 'cname' => $cn, 'layout' => $l ) );  
+        return ( array('products' => $array, 'cname' => $cn, 'layout' => $l, 'ns' => $nameSlider ) );  
     }
 
     private function getRowSlider($id) {
@@ -59,11 +74,40 @@ class Controller extends BaseController
     }
 
      public function clientDish( $id, $hash, $p) { 
-
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
-        $dish = DB::table('dish')->where('iddish', $id)->get()[0]; 
+        $dish = DB::table('dish')->where('iddish', $id)->get()[0];  
         $gallery = DB::table('galery_dish')->where('dish_iddish', $id)->orderBy('order')->get();
-        return view('dishClient', ['hash' => $hash, 'user' => $user, 'perfil' => $p, 'dish' => $dish, 'gallery' => $gallery ]);  
+        return view('dishClient', ['id' => $id, 'hash' => $hash, 'user' => $user, 'perfil' => $p, 'dish' => $dish, 'gallery' => $gallery ]);  
     }
+
+
+    public function clientOrder( $id, $hash, $p ) {
+        $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
+        return view('order', ['hash' => $hash, 'user' => $user, 'perfil' => $p ]); 
+    }
+
+    public function cart( $id, $hash, $p ) {
+        $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
+        return view('carrito', ['hash' => $hash, 'user' => $user, 'perfil' => $p ]); 
+    }
+
+    // CART 
+    public function try() {
+        //\Session::flush();
+        print_r( \Session::get('dishes') ); 
+    }
+    public function addToCart( Request $data ) {
+        $type = $data->input('type'); 
+        $cant = $data->input('cant'); 
+        $id   = $data->input('id');  
+
+        $dish = DB::table('dish')->where('iddish', $id)->get()[0]; 
+
+        $gallery = DB::table('galery_dish')->where('idgalery_dish', $id)->orderBy('order')->get()[0]->url; 
+
+        $item = array('cant' => $cant, 'id' => $id, 'info' => $dish, 'image' => $gallery ); 
+        \Session::push('dishes', $item); 
+    }
+
 }
   

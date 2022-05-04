@@ -180,11 +180,12 @@ class AdminController extends BaseController
 
     public function checkin() { 
         $hotels = DB::select("SELECT * FROM hotel"); 
-        return view('admin/checkin', ['hotels' => $hotels]);  
+        $client_types = DB::table("guest_types")->get();  
+        return view('admin/checkin', ['hotels' => $hotels, 'client_types' => $client_types]);  
     }
 
      public function list() {
-        $guests = DB::select("SELECT * FROM guest"); 
+        $guests = DB::select("SELECT * FROM guest G LEFT JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types"); 
         return view('admin/list', ['guests' => $guests]);  
     }
     // lista 
@@ -206,6 +207,22 @@ class AdminController extends BaseController
         $ingredients_menu     = DB::table("ingredients")->get(); 
         return view('admin/editDish', ['entity' => $dish, 'gallery' => $gallery, 'categories_menu' => $categories_menu, "categories_relation" => $categories_relation, 'ingredients_relation' => $ingredients_relation, 'ingredients_menu' => $ingredients_menu, 'id' => $id ]);  
     } 
+    // CATÁLOGOS HUÉSPEDES / TIPOS DE CLIENTES 
+    // lista 
+    public function listClientTypes() {
+        $entities = DB::table("guest_types")->get(); 
+        return view('admin/listClientTypes', ["entities" => $entities]); 
+    } 
+    // nuevo 
+    public function newClientType() {
+        return view('admin/newClientType');   
+    }
+    // editar 
+    public function editClientType( $id ) {
+        $entity = DB::table('guest_types')->where('idguest_types', $id)->get()[0]; 
+        return view('admin/editClientType', ["id" => $id, "entity" => $entity]); 
+    }  
+
     // INGREDIENTS 
     // lista de ingredientes 
     public function ingredientList() {
@@ -238,18 +255,24 @@ class AdminController extends BaseController
         return view('admin/editCategorieDish', ["id" => $id, "entity" => $entity]); 
     }
 
+    public function ticketList() {
+        return view('admin/ticket-list');  
+    }
+
     public function guest(Request $data) {
         $name  = $data->input('name'); 
         $phone = $data->input('phone');  
         $room  = $data->input('room'); 
         $hotel  = $data->input('hotel'); 
+        $idguest_types  = $data->input('idguest_types'); 
+        $nationality  = $data->input('nationality'); 
 
         $random_base64 = base64_encode(random_bytes(18));
         $hash = serialize($random_base64);
 
         $hash = str_replace( array('"', '/'), array("", ""), $hash); 
  
-        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel) VALUES('$name', '$hash', '$phone', '$room', $hotel)"); 
+        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel, guest_types_idguest_types, nationality) VALUES('$name', '$hash', '$phone', '$room', $hotel, $idguest_types, '$nationality')"); 
     }
       
      public function try() {

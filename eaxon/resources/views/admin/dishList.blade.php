@@ -16,6 +16,15 @@
     th {
         background-color: black; 
     }
+    .prev-img-gallery {
+        display: inline-block; 
+        width: 110px; 
+        height: 110px; 
+        background-color: black; 
+        border-radius: 12px; 
+        background-position: center;
+        background-size: cover; 
+    }
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
@@ -41,9 +50,11 @@
                         <td style="text-align: center;">
                             @foreach($dish->gallery as $key => $img )
                                 @if($key == 0 )
-                                    <img style="width: 150px; border-radius: 12px;" src="{{$img->url}}">
+                                    <div class="prev-img-gallery" style="background-image: url('{{$img->url}}')">
                                 @endif 
                             @endforeach 
+                                
+                            </div>
                         </td>
                         <td>
                             <a href="{{asset('editDish')}}/{{$dish->iddish}}">

@@ -30,6 +30,20 @@
     margin-top: 10px!important; 
     opacity: .6;
   }
+  .content-prev-image {
+    padding-top: 10px; 
+    margin-bottom: 20px; 
+  }
+  .prev-image {
+    display: inline-block; 
+    width: 350px; 
+    height: 300px; 
+    border-radius: 12px; 
+    background-color: black; 
+    background-position: center;
+    background-size: cover;
+    background-image: url('https://nuevascsensaludocupacional.com/modules/iblog/img/post/default.jpg');
+  }
 </style>
 
 @section('page')
@@ -37,7 +51,12 @@
         <div class="col-lg-12 pd1">
             <h1>Crear hotel</h1>
         </div> 
-        <div class="col-lg-12">
+        <div class="col-lg-4 col-md-4 col-sm-3">
+            <div class="content-prev-image">
+                <div class="prev-image"></div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-9">
             <div class="dropzone col-lg-12" id="dropzone-1"></div> 
         </div>
         <div class="col-lg-12 np" data-entity="form-entity" entity-name="hotel"> 
@@ -110,6 +129,7 @@
                 r = JSON.parse(r); 
                 url_image = r.link; 
                 $('.url_image').val(r.link); 
+                $('.prev-image').css("background-image", "url("+r.link+")"); 
                 /*  
                 $('.content-gallery-1').append('<div class="element-gallery imagen-'+r.id+' col-lg-2" link="'+r.link+'" style="background-image: url('+r.link+');"><input type="checkbox" class="status-photo" checked="" idphoto="1" /><button onclick="borrarFoto('+r.id+')" class="btn btn-default pull-right delete-img">&nbsp;</button></div>'); */
               } 

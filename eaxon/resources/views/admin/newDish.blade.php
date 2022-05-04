@@ -11,6 +11,8 @@
     width: auto;
     background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 12px; 
+    margin-right: 10px; 
   }
   /* CUSTOM DROPZONE */ 
   .dz-message {
@@ -53,11 +55,11 @@
         <div class="col-lg-12 np" data-entity="form-entity" entity-name="dish">
             <div class="col-lg-6 col-md-4 col-12 pd1">
                 <p>Título</p> 
-                <input field="data" name-field="name" type-field="input" class="form-control" id="checkin-name" placeholder="título del menú" type="text" name="">
+                <input field="data" name-field="name" type-field="input" class="form-control" id="name-dish" placeholder="título del menú" type="text" name="">
             </div>
              <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Precio</p>
-                <input field="data" name-field="price" type-field="input" class="form-control" id="checkin-name" placeholder="$" type="text" name="">
+                <input field="data" name-field="price" type-field="input" class="form-control" id="price-dish" placeholder="$" type="text" name="">
             </div>
             <div class="col-lg-6 col-md-4 col-12 pd1">
                 <p>Categorías</p>
@@ -153,12 +155,38 @@
               } 
         }); 
     }
- 
+    
+    function validate( to_validate ) {
+      let validate = false; 
+      let iter = true; 
+      to_validate.forEach( function( a , b ) {
+         console.log( $(a).val() ); 
+         if( $(a).val().length == 0 && iter ) {
+              validate = true; 
+              alert("Llena todos los campos");
+              iter = false; 
+              return false; 
+          } 
+       } );  
+
+      if( images_list_upload.length == 0 && iter ) {
+        validate = true; 
+        alert("Agrega al menos una imagen"); 
+      }
+
+      return validate; 
+    }
+
     function saveEntity() {
         let entity_name = $('div[entity-name]').attr('entity-name'); 
         let data_form = Array(); 
         let categories_relation = $('.categories-relation').val(); 
         let ingredients_relation = $('.ingredients-relation').val(); 
+
+        let to_validate = [".categories-relation", ".ingredients-relation", "#price-dish", "#name-dish"]; 
+        if( validate( to_validate ) ) {
+          return; 
+        }
 
         $('div[data-entity]').find('[field]').each( 
             function( a , b ) { 
@@ -173,6 +201,7 @@
             }
         ); 
         
+
         console.log( data_form );
  
         $.ajax({ 

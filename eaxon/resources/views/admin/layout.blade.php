@@ -1,14 +1,12 @@
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
 <!-- <script type="" src="https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"></script>   --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> 
 <!-- <script src="../dist/gridstack.js"></script>--> 
- 
+
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -19,7 +17,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Checkin</title>
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
@@ -34,6 +31,7 @@
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 <!-- Styles -->
+
  <style type="text/css">
    .pd1 {
     padding: 10px; 
@@ -55,11 +53,8 @@
     } 
 </style>
 
-
-
 </head>
-
-
+ 
 <body>
 
   <!-- cargar --> 
@@ -68,11 +63,9 @@
       <span class="spinner"></span>
     </div>
   </div>
-  <!-- // cargar --> 
-  
+  <!-- // cargar -->  
  
  <style type="text/css">
-
   td span { font-size: 15px; font-weight: 600; }
      td:hover{ cursor: pointer; }
      table.dataTable.no-footer {
@@ -150,7 +143,6 @@
       margin-right: 10px; 
   }
   .container-side {
-      height: 100vh;
       background: #212228;
       /*position: fixed;*/
       z-index: 99;
@@ -190,6 +182,9 @@
         }
         .opt-dashboard {
             background-image: url({{asset('media-admin/checkin.svg')}}); 
+        }
+        .opt-ticket {
+          background-image: url({{asset('media-admin/ticket.svg')}}); 
         }
         .opt-dish {
             background-image: url({{asset('media-admin/dish-2.svg')}}); 
@@ -282,6 +277,18 @@
                     <h3 style="font-weight: 900; margin: 5px; font-size: 35px; letter-spacing: 1px; margin-top: 35px; color: #3fbf92; background-color: black; border-radius: 4px; display: inline-block; padding: 4px 20px; border: 2px solid gray;">eAx</span>ón</h3>
                 </div>
                 <ul class="menu-options">
+                  <li class="col-lg-12 selected-admin-pedidos">
+                        <a href="{{asset('')}}"> 
+                            <div class="col-lg-6 option-side-conteainer opt-ticket">
+                            </div>  
+                            <div class="col-lg-6 txt-option">
+                                <span>Tickets</span>
+                            </div>
+                        </a> 
+                        <ul class="inter-menu">
+                          <li><a href="{{asset('ticket-list')}}"><span>--Listado</span></a></li>
+                        </ul>
+                    </li> 
                     <li class="col-lg-12 selected-admin-pedidos">
                         <a href="{{asset('')}}"> 
                             <div class="col-lg-6 option-side-conteainer opt-dashboard">
@@ -292,7 +299,7 @@
                         </a> 
                         <ul class="inter-menu">
                           <li><a href="{{asset('list')}}"><span>--Huespedes</span></a></li>
-                          <li><a href="{{asset('catalogues')}}"><span>--Catálogos</span></a></li>
+                          <li><a href="{{asset('listClientTypes')}}"><span>--Tipo de clientes</span></a></li>
                         </ul>
                     </li> 
                     <li class="col-lg-12 selected-admin-pedidos">
@@ -373,7 +380,6 @@
         <div class="col-lg-10 col-md-10" style="padding-top: 70px;">
             @yield('page')   
         </div>
-   
 
     </div>
   

@@ -28,6 +28,8 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono</th>
+                    <th>Tipo de cliente</th>
+                    <th>Habitación</th>
                     <th>VER</th>
                 </tr>
             </thead>
@@ -43,6 +45,12 @@
                         <span>
                             {{$guest->phone}}
                         </span>
+                    </td>
+                    <td>
+                        <span>{{$guest->title}}</span>
+                    </td>
+                    <td>
+                        <span>{{$guest->room}}</span>
                     </td>
                     <td>
                         <button class="btn" onclick="show('{{$guest->hash}}')">VER</button>

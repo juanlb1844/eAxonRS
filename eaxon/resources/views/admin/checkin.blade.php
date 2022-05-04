@@ -23,9 +23,10 @@
         </div>
         <div class="col-lg-4 col-md-4 col-12 pd1">
             <p>Nacionalidad</p>
-            <select class="form-control">
-                <option value="1">EU</option>
-                <option value="2">CA</option>
+            <select id="nationality" class="form-control">
+                <option value="EU">EU</option>
+                <option value="CA">CA</option>
+                <option value="MX">MX</option> 
             </select>
         </div>
         <div class="col-lg-4 col-md-4 col-12 pd1">
@@ -47,6 +48,18 @@
                 <option value="1">enfermo</option>
             </select>
         </div>
+
+        <div class="col-lg-4 col-md-4 col-12 pd1">
+            <p>Tipo de cliente</p>
+            <select class="form-control" id="idguest_types">
+                @foreach( $client_types as $k => $type )
+                    <option value="{{$type->idguest_types}}" value="{{$type->idguest_types}}">{{$type->title}}</option>
+                @endforeach  
+            </select>
+        </div>
+
+        client_types
+
         <div id="qrcode-2"></div>
         <div class="col-lg-12 pd1">
             <button class="btn btn-primary" onclick="save()">guardar</button>
@@ -60,18 +73,22 @@
         let checkinPhone = $('#checkin-phone').val(); 
         let checkinRoom = $('#checkin-room').val(); 
         let checkinHotel = $('#hotel').val(); 
+        let idguest_types = $('#idguest_types').val(); 
+        let nationality   = $('#nationality').val(); 
         $.ajax({
             'url' : '{{asset("guest")}}', 
-            'method' : 'post', 
+            'method' : 'post',  
             'data' : {
                 'name' : checkinName,  
                 'phone' : checkinPhone, 
                 'room' : checkinRoom, 
-                'hotel' : checkinHotel 
+                'hotel' : checkinHotel, 
+                'nationality' : nationality, 
+                'idguest_types' : idguest_types
             }, 
             'success' : function(resp) {
                 window.location.href = "{{asset('list')}}"; 
-            }
+            } 
         }); 
 
         var qrcode = new QRCode(document.getElementById("qrcode-2"), { 

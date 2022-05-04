@@ -16,6 +16,15 @@
     th {
         background-color: black; 
     }
+    .prev-img-gallery {
+        display: inline-block; 
+        width: 110px; 
+        height: 110px; 
+        background-color: black; 
+        border-radius: 12px; 
+        background-position: center;
+        background-size: cover; 
+    }
 </style> 
  
     <div class="col-lg-12 col-sm-12"> 
@@ -51,7 +60,7 @@
                         </span>
                     </td>
                     <td style="text-align: center; background-size: cover;">
-                        <img style="width: 170px;" src="{{$hotel->url_img}}">
+                        <div class="prev-img-gallery" style="background-image: url('{{$hotel->url_img}}')"></div>
                     </td>
                     <td>
                         <a href="{{asset('editHotel')}}/{{$hotel->idhotel}}">

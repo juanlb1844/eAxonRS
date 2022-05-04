@@ -16,7 +16,8 @@
  	@if( $sliders ) 
 		@foreach($sliders as $k => $slider)
 			<h2>
-				{{$slider['products'][0]->category_name}}
+				<!-- {{$slider['products'][0]->category_name}}--> 
+				{{$slider['ns']}}
 			</h2>  
 			<div class="col-xs-12 np" style="padding: 0px!important;">
 				<div class="owl-carousel carousel-{{$slider['layout']}} owl-theme">

@@ -33,9 +33,13 @@
 	}
 	
 	.header-top {
-		/*background-color: #050505; */ 
-		text-align: center;
-		padding: 10px 10px; 
+		width: 100%;
+		background-color: #333333;
+	    text-align: center;
+	    display: block;
+	    padding: 10px 10px;
+	    clear: both;
+	    display: inline-block;
 	}
 	.header-title {
 		font-size: 25px; 
@@ -90,7 +94,7 @@
 		color: #d15219;
 		/*text-shadow: 0px 0px 4px white;*/ 
 		color: #dddddd; 
-		font-size: 45px; 
+		font-size: 35px; 
 		font-weight: bolder; 
 		padding-top: 60vh; 
 		text-align: center;
@@ -134,19 +138,41 @@
     	height: 400px;
     	position: absolute;
     	width: 100%;
-    	bottom: -100px;
-    	background: rgb(54,53,48);
-		background: linear-gradient(0deg, rgba(54,53,48,1) 0%, rgba(54,53,48,0.7962535355939251) 47%, rgba(0,0,0,0) 100%);
+    	bottom: 0px!important;
+		background: linear-gradient(0deg, rgba(54,53,48,1) 0%, rgba(54,53,48,0.7962535355939251) 47%, rgba(0,0,0,0) 100%); 
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
 	}
 	.courtain-slider {
 		background-color: #00000087;
-    	height: 100px;
-    	position: absolute;
-    	width: 101%;
-    	bottom: -10px;
-    	background: rgb(54,53,48);
-		background: linear-gradient(0deg, rgba(54,53,48,1) 0%, rgba(54,53,48,0.7962535355939251) 47%, rgba(0,0,0,0) 100%);
-		left: 0px;
+	    height: 100px;
+	    position: absolute;
+	    width: 101%;
+	    background: rgb(54,53,48);
+	    background: linear-gradient(0deg, rgb(0 0 0 / 65%) 0%, rgba(54,53,48,0.7962535355939251) 47%, rgba(0,0,0,0) 100%);
+	    border-bottom-left-radius: 10px; 
+	    border-bottom-right-radius: 10px; 
+	    left: 0px;
+	    bottom: 0px; 
+	}
+
+	.np {
+		padding: 0px!important;
+	}
+
+	.basket {
+		display: inline-block;
+		width: 45px; 
+		height: 40px; 
+		position: absolute;
+		background-image: url('{{asset("theme_client/cart.svg")}}');
+		background-size: 75%;
+		right: 10px;
+		/*top: -10%;*/ 
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: #d15219e3;
+    	border-radius: 7px;
 	}
 </style>  
 
@@ -157,16 +183,21 @@
 		<div class="header-top">
 			<!-- <span>{{$hash}}</span> --> 
 			<div class="col-lg-6 col-xs-3">
-				<span class="header-title pull-left">eAxón</span>
+				<a href='{{asset("/client/$hash/perfil/1")}}'>
+					<span class="header-title pull-left">eAxón</span>
+				</a> 
 			</div>
-			<div class="col-lg-6 col-xs-6">
-				<span class="header-title" id="MyClockDisplay" style="color: red; font-size: 25px!important;"></span>
+			<div class="col-lg-6 col-xs-6" style="padding-top: 5px;">
+				<span class="header-title" id="MyClockDisplay" style="color: red; font-size: 22px!important;"></span>
 			</div>
 			<div class="col-lg-6 col-xs-3">
-				<span class="header-avatar pull-right"></span>
+				<!-- <span class="header-avatar pull-right"></span> -->}
+				<a href='{{asset("/cart/1/hash/$hash/perfil/1")}}'>
+					<span class="pull-right basket"></span>
+				</a>
 			</div>
 		</div>
-		<div class="second-menu col-xs-12">
+		<div class="second-menu col-xs-12 np"> 
 			<ul>
 				<li>
 					<span>comida</span>
@@ -175,7 +206,7 @@
 					<span>servicios</span>
 				</li>
 				<li>
-					<span>comentarios *</span>
+					<span>comentarios</span>
 				</li> 
 			</ul> 
 		</div>
@@ -184,11 +215,11 @@
 				<span style="display: block; font-weight: bolder; position: relative;z-index: 999;">
 					{{$portada->name}}  ${{number_format($portada->price, 2, '.', ',') }}
 				</span>
-	    		<a href='{{asset("/dish/$hash/perfil/$perfil")}}'>
+	    		<a href='{{asset("/dish/$portada->iddish/hash/$hash/perfil/$perfil")}}'>
 					<button class="btn btn-primary btn-s1" style="position: relative; z-index: 999;">ordenar</button>	
 	    		</a>
 			</div>
-			<div class="courtain"></div>
+			<div class="courtain" style="border-radius: 0px!important;"></div>
 		 @endif 
 	</div>
 	@yield('page'); 
