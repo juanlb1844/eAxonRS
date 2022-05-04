@@ -256,7 +256,16 @@ class AdminController extends BaseController
     }
 
     public function ticketList() {
-        return view('admin/ticket-list');  
+        $tickets = DB::select("SELECT * FROM ticket");
+
+        foreach ($tickets as $key => $ticket) {
+            $id = $ticket->idticket; 
+            $ticket->img = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id")[0]->options;
+            $tickets[$key]->products = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id"); 
+
+        } 
+             
+        return view('admin/ticket-list', ['tickets' => $tickets]);    
     }
 
     public function guest(Request $data) {

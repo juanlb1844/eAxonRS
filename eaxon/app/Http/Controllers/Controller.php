@@ -21,9 +21,20 @@ class Controller extends BaseController
         DB::table('ticket')->insert([
             'hora_de_peticion' => $to, 
             'id_client' => $idguest, 
-            'to_time' => $to]); 
-        return; 
+            'to_time' => $to, 
+            'type_ticket_idtype_ticket' => 1]);  
+
+        $idticket = DB::getPdo()->lastInsertId(); 
+        
         foreach( \Session::get('dishes') as $k ) {
+            echo $k['info']->price; 
+            DB::table('ticket_products_cart')->insert([
+                'type_product_idtype_product' => 1, 
+                'cant' => $k['cant'], 
+                'ticket_idticket' => $idticket, 
+                'name' => $k['info']->name, 
+                'options' => $k['image'] 
+            ]); 
             print_r( $k );  
         }
     }

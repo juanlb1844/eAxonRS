@@ -378,7 +378,8 @@
 					'hash' : '{{$hash}}' 
 				}, 
 				'success' : function(resp) {
-					alert(resp); 
+					//alert(resp); 
+					window.location.href = '{{asset('order/1/hash/')}}/{{$hash}}/perfil/1'; 
 				}
 			}); 
 		}); 

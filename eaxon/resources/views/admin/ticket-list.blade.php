@@ -45,7 +45,7 @@
         height: 200px; 
         border: 1px solid gray;
         width: 100%;
-        background-image: url('https://media.timeout.com/images/105490616/750/562/image.jpg'); 
+        /* background-image: url('https://media.timeout.com/images/105490616/750/562/image.jpg'); */ 
         background-position: center;
         background-size: cover;
     }
@@ -61,6 +61,21 @@
             <h1>Lista de tickets</h1>
             <h2></h2>
         <div class="col-lg-12">
+
+          @foreach( $tickets as $key => $t )
+            <div class="col-lg-3 cotainer-ticket-item client-gold">
+               <div class="content-ticket">
+                   <p><span class="name-field-ticket">Hora: </span> {{ $t->hora_de_peticion }} </p>
+                   <p><span class="name-field-ticket">Cliente: </span> {{$t->id_client }} </p>
+                   <p><span class="name-field-ticket">TIPO: </span> RESTAURANTE</p>
+                   <div class="img-back" style="background-image: url('{{$t->img}}')">
+                       
+                   </div>
+               </div>
+           </div>
+          @endforeach 
+
+          <!-- 
            <div class="col-lg-3 cotainer-ticket-item client-gold">
                <div class="content-ticket">
                    <p><span class="name-field-ticket">Cliente: </span> Ruben Estrada</p>
@@ -82,7 +97,7 @@
                        
                    </div>
                </div>
-           </div>
+           </div> --> 
         </div>
     </div>
  
