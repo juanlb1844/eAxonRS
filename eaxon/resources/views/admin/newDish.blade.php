@@ -61,7 +61,7 @@
                 <p>Precio</p>
                 <input field="data" name-field="price" type-field="input" class="form-control" id="price-dish" placeholder="$" type="text" name="">
             </div>
-            <div class="col-lg-6 col-md-4 col-12 pd1">
+            <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Categorías</p>
                 <select multiple class="form-control categories-relation">
                     @foreach( $categories_menu as $category )
@@ -69,11 +69,19 @@
                     @endforeach 
                 </select>
             </div>
-            <div class="col-lg-6 col-md-4 col-12 pd1">
+            <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Ingredientes</p>
                 <select multiple class="form-control ingredients-relation">
                     @foreach( $ingredients as $ingredient ) 
                       <option value="{{$ingredient->idingredients}}">{{$ingredient->name}}</option>
+                    @endforeach 
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Guarniciones</p>
+                <select multiple class="form-control guarnicion-relation">
+                    @foreach( $guarnicions as $guarnicion ) 
+                      <option value="{{$guarnicion->idguarnicion}}">{{$guarnicion->name}}</option>
                     @endforeach 
                 </select>
             </div>
@@ -182,6 +190,7 @@
         let data_form = Array(); 
         let categories_relation = $('.categories-relation').val(); 
         let ingredients_relation = $('.ingredients-relation').val(); 
+        let guarnicion_relation = $('.guarnicion-relation').val(); 
 
         let to_validate = [".categories-relation", ".ingredients-relation", "#price-dish", "#name-dish"]; 
         if( validate( to_validate ) ) {
@@ -200,16 +209,17 @@
                 }); 
             }
         ); 
-        
+         
 
         console.log( data_form );
  
         $.ajax({ 
             'url' : '{{asset("newDishEntityPost")}}', 
-            'method' : 'POST', 
+            'method' : 'POST',  
             'data' : {
                 'categories_relation' : categories_relation, 
                 'ingredients_relation' : ingredients_relation, 
+                'guarnicion_relation' : guarnicion_relation, 
                 'fileds' : data_form, 
                 'resources' : images_list_upload, 
                 'entity_name' : entity_name  

@@ -98,7 +98,7 @@
             <div class="col-lg-12 pd1">
                 <button class="btn btn-primary" onclick="saveEntity()">guardar</button>
             </div>
-        </div> 
+        </div>  
  
 
 <script type="text/javascript">

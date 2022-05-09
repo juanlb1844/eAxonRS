@@ -20,7 +20,12 @@
  
     <div class="col-lg-12 col-sm-12"> 
         <div class="col-lg-12 pd1">
-            <h1>Lista de menús</h1>
+            <span class="title-page">MENÚS</span>
+            <span class="description-page"> Guarda la lista de menús que tienen tus restaurantes para ayudar a tus clientes 
+                                            <br>
+                                            a filtrar y encontrar los productos que buscan.
+                                        </span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>

@@ -42,14 +42,6 @@
             <input class="form-control" id="checkin-room" placeholder="habitación" type="text" name="">
         </div>
         <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Condición médica</p>
-            <select class="form-control">
-                <option value="1">al 100</option>
-                <option value="1">enfermo</option>
-            </select>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-12 pd1">
             <p>Tipo de cliente</p>
             <select class="form-control" id="idguest_types">
                 @foreach( $client_types as $k => $type )
@@ -57,9 +49,18 @@
                 @endforeach  
             </select>
         </div>
-
-        client_types
-
+         <div class="col-lg-4 col-md-4 col-12 pd1">
+            <p>Condición médica</p>
+            <select class="form-control">
+                <option value="1">al 100</option>
+                <option value="1">enfermo</option>
+            </select>
+        </div>
+        <div class="col-lg-12 col-md-4 col-12 pd1">
+            <p>Alergias</p>
+            <textarea class="form-control" id="alergias" placeholder="alergias" type="text" name=""></textarea>
+        </div>
+ 
         <div id="qrcode-2"></div>
         <div class="col-lg-12 pd1">
             <button class="btn btn-primary" onclick="save()">guardar</button>
@@ -75,16 +76,18 @@
         let checkinHotel = $('#hotel').val(); 
         let idguest_types = $('#idguest_types').val(); 
         let nationality   = $('#nationality').val(); 
+        let alergias = $('#alergias').val(); 
         $.ajax({
             'url' : '{{asset("guest")}}', 
             'method' : 'post',  
-            'data' : {
+            'data' : { 
                 'name' : checkinName,  
                 'phone' : checkinPhone, 
                 'room' : checkinRoom, 
                 'hotel' : checkinHotel, 
                 'nationality' : nationality, 
-                'idguest_types' : idguest_types
+                'idguest_types' : idguest_types, 
+                'alergias' : alergias 
             }, 
             'success' : function(resp) {
                 window.location.href = "{{asset('list')}}"; 

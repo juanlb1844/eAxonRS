@@ -147,6 +147,7 @@
       /*position: fixed;*/
       z-index: 99;
       border-right: 1px solid gray; 
+      min-height: 100vh;
   }
   .panel-right {
       padding: 45px 0px; width: 120%; padding-left: 25vh
@@ -261,13 +262,79 @@
             background-color: #39b67c; 
           }
           
-          .inter-menu li { display: inline-block; width: 100%; }
+          .inter-menu li { 
+            display: inline-block; 
+            width: 100%;
+            border-left: 1px solid gray;
+            border-radius: 0px;
+            margin: 0px; 
+            padding-left: 0px;
+            padding-top: 10px;
+          }
+          .inter-menu { display: none; padding-left: 20px; width: 100%; }
 
 
           html, body{
             background-color: #212228;
             color: white; 
           }
+
+  /* nuevo menú */ 
+    .selected-option {
+      background-color: white;
+      display: inline-block;
+      border-radius: 12px;
+      width: 100%;
+    }
+    .selected-option span {
+      color: #59d66c; 
+      font-weight: 700; 
+    }
+    .selected-option + .inter-menu { display: inline-block; }
+    /* **/ 
+    .selected-admin-pedidos{
+      background-color: transparent; 
+      transition-property: all; 
+      transition-duration: .2s;
+    }
+    .selected-admin-pedidos:hover {
+      cursor: pointer;
+      background-color: #00000040; 
+      transition-property: all; 
+      transition-duration: .2s;
+    }
+
+
+    .separator {
+      width: 15px;
+      border-top: 1px solid gray;
+      display: inline-block;
+      margin-bottom: 4;
+      margin-right: 10px;
+    }
+
+    .{{request()->route()->uri}} {
+      font-weight: bolder; 
+    }
+
+
+     /* theme */ 
+    .title-page {
+        font-weight: 900; 
+        font-size: 35px; 
+        display: block;
+    }
+    .description-page {
+        font-size: 20px; 
+        line-height: 20px;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    .more-info { font-size: 17px; font-weight: 700; }
+    .modal-content {
+      background-color: #131313;
+    }
+
 </style>
  
     <div class="container-fluid" style="padding-left: 0px;">
@@ -278,98 +345,181 @@
                 </div>
                 <ul class="menu-options">
                   <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div @if( request()->route()->uri == 'ticket-list' ) class="selected-option" @endif> 
                             <div class="col-lg-6 option-side-conteainer opt-ticket">
                             </div>  
                             <div class="col-lg-6 txt-option">
-                                <span>Tickets</span>
+                                <span>Tickets </span>
                             </div>
-                        </a> 
+                        </div> 
                         <ul class="inter-menu">
-                          <li><a href="{{asset('ticket-list')}}"><span>--Listado</span></a></li>
+                          <li>
+                              <a href="{{asset('ticket-list')}}">
+                                <span class="separator"></span>
+                                <span class="ticket-list">Listado</span>
+                              </a>
+                            </li>
                         </ul>
                     </li> 
                     <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div @if( request()->route()->uri == 'list' OR request()->route()->uri == 'listClientTypes' ) class="selected-option col-lg-12" @endif > 
                             <div class="col-lg-6 option-side-conteainer opt-dashboard">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Checkin</span>
                             </div>
-                        </a> 
+                        </div> 
                         <ul class="inter-menu">
-                          <li><a href="{{asset('list')}}"><span>--Huespedes</span></a></li>
-                          <li><a href="{{asset('listClientTypes')}}"><span>--Tipo de clientes</span></a></li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span class="list">Huespedes</span>
+                            </a>
+                          </li>
+                          <li>
+                              <a href="{{asset('listClientTypes')}}">
+                                <span class="separator"></span>
+                                <span class="listClientTypes">Tipo de clientes</span>
+                              </a>
+                          </li>
                         </ul>
                     </li> 
                     <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div @if( request()->route()->uri == 'restaurantsList' OR request()->route()->uri == 'categoriesDishList' OR request()->route()->uri == 'menuList' OR request()->route()->uri == 'ingredientList' OR request()->route()->uri == 'guarnicionsList' OR request()->route()->uri == 'dishList' OR request()->route()->uri == 'newRestaurant' OR request()->route()->uri == 'newDishCategory' OR request()->route()->uri =='newDish') 
+                                  class="selected-option col-lg-12" 
+                              @endif> 
                             <div class="col-lg-6 option-side-conteainer opt-dish">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Cocina</span>
-                            </div>
-                        </a> 
+                            </div> 
+                        </div> 
                         <ul class="inter-menu">
-                          <li><a href="{{asset('restaurantsList')}}"><span>--Restaurantes</span></a></li>
-                          <li><a href="{{asset('menuList')}}"><span>--Menús</span></a></li>
-                          <li><a href="{{asset('dishList')}}"><span>--Platillos</span></a></li>
-                          <li><a href="{{asset('categoriesDishList')}}"><span>--Categorías</span></a></li>
-                          <li><a href="{{asset('ingredientList')}}"><span>--Ingredientes</span></a></li>
+                          <li>
+                              <a href="{{asset('restaurantsList')}}">
+                                <span class="separator"></span>
+                                <span class="restaurantsList newRestaurant">Restaurantes</span>
+                              </a>
+                            </li>
+                          <li>
+                            <a href="{{asset('categoriesDishList')}}">
+                              <span class="separator"></span>
+                              <span class="categoriesDishList newDishCategory">Categorías</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('menuList')}}">
+                              <span class="separator"></span>
+                              <span class="menuList">Menús</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('ingredientList')}}">
+                              <span class="separator"></span>
+                              <span class="ingredientList">Ingredientes</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('guarnicionsList')}}">
+                              <span class="separator"></span>
+                              <span class="guarnicionsList">Guarniciones</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('dishList')}}">
+                              <span class="separator"></span>
+                              <span class="dishList newDish">Platillos</span>
+                            </a>
+                          </li>
                         </ul>
                     </li>   
                      <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div @if( request()->route()->uri == 'x') class="" @endif)>
                             <div class="col-lg-6 option-side-conteainer opt-activities">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Actividades</span>
                             </div>
-                        </a> 
+                        </div> 
                         <ul class="inter-menu">
-                          <li><a href="{{asset('list')}}"><span>--Actividades</span></a></li>
-                        </ul>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Actividades</span>
+                            </a>
+                          </li>
+                        </ul> 
                     </li>  
                      <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div> 
                             <div class="col-lg-6 option-side-conteainer opt-misc">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Miscelanea</span>
                             </div>
-                        </a> 
+                        </div> 
                         <ul class="inter-menu">
-                          <li><a href="{{asset('list')}}"><span>--Productos</span></a></li>
-                          <li><a href="{{asset('list')}}"><span>--Categorías</span></a></li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Productos</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Categorías</span>
+                            </a>
+                          </li>
                         </ul>
                     </li>  
                      <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div @if( request()->route()->uri == 'hotelList') 
+                                  class="selected-option col-lg-12" 
+                              @endif>
                             <div class="col-lg-6 option-side-conteainer opt-hotels">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Hoteles</span>
                             </div>
-                        </a> 
+                        </div>
                         <ul class="inter-menu">
-                          <li><a href="{{asset('hotelList')}}"><span>--Lista</span></a></li>
-                          <li><a href="{{asset('list')}}"><span>--Grupos</span></a></li>
+                          <li>
+                            <a href="{{asset('hotelList')}}">
+                              <span class="separator"></span>
+                              <span class="hotelList">Lista</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Grupos</span>
+                            </a>
+                          </li>
                         </ul>
                     </li>
                     <li class="col-lg-12 selected-admin-pedidos">
-                        <a href="{{asset('')}}"> 
+                        <div  @if( request()->route()->uri == 'configHome' || request()->route()->uri == 'configStatus') 
+                                  class="selected-option col-lg-12" 
+                              @endif>
                             <div class="col-lg-6 option-side-conteainer opt-clock">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Home</span>
                             </div>
-                        </a> 
+                        </div> 
                         <ul class="inter-menu">
                           <li>
-                            <a href="{{asset('configHome')}}"><span>--Sliders home</span></a>
+                            <a href="{{asset('configHome')}}">
+                              <span class="separator"></span>
+                              <span class="configHome">Sliders home</span>
+                            </a>
                           </li>
                           <li>
-                            <a href="{{asset('list')}}"><span>--Status</span></a>
+                            <a href="{{asset('configStatus')}}">
+                              <span class="separator"></span>
+                              <span class="configStatus">Status</span>
+                            </a>
                           </li>
                         </ul>
                     </li>  
@@ -377,11 +527,22 @@
             </div> 
         </div>
 
-        <div class="col-lg-10 col-md-10" style="padding-top: 70px;">
+        <div class="col-lg-10 col-md-10" style="padding-top: 40px;">
             @yield('page')   
         </div>
 
     </div>
+
+
+    <script type="text/javascript">
+      $('.selected-admin-pedidos').click( function( event ){
+         if ( $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').css('display') == 'none' ) {
+            $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').slideDown(200); 
+         } else {
+            $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').slideUp(200); 
+         }
+      }); 
+    </script>
   
  
 </body>

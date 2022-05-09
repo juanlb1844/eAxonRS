@@ -19,8 +19,12 @@
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
-        <div class="col-lg-12 pd1">
-            <h1>Configuración del home (cliente)</h1>
+         <div class="col-lg-12 pd1">
+            <span class="title-page">CONFIGURACIÓN DE LA VISTA DEL CLIENTE</span>
+            <span class="description-page">Configura lo que ven tus clientes, establece tus prioridades y crea estragegias 
+                                            <br> comerciales que te ayuden a mover tus productos.
+            </span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>

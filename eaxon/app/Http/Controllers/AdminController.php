@@ -55,6 +55,9 @@ class AdminController extends BaseController
         $entities = DB::table('sliders_home')->get(); 
         return view('admin/configHome', ['entities' => $entities]); 
     }
+    public function configStatus() { 
+        return view('admin/configStatus'); 
+    }
 
     // definir cuerpo de formulario 
     const form_restaurants = array(
@@ -148,7 +151,7 @@ class AdminController extends BaseController
         $table = null; 
         foreach ($data as $key => $value) {
             $table[$value['name_field']] = $value['val_field'];  
-        } 
+        }  
         echo DB::table($entity_name)->insert($table);
     }
   
@@ -175,7 +178,8 @@ class AdminController extends BaseController
     public function newDish() {
         $categories_menu = DB::table("categories_menu")->get();  
         $ingredients = DB::table("ingredients")->get();  
-        return view('admin/newDish', ['categories_menu' => $categories_menu, 'ingredients' => $ingredients ]);
+        $guarnicions = DB::table("guarnicion")->get(); 
+        return view('admin/newDish', ['categories_menu' => $categories_menu, 'ingredients' => $ingredients, 'guarnicions' => $guarnicions ]);
     }
 
     public function checkin() { 
@@ -193,9 +197,14 @@ class AdminController extends BaseController
         $dishes = json_decode( DB::table('dish')->get() ); 
         foreach ($dishes as $key => $dish) {
             $dish->gallery = DB::table('galery_dish')->where('dish_iddish', $dish->iddish)->orderBy('order', 'asc')->get(); 
-        }
-        
-        return view('admin/dishList', ['dishes' => $dishes]);   
+            $dish->ingredients = DB::select("SELECT * FROM ingredient_relation IR INNER JOIN ingredients I ON IR.ingredients_idingredients = I.idingredients WHERE IR.dish_iddish = ".$dish->iddish);  
+        } 
+
+        $ingredients = DB::table("ingredients")->get(); 
+        $categories = DB::table("categories_menu")->get(); 
+        //print_r( json_encode($dishes)); return;  
+ 
+        return view('admin/dishList', ['dishes' => $dishes, 'ingredients' => $ingredients, 'categories' => $categories ]);   
     }
     // edit 
     public function editDish( $id ) {
@@ -222,11 +231,21 @@ class AdminController extends BaseController
         $entity = DB::table('guest_types')->where('idguest_types', $id)->get()[0]; 
         return view('admin/editClientType', ["id" => $id, "entity" => $entity]); 
     }  
+    // GUARNICIONES 
+    //lista 
+    public function guarnicionsList() {
+        $guarnicions = DB::table('guarnicion')->get(); 
+        return view('admin/guarnicionsList', ['entities' => $guarnicions]); 
+    }
+    //nuevo 
+    public function newGuarnicion() {
+        return view('admin/newGuarnicion'); 
+    }
 
     // INGREDIENTS 
     // lista de ingredientes 
     public function ingredientList() {
-         $entities = DB::table("ingredients")->get();  
+         $entities = DB::table("ingredients")->orderBy('name')->get();  
          return view('admin/ingredientsList', ["entities" => $entities]); 
     }
     //nuevo ingrediente 
@@ -242,7 +261,8 @@ class AdminController extends BaseController
     // CATEGORIES DISH 
     //list 
     public function categoriesDishList() {
-        $entities = DB::table("categories_menu")->get(); 
+        $entities = DB::table("categories_menu")->orderBy('name')->get(); 
+
         return view('admin/categoriesDishList', ["entities" => $entities]); 
     }
     //new category dish 
@@ -257,14 +277,15 @@ class AdminController extends BaseController
 
     public function ticketList() {
         $tickets = DB::select("SELECT * FROM ticket");
-
+        $client = ""; 
         foreach ($tickets as $key => $ticket) {
+            $client = DB::table("guest")->where("idguest", $ticket->id_client)->get(); 
+            $tickets[$key]->client = $client; 
             $id = $ticket->idticket; 
             $ticket->img = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id")[0]->options;
             $tickets[$key]->products = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id"); 
-
         } 
-             
+        //print_r( $client); return; 
         return view('admin/ticket-list', ['tickets' => $tickets]);    
     }
 
@@ -275,13 +296,14 @@ class AdminController extends BaseController
         $hotel  = $data->input('hotel'); 
         $idguest_types  = $data->input('idguest_types'); 
         $nationality  = $data->input('nationality'); 
-
+        $alergias  = $data->input('alergias'); 
+         
         $random_base64 = base64_encode(random_bytes(18));
         $hash = serialize($random_base64);
 
         $hash = str_replace( array('"', '/'), array("", ""), $hash); 
  
-        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel, guest_types_idguest_types, nationality) VALUES('$name', '$hash', '$phone', '$room', $hotel, $idguest_types, '$nationality')"); 
+        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel, guest_types_idguest_types, nationality, notes) VALUES('$name', '$hash', '$phone', '$room', $hotel, $idguest_types, '$nationality', '$alergias')"); 
     }
       
      public function try() {
@@ -303,6 +325,7 @@ class AdminController extends BaseController
         $resources = $data->input('resources'); 
         $categories_relation = $data->input('categories_relation'); 
         $ingredients_relation = $data->input('ingredients_relation'); 
+        $guarnicion_relation = $data->input('guarnicion_relation'); 
         $entity_name = $data->input('entity_name'); 
         $data = $data->input('fileds'); 
         $table = null; 
@@ -319,6 +342,9 @@ class AdminController extends BaseController
         }
         foreach ($ingredients_relation as $key => $id) {
             DB::table("ingredient_relation")->insert(["ingredients_idingredients" => $id, "dish_iddish" => $las_id]); 
+        }
+         foreach ($guarnicion_relation as $key => $id) {
+            DB::table("guarnicion_relation")->insert(["guarnicion_idguarnicion" => $id, "dish_iddish" => $las_id]); 
         }
 
         foreach ($resources as $key => $res) {

@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
  
- 
+// HOME  
 Route::get('/configHome', 'AdminController@configHome'); 
+Route::get('/configStatus', 'AdminController@configStatus');  
+
 Route::get('/newSiliderHome', 'AdminController@newSiliderHome'); 
 Route::get('/editSiliderHome/{id}', 'AdminController@editSiliderHome'); 
 Route::post('/getDishesByCat', 'AdminController@getDishesByCat');  
@@ -56,7 +58,10 @@ Route::post('/uploadPhotoHotel', 'AdminController@uploadPhotoHotel');
 Route::get('/ingredientList', 'AdminController@ingredientList'); 
 Route::get('/newIngredient', 'AdminController@newIngredient');  
 Route::get('/editIngredient/{id}', 'AdminController@editIngredient');  
-
+// guarniciones 
+Route::get('/guarnicionsList', 'AdminController@guarnicionsList'); 
+Route::get('/newGuarnicion', 'AdminController@newGuarnicion'); 
+ 
 Route::get('/catalogues', function () { 
     return "hola"; 
 });

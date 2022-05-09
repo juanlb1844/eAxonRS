@@ -25,11 +25,15 @@
         background-position: center;
         background-size: cover; 
     }
+
+ 
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
         <div class="col-lg-12 pd1">
-            <h1>Lista de restaurantes</h1>
+            <span class="title-page">LISTA DE RESTAURANTES</span>
+            <span class="description-page">Registra los restaurantes o crea varias instancias de unos para igualar tu forma detrabajo <br> de tu o tus hoteles.</span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>

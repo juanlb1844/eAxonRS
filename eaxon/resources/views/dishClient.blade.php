@@ -300,7 +300,7 @@
 
 <style type="text/css">
 	.list-ingredents img {
-		width: 70px;
+		width: 55px;
 	}
 	.row-ingredient {
 		background-color: #dedede; 
@@ -321,6 +321,8 @@
 		    background-color: #bebebe;
 		    border-radius: 30px;
 		    height: 28px;
+        width: 28px; 
+        border-radius: 50%; 
 		    line-height: 1px;
 	}
 </style>
@@ -365,6 +367,8 @@
 .is-hide{
   display:none;
 }
+
+.cant-guarnicion { font-size: 17px; }
 </style>
 
 <!-- Modal -->
@@ -380,67 +384,50 @@
       <div class="modal-body">
         <p>Agrega lo que desees en tu platillo</p>
         <div class="col-xs-12 list-ingredents" style="display: flow-root; margin-bottom: 20px;">
-        	<div class="row row-ingredient">
+        	
+        @foreach( $ingredients as $k => $i )
+          <div class="row row-ingredient">
         		<div class="col-xs-7">
-        			<p class="name-ingredient">nombre del ingred</p>
-        			<p class="price-ingredient">$20.00</p>
+              <p></p>
+        			<p class="name-ingredient">{{$i->name}} </p>
+        			<p class="price-ingredient" id="ing-{{$i->idingredients}}">SI</p> 
         		</div>
         		<div class="col-xs-5 np">
-        			<div class="col-xs-10 np" style="text-align: right;">
-        				<img src="https://cdn-icons-png.flaticon.com/512/926/926255.png">
+        			<div class="col-xs-9 np" style="text-align: right; padding: 5px 5px!important;">
+        				<img style="border-radius: 7px;" src="{{$i->img}}"> 
         			</div>
-        			<div class="col-xs-2 np">
-        				<button class="btn control-amount">+</button>
-        				<button class="btn control-amount" style="margin-top: 10px;">-</button>
+        			<div class="col-xs-3 np">
+        				<button class="btn control-amount control-ingredient pull-right" ing="{{$i->idingredients}}">+</button>
+        				<button class="btn control-amount control-ingredient pull-right" ing="{{$i->idingredients}}" style="margin-top: 10px;">-</button>
         			</div>
         		</div>
         	</div>
-        	<div class="row row-ingredient">
-        		<div class="col-xs-7">
-        			<p class="name-ingredient">nombre del ingred</p>
-        			<p class="price-ingredient">$20.00</p>
-        		</div>
-        		<div class="col-xs-5 np">
-        			<div class="col-xs-10 np" style="text-align: right;">
-        				<img src="https://cdn-icons-png.flaticon.com/512/926/926255.png">
-        			</div>
-        			<div class="col-xs-2 np">
-        				<button class="btn control-amount">+</button>
-        				<button class="btn control-amount" style="margin-top: 10px;">-</button>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="row row-ingredient">
-        		<div class="col-xs-7">
-        			<p class="name-ingredient">nombre del ingred</p>
-        			<p class="price-ingredient">$20.00</p>
-        		</div>
-        		<div class="col-xs-5 np">
-        			<div class="col-xs-10 np" style="text-align: right;">
-        				<img src="https://cdn-icons-png.flaticon.com/512/926/926255.png">
-        			</div>
-        			<div class="col-xs-2 np">
-        				<button class="btn control-amount">+</button>
-        				<button class="btn control-amount" style="margin-top: 10px;">-</button>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="row row-ingredient">
-        		<div class="col-xs-7">
-        			<p class="name-ingredient">nombre del ingred</p>
-        			<p class="price-ingredient">$20.00</p>
-        		</div>
-        		<div class="col-xs-5 np">
-        			<div class="col-xs-10 np" style="text-align: right;">
-        				<img src="https://cdn-icons-png.flaticon.com/512/926/926255.png">
-        			</div>
-        			<div class="col-xs-2 np">
-        				<button class="btn control-amount">+</button>
-        				<button class="btn control-amount" style="margin-top: 10px;">-</button>
-        			</div>
-        		</div>
-        	</div>
+        @endforeach 
         </div>
+        
+        <p>Agregar guarniciones</p>
+        <div class="col-xs-12 list-ingredents" style="display: flow-root; margin-bottom: 20px;">
+          @foreach( $guarnicions as $k => $i )
+              <div class="row row-ingredient">
+            <div class="col-xs-7">
+              <p></p>
+              <p class="name-ingredient">{{$i->name}} </p>
+              <p class="pull-left price-ingredient">${{$i->price}}</p> 
+            </div>
+            <div class="col-xs-5 np">
+              <div class="col-xs-9 np" style="text-align: right; padding: 5px 5px!important;">
+                <span class="cant-guarnicion" id="guar-{{$i->idguarnicion}}">1</span>
+                <img style="border-radius: 7px;" src="{{$i->img}}"> 
+              </div>
+              <div class="col-xs-3 np">
+                <button class="btn control-amount control-guarnicion pull-right" guar="{{$i->idguarnicion}}">+</button>
+                <button class="btn control-amount control-guarnicion pull-right" guar="{{$i->idguarnicion}}" style="margin-top: 10px;">-</button>
+              </div>
+            </div>
+          </div>
+          @endforeach 
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
@@ -452,6 +439,35 @@
 </div>
 
 <script type="text/javascript">
+  
+  $('.control-guarnicion').click( function( event ) {
+    let control = $(event.target ).text().trim(); 
+    let ing = $(event.target ).attr('guar'); 
+    let cant = $('#guar-'+ing).html(); 
+    cant = parseInt(cant); 
+    if( control == '+' ) {
+      cant++; 
+      $('#guar-'+ing).html(cant); 
+    } else {
+      let ing = $(event.target ).attr('guar'); 
+      if( cant > 0 ) {
+        cant--; 
+        $('#guar-'+ing).html(cant); 
+      }
+    }
+  }); 
+
+  $('.control-ingredient').click( function( event ) {
+    let control = $(event.target ).text().trim(); 
+    if( control == '+' ) {
+      let ing = $(event.target ).attr('ing'); 
+      $('#ing-'+ing).html("SÍ"); 
+    } else {
+      let ing = $(event.target ).attr('ing'); 
+      $('#ing-'+ing).html("NO"); 
+    }
+  }); 
+
   let cant = 1; 
   function updateCant( res ) {
     cant = parseInt( $('.control-main-cant').html() ); 

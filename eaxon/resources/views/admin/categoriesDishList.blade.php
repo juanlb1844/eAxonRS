@@ -19,8 +19,13 @@
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
-        <div class="col-lg-12 pd1">
-            <h1>Categorías de platillos</h1>
+         <div class="col-lg-12 pd1">
+            <span class="title-page">CATEGORÍAS DE PLATILLOS</span>
+            <span class="description-page"> Crea categorías que te ayuden a agrupar tus platillos fuera de su menú habitual 
+                                            <br>
+                                            y con eso manejar diferentes agrupaciones para la vista del cliente.
+                                        </span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>

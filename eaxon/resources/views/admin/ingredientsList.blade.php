@@ -16,11 +16,24 @@
     th {
         background-color: black; 
     }
+
+    .img-prev {
+        width: 120px; 
+        height: 120px; 
+        border-radius: 12px; 
+        background-position: center;
+        background-size: cover;
+    }
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
-        <div class="col-lg-12 pd1">
-            <h1>Lista de ingredientes</h1>
+         <div class="col-lg-12 pd1">
+            <span class="title-page">LISTA DE INGREDIENTES</span>
+            <span class="description-page"> Administra los ingredientes que conforman tus platillo para ayudar a que los clientes 
+                                            <br>
+                                            puedan agregarlos o excluirlos de sus platillos.
+                                        </span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>
@@ -37,6 +50,11 @@
                                 {{$item->name}}
                             </span>
                         </td> 
+                        <td>
+                            <div class="img-prev" style="background-image: url('{{$item->img}}')">
+                                
+                            </div>
+                        </td>
                         <td>  
                             <a href="{{asset('editIngredient')}}/{{$item->idingredients}}">
                                 <button class="btn" onclick="">VER</button>

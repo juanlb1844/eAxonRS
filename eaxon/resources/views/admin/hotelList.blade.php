@@ -28,8 +28,12 @@
 </style> 
  
     <div class="col-lg-12 col-sm-12"> 
-        <div class="col-lg-12 pd1">
-            <h1>Lista de hoteles</h1>
+         <div class="col-lg-12 pd1">
+            <span class="title-page">LISTA DE HOTELES</span>
+            <span class="description-page">Registra los hoteles que tiene tu empresa o divide secciones de uno para mejorar 
+                                            <br> la organización de tu equipo y aumentar su rendimiento.
+            </span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>

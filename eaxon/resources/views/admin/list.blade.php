@@ -20,8 +20,11 @@
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
-        <div class="col-lg-12 pd1">
-            <h1>Lista de huéspedes</h1>
+         <div class="col-lg-12 pd1">
+            <span class="title-page">CLIENTES</span>
+            <span class="description-page">Registra a tus clientes y obtendrás el código QR para que lo escanee y pueda acceder 
+                                                <br> a la plataforma para poder comunicarse contigo. </span> 
+            <a class="more-info" href=""><p>Más información sobre esta página <img style="width: 25px;" src="{{asset('/media-admin/link.svg')}}"> </p></a>
         </div>
         <table class="table table-hover table-bordered">
             <thead>
@@ -30,6 +33,7 @@
                     <th>Teléfono</th>
                     <th>Tipo de cliente</th>
                     <th>Habitación</th>
+                    <th>Alergias</th>
                     <th>VER</th>
                 </tr>
             </thead>
@@ -51,6 +55,9 @@
                     </td>
                     <td>
                         <span>{{$guest->room}}</span>
+                    </td>
+                    <td>
+                        <span>{{$guest->notes}}</span>
                     </td>
                     <td>
                         <button class="btn" onclick="show('{{$guest->hash}}')">VER</button>

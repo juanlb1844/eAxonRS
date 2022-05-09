@@ -18,6 +18,10 @@
                 <p>Título</p> 
                 <input field="data" name-field="title" type-field="input" class="form-control" id="checkin-name" placeholder="título de categoría" type="text" name="">
             </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Color identificador (opcional)</p> 
+                <input field="data" name-field="flag" type-field="input" class="form-control" id="checkin-name" placeholder="" type="color" name="">
+            </div> 
             <div class="col-lg-8 col-md-8 col-12 pd1">
                 <p>Descripción</p> 
                 <textarea field="data" name-field="description" type-field="input" class="form-control" id="checkin-name" placeholder="Descripción de tipo de cliente" type="text" name=""></textarea>
@@ -25,7 +29,7 @@
             <div class="col-lg-12 pd1">
                 <button class="btn btn-primary" onclick="saveEntity()">guardar</button>
             </div> 
-        </div>
+        </div> 
 
 <script type="text/javascript">
  

@@ -5,6 +5,16 @@
 <link rel="stylesheet" type="text/css" href="https://begima.com.mx/public/js/sortable/theme.css"/> 
 <script type="text/javascript" src="https://begima.com.mx/public/js/sortable/Sortable.min.js"/></script>
 
+<style type="text/css">
+    .img-prev {
+        width: 250px; 
+        height: 200px; 
+        background-color: black; 
+        border-radius: 12px; 
+        background-position: center;
+        background-size: cover;
+    }
+</style>
  
 @section('page')
 
@@ -14,10 +24,16 @@
         </div> 
          
         <div class="col-lg-12 np"  entity-id-field="idingredients" data-entity="form-entity" entity-name="ingredients">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <div class="img-prev" style="background-image: url('{{$entity->img}}')"></div>
+            </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Nombre del ingrediente</p> 
                 <input field="data" name-field="name" type-field="input" class="form-control" id="checkin-name" placeholder="nombre del ingrediente" type="text" name="" value="{{$entity->name}}"> 
             </div> 
+            <div class="col-lg-12">
+                <h2></h2>
+            </div>
             <div class="col-lg-12 pd1">
                 <button class="btn btn-primary" onclick="updateEntity()">editar</button>
                 <button class="btn btn-primary btn-delete" onclick="deleteEntity()">borrar</button>

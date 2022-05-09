@@ -88,7 +88,14 @@ class Controller extends BaseController
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
         $dish = DB::table('dish')->where('iddish', $id)->get()[0];  
         $gallery = DB::table('galery_dish')->where('dish_iddish', $id)->orderBy('order')->get();
-        return view('dishClient', ['id' => $id, 'hash' => $hash, 'user' => $user, 'perfil' => $p, 'dish' => $dish, 'gallery' => $gallery ]);  
+
+        $iddish = $dish->iddish;
+        $ingredients = DB::select("SELECT idingredients, name, img FROM ingredient_relation IR INNER JOIN ingredients I ON IR.idingredient_relation = I.idingredients");
+
+        $guarnicions = DB::select("SELECT * FROM guarnicion_relation GR INNER JOIN guarnicion G ON GR.idguarnicion_relation = G.idguarnicion"); 
+
+ 
+        return view('dishClient', ['id' => $id, 'hash' => $hash, 'user' => $user, 'perfil' => $p, 'dish' => $dish, 'gallery' => $gallery, 'ingredients' => $ingredients, 'guarnicions' => $guarnicions ]);  
     }
 
 
