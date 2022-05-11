@@ -90,9 +90,9 @@
                 'entity_name' : entity_name, 
                 'entity_id_field' : entity_id_field
             }, 
-            'success' : function(resp) {
+            'success' : function(resp) { 
                 console.log( resp ); 
-                window.location.href = "{{asset('categoriesDishList')}}"; 
+                window.location.href = "{{asset('ingredientList')}}"; 
             }
         }); 
     }
