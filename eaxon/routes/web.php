@@ -94,6 +94,9 @@ Route::get('/order/{id}/hash/{hash}/perfil/{p}', 'Controller@clientOrder');
 Route::get('/cart/{id}/hash/{hash}/perfil/{p}', 'Controller@cart');  
 
 Route::post('/createTicket', 'Controller@createTicket'); 
+Route::post('/updateStatusTicket', 'AdminController@updateStatusTicket');    
+Route::get('ticketFrom/{id}', 'AdminController@ticketFrom'); 
+Route::post('ticketById/{id}', 'Controller@ticketById');  
 
 Route::post('/addToCart', 'Controller@addToCart');  
    

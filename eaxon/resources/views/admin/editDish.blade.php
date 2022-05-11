@@ -55,16 +55,34 @@
         <div class="col-lg-12 np" data-entity="form-entity" entity-id-field="iddish" entity-name="dish">
             <div class="col-lg-6 col-md-4 col-12 pd1">
                 <p>Título</p> 
-                <input field="data" name-field="name" type-field="input" class="form-control" id="checkin-name" placeholder="título del menú" type="text" name="" value="{{$entity->name}}">
+                <input field="data" name-field="name" type-field="input" class="form-control" id="checkin-name" placeholder="título del platillo" type="text" name="" value="{{$entity->name}}">
             </div>
          <div class="col-lg-6 col-md-4 col-12 pd1">
             <p>Precio</p>
             <input field="data" name-field="price" type-field="input" class="form-control" id="checkin-name" placeholder="$" type="text" name="" value="{{$entity->price}}">
         </div>
-            <div class="col-lg-6 col-md-4 col-12 pd1">
+            <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Categorías</p>
+
+                <!-- 
                 <select multiple class="form-control categories-relation">
                     <option>Seleccionar categorías</option>
+                    @foreach( $categories_menu as $category )
+                      {{ $a = false }}
+                      @foreach($categories_relation as $cat)
+                        @if( $cat->categories_menu_idcategories_menu == $category->idcategories_menu )
+                          {{ $a = true }}
+                        @endif 
+                      @endforeach  
+                      @if( $a )  
+                        <option selected value="{{$category->idcategories_menu}}">{{$category->name}}</option>
+                      @else 
+                        <option value="{{$category->idcategories_menu}}">{{$category->name}}</option>
+                      @endif 
+                    @endforeach 
+                </select> --> 
+
+               <select onchange="formatCantidades(event)" class="multipleSelect-categorias multipleSelect categories-relation" multiple value="Categorías" idProduct='1' name="language">
                     @foreach( $categories_menu as $category )
                       {{ $a = false }}
                       @foreach($categories_relation as $cat)
@@ -81,8 +99,10 @@
                 </select>
 
             </div>
-             <div class="col-lg-6 col-md-4 col-12 pd1">
+             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Ingredientes</p>
+
+                <!-- 
                 <select multiple class="form-control ingredients-relation">
                     <option>Seleccionar ingredientes</option>
                     @foreach( $ingredients_menu as $ingredient )
@@ -96,6 +116,41 @@
                         <option selected value="{{$ingredient->idingredients}}">{{$ingredient->name}}</option>
                       @else 
                         <option value="{{$ingredient->idingredients}}">{{$ingredient->name}}</option>
+                      @endif 
+                    @endforeach 
+                </select> --> 
+
+                <select onchange="formatCantidades(event)" class="multipleSelect-ingredients multipleSelect ingredients-relation" multiple value="Ingredientes" idProduct='1' name="language">
+                    @foreach( $ingredients_menu as $ingredient )
+                      {{ $a = false }}
+                      @foreach($ingredients_relation as $r)
+                        @if( $r->ingredients_idingredients == $ingredient->idingredients )
+                          {{ $a = true }}
+                        @endif 
+                      @endforeach   
+                      @if( $a )  
+                        <option selected value="{{$ingredient->idingredients}}">{{$ingredient->name}}</option>
+                      @else 
+                        <option value="{{$ingredient->idingredients}}">{{$ingredient->name}}</option>
+                      @endif 
+                    @endforeach 
+                </select>
+
+            </div>
+             <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Guarniciones</p>
+                 <select onchange="formatCantidades(event)" class="multipleSelect-guarnicions multipleSelect guarnicions-relation" multiple value="Ingredientes" idProduct='1' name="language">
+                    @foreach( $guarnicions as $guarnicion )
+                      {{ $a = false }}
+                      @foreach($guarnicion_relation as $r)
+                        @if( $r->guarnicion_idguarnicion == $guarnicion->idguarnicion )
+                          {{ $a = true }}
+                        @endif 
+                      @endforeach   
+                      @if( $a )   
+                        <option selected value="{{$guarnicion->idguarnicion}}">{{$guarnicion->name}}</option>
+                      @else 
+                        <option value="{{$guarnicion->idguarnicion}}">{{$guarnicion->name}}</option>
                       @endif 
                     @endforeach 
                 </select>
@@ -114,6 +169,11 @@
         </div>
 
 <script type="text/javascript">
+ 
+        $('.multipleSelect-categorias').fastselect({ placeholder: "selecciona las categorías"}); 
+        $('.multipleSelect-ingredients').fastselect({ placeholder: "selecciona los ingredientes"}); 
+        $('.multipleSelect-guarnicions').fastselect({ placeholder: "selecciona las guarniciones"}); 
+
 
       function deleteEntity() {
         let entity_name = $('div[entity-name]').attr('entity-name'); 

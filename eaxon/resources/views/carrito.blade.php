@@ -204,7 +204,8 @@
 			.control-item {
 				display: inline-block;
 				border-radius: 50%; 
-				border: 1px solid #f1f1f1;
+				border: 1px solid #d5d5d5;
+				background-color: #d5d5d5; 
 				width: 30px;
 				height: 30px;
 				padding: 0px 0px;
@@ -234,6 +235,8 @@
 				font-size: 20px; 
 				font-weight: 700;
 			}
+
+			.control-count { display: inline-block; width: 100%; text-align: center; }
 		</style>
 
 
@@ -255,12 +258,39 @@
 									<p>{{$k['info']->name}}</p>
 									<p class="price-item">${{$k['info']->price}}</p>
 								</div>
-								<div class="col-xs-2">
+								<div class="col-xs-2 np">
 									<div class="container-controls">
 										<span class="control-item">+</span>
 										<span class="control-count">{{$k['cant']}}</span>
 										<span class="control-item">-</span>
 									</div>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div>
+									@if( $k['excluded_ingredients'] ) 
+										<span style="font-weight: 900;">sin:</span>   
+										@foreach( $k['excluded_ingredients'] as $i => $ing )
+											@if( $i === array_key_last($k['excluded_ingredients']) )
+												<span>{{ $ing['name'] }}</span>
+											@else 
+												<span>{{ $ing['name'] }}, </span>
+											@endif 
+										@endforeach 
+									@endif 
+								</div>
+								<div> 
+									@if( $k['included_guarnicions'] )
+										<span style="font-weight: 900;">extras: </span>    
+										@foreach( $k['included_guarnicions'] as $i => $guar )
+											@if( $i === array_key_last($k['included_guarnicions']) )
+												<span>{{ $guar['name'] }} {{ $guar['cant'] }}</span>
+											@else 
+												<span>{{ $guar['name'] }} {{ $guar['cant'] }}, </span>
+											@endif 
+										@endforeach 
+										@endif 
+									<img src="{{asset('theme_client/edit_2.svg')}}" style="width: 20px;">
 								</div>
 							</div>
 						</div>
@@ -371,15 +401,18 @@
 
 	<script type="text/javascript">
 		$('.main-btn-cart').click( function() {
-			$.ajax({
+			let hash = '{{$hash}}';
+			let base = "{{$_SERVER['SERVER_NAME']}}{{str_replace('index.php', '', $_SERVER['PHP_SELF'])}}"; 
+			$.ajax({ 
 				'url' : "{{asset('createTicket')}}", 
 				'method' : 'post', 
 				'data' : {
 					'hash' : '{{$hash}}' 
 				}, 
 				'success' : function(resp) {
-					//alert(resp); 
-					window.location.href = '{{asset('order/1/hash/')}}/{{$hash}}/perfil/1'; 
+					resp = resp.trim(); 
+					to = window.location.protocol+"//"+base+"order/"+resp+"/hash/"+hash+"/perfil/1";
+					window.location = to; 
 				}
 			}); 
 		}); 

@@ -32,6 +32,10 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 <!-- Styles -->
 
+<script src="https://rawgit.com/dbrekalo/fastselect/master/dist/fastselect.standalone.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fastselect/0.7.3/fastselect.css">
+
+
  <style type="text/css">
    .pd1 {
     padding: 10px; 
@@ -51,6 +55,29 @@
         font-size: 20px; 
         font-weight: 800; 
     } 
+</style>
+
+<style type="text/css">
+    /* THEME FAST SELECT */ 
+  .fstMultipleMode {
+    width: 100%; 
+    height: 50px; 
+    border-radius: 7px; 
+    padding: 4px; 
+    display: inline-table!important;
+  }
+  .fstChoiceItem {
+    font-size: 15px!important; 
+    background-color:  #46b04a!important; 
+    border: 1px solid #46b04a!important;
+    padding-left: 30px!important;
+  }
+  .fstChoiceRemove { font-size: 30px!important; }
+  .fstControls { display: inline!important; }
+  .fstMultipleMode .fstControls { display: inline-block!important; width: 100%!important; padding: 0px!important; }
+  .fstMultipleMode .fstQueryInputExpanded { font-size: 17px!important;  }
+  .fstQueryInput { height: 30px; }
+  .fstResultItem { font-size: 17px!important; }
 </style>
 
 </head>
@@ -146,7 +173,6 @@
       background: #212228;
       /*position: fixed;*/
       z-index: 99;
-      border-right: 1px solid gray; 
       min-height: 100vh;
   }
   .panel-right {
@@ -166,6 +192,7 @@
             background-size: 75%;
             background-position: center;
             background-repeat: no-repeat;
+            margin-top: 5px; 
         }
         .opt-hotels {
             background-image: url({{asset('media-admin/hotel.svg')}}); 
@@ -265,11 +292,11 @@
           .inter-menu li { 
             display: inline-block; 
             width: 100%;
-            border-left: 1px solid gray;
             border-radius: 0px;
             margin: 0px; 
             padding-left: 0px;
             padding-top: 10px;
+            font-size: 18px; 
           }
           .inter-menu { display: none; padding-left: 20px; width: 100%; }
 
@@ -307,7 +334,6 @@
 
     .separator {
       width: 15px;
-      border-top: 1px solid gray;
       display: inline-block;
       margin-bottom: 4;
       margin-right: 10px;
@@ -335,15 +361,28 @@
       background-color: #131313;
     }
 
+
+    .border-b { border-bottom: 1px solid #363636; }
+    .border-r { border-right: 1px solid #363636; }
+    .inter-menu li { border-left: 1px solid #636363; }
+    .separator { border-top: 1px solid #636363; }
 </style>
  
-    <div class="container-fluid" style="padding-left: 0px;">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side" style="padding: 0px!important; width: 190px; overflow-y: auto;">
-            <div>  
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side border-r" style="padding: 0px!important; overflow-y: auto;">
+
+            <div class="col-lg-12 border-b" style="text-align: center;">
+              <img style="width: 70%;" src="{{asset('media-admin/eaxon.png')}}">
+            </div>
+              
+            <div class="col-lg-12">  
+                <!-- 
                 <div style="text-align: center; padding-top: 0px!important;">
-                    <h3 style="font-weight: 900; margin: 5px; font-size: 35px; letter-spacing: 1px; margin-top: 35px; color: #3fbf92; background-color: black; border-radius: 4px; display: inline-block; padding: 4px 20px; border: 2px solid gray;">eAx</span>ón</h3>
-                </div>
-                <ul class="menu-options">
+                    <h3 style="font-weight: 900; margin: 5px; font-size: 35px; letter-spacing: 1px; color: #46b04a; background-color: #2c2c2c; border-radius: 4px; display: inline-block; padding: 4px 20px; border: 1px solid #193f1a;">eAx</span>ón</h3>
+                </div> --> 
+
+                 
+                <ul class="menu-options" style="padding-left: 40px;">
                   <li class="col-lg-12 selected-admin-pedidos">
                         <div @if( request()->route()->uri == 'ticket-list' ) class="selected-option" @endif> 
                             <div class="col-lg-6 option-side-conteainer opt-ticket">
@@ -527,7 +566,7 @@
             </div> 
         </div>
 
-        <div class="col-lg-10 col-md-10" style="padding-top: 40px;">
+        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 40px; max-height: 100vh; overflow: auto;">
             @yield('page')   
         </div>
 
@@ -543,6 +582,207 @@
          }
       }); 
     </script>
+
+
+     <script type="text/javascript">
+
+  $(document).ready( function() {
+
+      let idactual = $( $('.container-ticket-row')[0] ).attr("idticket"); 
+      let idnew = $( $('.container-ticket-row')[0] ).attr("idticket"); 
+
+      setInterval(checkNew, 2000);
+      //notifications(); 
+
+ 
+      function checkNew() {
+        
+
+        console.log( idactual ); 
+        console.log( idnew );
+
+          $.ajax({
+            'url' : "{{asset('ticketFrom/"+idnew+"')}}", 
+            'method' : 'get', 
+            'success' : function( resp ) {
+                resp = JSON.parse(resp);  
+                last = resp[resp.length-1].idticket; 
+                console.log( resp[resp.length-1].idticket ); 
+                if( last > idnew ) {
+                    notifications(); 
+                    idnew = last; 
+                }
+              }
+          });
+        
+      }
+
+
+      let cant_n = 0;  
+      let cant_sales = 0; 
+      function notifications() {
+        console.log("..");
+
+         //resp = JSON.parse(resp); 
+         notification( "RESTAURANTE", "Nuevo ticket", "{{asset('/ticket-list')}}" ); 
+            /*$('#cantNewNotify').html(resp.clients.cant_panel); 
+            if( resp.clients.cant_panel > 0 ) {
+                  $('#cantNewNotify').css('opacity', '1'); 
+            }
+            $('#cantSalesNotify').html(resp.sales.cant_panel); 
+            if( resp.sales.cant_panel > 0 ) {
+                  $('#cantSalesNotify').css('opacity', '1');   
+            }*/ 
+            /*
+            console.log( resp.clients ); 
+            if( resp.clients.cant > 0 && cant_n == 0 ) {
+              notification( resp.clients.name, "Se ha registado un nuevo cliente", resp.clients.location ); 
+              cant_n++;  
+            }
+            console.log( resp.sales );  
+            console.log( resp.sales.cant );
+            if( resp.sales.cant > 0 && cant_sales == 0 ) {
+              notification( resp.sales.name, "Se ha registado una nueva venta", resp.sales.location); 
+              cant_sales++; */
+
+        /* 
+        $.ajax({
+          'url' : "{{asset('notifications')}}", 
+          'method' : 'get', 
+          'success' : function( resp ) {
+            
+            }
+          } 
+        }); */ 
+      }
+ 
+  }); 
+
+  function notification(n_body, n_header, n_location) {
+          // Let's check if the browser supports notifications
+          if (!("Notification" in window)) {
+            alert("This browser does not support desktop notification");
+          }
+
+          // Let's check if the user is okay to get some notification
+          else if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            var notification = new Notification(n_header, {
+                icon: '{{asset("/media-admin/eaxon.png")}}',
+                body: n_body,
+          }); 
+            notification.onclick = function() {
+             window.open(n_location);
+            };
+          }
+
+          // Otherwise, we need to ask the user for permission
+          // Note, Chrome does not implement the permission static property
+          // So we have to check for NOT 'denied' instead of 'default'
+          else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+
+              // Whatever the user answers, we make sure we store the information
+              if(!('permission' in Notification)) {
+                Notification.permission = permission;
+              }
+ 
+              // If the user is okay, let's create a notification
+              if (permission === "granted") {
+                const notification = new Notification("Hi there!");
+              }
+            });
+          } else {
+            alert(`Permission is ${Notification.permission}`);
+          }
+        }
+
+
+  const notificationTexts = [
+  "Hey Jussi! If you're recording your screen, I just wanted to tell that...",
+  "Congratulations, you've found the meaning of life, which by the way is being present.",
+  "You looked super today! Where's that smile from?",
+  "COME HOME ALREADY! -MOM",
+  "How are you doing? Dismiss this message to tell me that you've seen it.",
+  "Dude, I've never slided so smoothly into anything before! Well, that sounded a bit weird to be honest.",
+  "Did you know that LASER is an abbreviation for Light Amplification by the Stimulated Emission of Radiation?"
+];
+
+const addButton = document.querySelector(".add");
+const notificationPosition = document.body.querySelector("div");
+const margin = 16;
+
+const addNotification = ( mge, title ) => {
+  // Create notification
+  
+  const notification = document.createElement("div");
+  // Add class "notification"
+  notification.classList.add("notification");
+  // Pick random content for notification
+  const randomMessage = mge; 
+  // Insert random content and close button
+  notification.innerHTML = `
+                    <div class="content">
+            <h4 class="title">${title}</h4>
+            <p class="description">${randomMessage}</p>
+          </div>
+          <button class="close-not" aria-label="Dismiss notification">ok</button>
+        `;
+  // Get close button within notification
+  const closeButton = notification.querySelector(".close-not");
+  // Listen for the button and attach "removeNotification" function to it
+  closeButton.addEventListener("click", removeNotification);
+  // Position notification
+  notification.style.bottom = `${margin}px`;
+  // Add notification on the page
+  notificationPosition.prepend(notification);
+  // Move other notifications down
+  // 1. Get height of the newly added notification
+  const currentHeight = notification.offsetHeight;
+  // 2. Get the rest of the notifications and turn them into an array
+  const restNotifications = Array.from(
+    document.querySelectorAll(".notification")
+  ).slice(1);
+  // 3. Add the currently added notification's height to the rest of the notifications
+  restNotifications.forEach((item) => {
+    item.style.bottom = `${parseInt(item.style.bottom) + currentHeight + margin}px`;
+  });  
+};
+
+const removeNotification = (event) => {
+  // Get clicked close button
+  const closeButton = event.currentTarget;
+  // Get the notification
+  const notification = closeButton.parentNode;
+  // Get the height of the clicked notification
+  const currentHeight = notification.offsetHeight;
+  // Define rest of the notifications
+  let restNotifications = [];
+  let next = notification.nextElementSibling;
+  // Loop always the next notification until none is found
+  while (next) {
+    // If the next element doesn't have 'notification' class, break the while loop
+    if (!next.matches(".notification")) {
+      break;
+    }
+    // Add the notification to the array
+    restNotifications.push(next);
+    // Set the next to be the next element
+    next = next.nextElementSibling;
+  }
+  // Se the new height for each of the notifications below the removed one
+  restNotifications.forEach((item) => {
+    item.style.bottom = `${parseInt(item.style.bottom) - currentHeight - margin}px`;
+  });
+  // Animate removed notification
+  notification.classList.add("animate-out");
+  // Remove notification once animation has ended
+  notification.addEventListener("animationend", () => {
+    notification.parentNode.removeChild(notification);
+  });
+};
+
+</script>
   
  
 </body>

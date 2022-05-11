@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="https://begima.com.mx/public/js/sortable/theme.css"/> 
 <script type="text/javascript" src="https://begima.com.mx/public/js/sortable/Sortable.min.js"/></script>
 
+
   <style type="text/css">
   .element-gallery {
     height: 170px; 
@@ -34,6 +35,8 @@
     margin-top: 10px!important; 
     opacity: .6;
   }
+
+  
 </style>
 
 @section('page')
@@ -63,27 +66,39 @@
             </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Categorías</p>
+
+                 <select onchange="formatCantidades(event)" class="multipleSelect-categorias multipleSelect categories-relation" multiple value="Categorías" idProduct='1' name="language">
+                    @foreach( $categories_menu as $category )
+                      <option value="{{$category->idcategories_menu}}">{{$category->name}}</option>
+                    @endforeach 
+                 </select>  
+                 <!-- 
                 <select multiple class="form-control categories-relation">
                     @foreach( $categories_menu as $category )
                       <option value="{{$category->idcategories_menu}}">{{$category->name}}</option>
                     @endforeach 
-                </select>
+                </select> --> 
             </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Ingredientes</p>
-                <select multiple class="form-control ingredients-relation">
-                    @foreach( $ingredients as $ingredient ) 
+            
+
+                <select onchange="formatCantidades(event)" class="multipleSelect-ingredients multipleSelect ingredients-relation" multiple value="Ingredients" idProduct='1' name="language">
+                    @foreach( $ingredients as $ingredient )
                       <option value="{{$ingredient->idingredients}}">{{$ingredient->name}}</option>
                     @endforeach 
-                </select>
+                 </select>  
+
             </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Guarniciones</p>
-                <select multiple class="form-control guarnicion-relation">
-                    @foreach( $guarnicions as $guarnicion ) 
+
+                <select onchange="formatCantidades(event)" class="multipleSelect-guarnicion multipleSelect guarnicion-relation" multiple value="Categorías" idProduct='1' name="language">
+                    @foreach( $guarnicions as $guarnicion )
                       <option value="{{$guarnicion->idguarnicion}}">{{$guarnicion->name}}</option>
                     @endforeach 
-                </select>
+                 </select>  
+
             </div>
              <div class="col-lg-12 col-md-4 col-12 pd1">
                 <p>Descripción</p>
@@ -97,6 +112,11 @@
         </div>
 
 <script type="text/javascript">
+
+     $('.multipleSelect-categorias').fastselect({ placeholder: "selecciona las categorías"}); 
+     $('.multipleSelect-ingredients').fastselect({ placeholder: "selecciona los ingredientes"}); 
+     $('.multipleSelect-guarnicion').fastselect({ placeholder: "selecciona las guarniciones"}); 
+     
 
     Dropzone.autoDiscover = false;
 

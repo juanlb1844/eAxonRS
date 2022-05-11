@@ -390,7 +390,7 @@
         		<div class="col-xs-7">
               <p></p>
         			<p class="name-ingredient">{{$i->name}} </p>
-        			<p class="price-ingredient" id="ing-{{$i->idingredients}}">SI</p> 
+        			<p class="price-ingredient" name-ingredient="{{$i->name}}" idingredient="{{$i->idingredients}}" id="ing-{{$i->idingredients}}" val="true">SÍ</p>
         		</div>
         		<div class="col-xs-5 np">
         			<div class="col-xs-9 np" style="text-align: right; padding: 5px 5px!important;">
@@ -416,7 +416,7 @@
             </div>
             <div class="col-xs-5 np">
               <div class="col-xs-9 np" style="text-align: right; padding: 5px 5px!important;">
-                <span class="cant-guarnicion" id="guar-{{$i->idguarnicion}}">1</span>
+                <span class="cant-guarnicion" name-guar="{{$i->name}}" idguar="{{$i->idguarnicion}}" id="guar-{{$i->idguarnicion}}">1</span>
                 <img style="border-radius: 7px;" src="{{$i->img}}"> 
               </div>
               <div class="col-xs-3 np">
@@ -462,9 +462,11 @@
     if( control == '+' ) {
       let ing = $(event.target ).attr('ing'); 
       $('#ing-'+ing).html("SÍ"); 
+      $('#ing-'+ing).attr('val', true); 
     } else {
       let ing = $(event.target ).attr('ing'); 
       $('#ing-'+ing).html("NO"); 
+      $('#ing-'+ing).attr('val', false); 
     }
   }); 
 
@@ -483,20 +485,33 @@
   }
 
   function addToCart() {
-    $("#overlay").fadeIn(); 
+    excluded_ingredients = Array(); 
+    $('.price-ingredient[val="false"]').each( function(a , b) {
+      excluded_ingredients.push( {'id' : $(b).attr('idingredient'), 'name' : $(b).attr('name-ingredient') }); 
+    }); 
+    console.log( excluded_ingredients ); 
+    let included_guarnicions = Array();
+    $('.cant-guarnicion').each( function(a , b) {
+        included_guarnicions.push( {'id' : $(b).attr('idguar'), 'cant' : $(b).html().trim(), 'name' : $(b).attr('name-guar') } );  
+    }); 
+    console.log(included_guarnicions); 
+    $("#overlay").fadeIn();  
     $.ajax({
       'url' : '{{asset("addToCart")}}', 
       'method' : 'post', 
       'data' : { 
         'type' : 'dish', 
         'cant' : cant, 
-        'id' : '{{$id}}' 
+        'id' : '{{$id}}', 
+        'excluded_ingredients' : excluded_ingredients, 
+        'included_guarnicions' : included_guarnicions 
       }, 
       'success' : function( resp ) {
         $("#overlay").fadeOut();  
-      }
+      } 
     }); 
   }
+
 	function programming() {
 		$('#programming').modal('toggle'); 
 	}

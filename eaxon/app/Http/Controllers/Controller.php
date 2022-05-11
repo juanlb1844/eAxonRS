@@ -13,21 +13,35 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    // get ticket by id 
+    public function ticketById( $id ) {
+        $ticket = DB::table('ticket')->where('idticket', $id)->get(); 
+        return json_encode( $ticket ); 
+    }
+
+    // crear ticket 
     public function createTicket( Request $data ) {
+        date_default_timezone_set('America/Mexico_City'); 
+
         $hash = $data->get('hash'); 
+        $json = json_encode( \Session::get('dishes') ); 
         $idguest = DB::table('guest')->where('hash', $hash)->get()[0]->idguest; 
-        
-        $to = date("Y-m-d H:m:s"); 
+         
+        $to = date("Y-m-d H:i:s");  
+        $to2 = date("Y-m-d H:i:s");  
+  
         DB::table('ticket')->insert([
             'hora_de_peticion' => $to, 
             'id_client' => $idguest, 
-            'to_time' => $to, 
-            'type_ticket_idtype_ticket' => 1]);  
+            'to_time' => $to2, 
+            'type_ticket_idtype_ticket' => 1, 
+            'status' => 'atender',  
+            'json' => $json]);  
 
         $idticket = DB::getPdo()->lastInsertId(); 
         
         foreach( \Session::get('dishes') as $k ) {
-            echo $k['info']->price; 
+           // echo $k['info']->price; 
             DB::table('ticket_products_cart')->insert([
                 'type_product_idtype_product' => 1, 
                 'cant' => $k['cant'], 
@@ -35,8 +49,10 @@ class Controller extends BaseController
                 'name' => $k['info']->name, 
                 'options' => $k['image'] 
             ]); 
-            print_r( $k );  
+            //print_r( $k );  
         }
+        
+        echo $idticket;
     }
 
     public function client( $hash ) { 
@@ -85,12 +101,12 @@ class Controller extends BaseController
     }
 
      public function clientDish( $id, $hash, $p) { 
-        $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
-        $dish = DB::table('dish')->where('iddish', $id)->get()[0];  
+        $user    = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
+        $dish    = DB::table('dish')->where('iddish', $id)->get()[0];  
         $gallery = DB::table('galery_dish')->where('dish_iddish', $id)->orderBy('order')->get();
-
+ 
         $iddish = $dish->iddish;
-        $ingredients = DB::select("SELECT idingredients, name, img FROM ingredient_relation IR INNER JOIN ingredients I ON IR.idingredient_relation = I.idingredients");
+        $ingredients = DB::select("SELECT idingredients, name, img FROM ingredient_relation IR INNER JOIN ingredients I ON IR.ingredients_idingredients = I.idingredients WHERE IR.dish_iddish = $iddish");
 
         $guarnicions = DB::select("SELECT * FROM guarnicion_relation GR INNER JOIN guarnicion G ON GR.idguarnicion_relation = G.idguarnicion"); 
 
@@ -101,7 +117,7 @@ class Controller extends BaseController
 
     public function clientOrder( $id, $hash, $p ) {
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
-        return view('order', ['hash' => $hash, 'user' => $user, 'perfil' => $p ]); 
+        return view('order', ['hash' => $hash, 'user' => $user, 'perfil' => $p, 'id' => $id ]); 
     }
 
     public function cart( $id, $hash, $p ) {
@@ -112,19 +128,29 @@ class Controller extends BaseController
     // CART 
     public function try() {
         //\Session::flush();
-        print_r( \Session::get('dishes') ); 
-    }
+        print_r( json_encode( \Session::get('dishes') ) ); 
+    } 
+    // AÑADIR AL CARRITO 
     public function addToCart( Request $data ) {
         $type = $data->input('type'); 
         $cant = $data->input('cant'); 
         $id   = $data->input('id');  
 
+        $excluded_ingredients = $data->input('excluded_ingredients'); 
+        $included_guarnicions = $data->input('included_guarnicions'); 
+
         $dish = DB::table('dish')->where('iddish', $id)->get()[0]; 
 
         $gallery = DB::table('galery_dish')->where('idgalery_dish', $id)->orderBy('order')->get()[0]->url; 
 
-        $item = array('cant' => $cant, 'id' => $id, 'info' => $dish, 'image' => $gallery ); 
-        \Session::push('dishes', $item); 
+        $item = array(  'cant' => $cant, 
+                        'id' => $id, 
+                        'info' => $dish,  
+                        'image' => $gallery, 
+                        'included_guarnicions' => $included_guarnicions, 
+                        'excluded_ingredients' => $excluded_ingredients ); 
+
+        \Session::push('dishes', $item);  
     }
 
 }

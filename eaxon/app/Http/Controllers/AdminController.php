@@ -12,6 +12,20 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+ 
+    // get ticket from 
+    public function ticketFrom( $id ) {
+        $ticket = DB::table('ticket')->where('idticket', '>=', $id)->get(); 
+        return json_encode($ticket);    
+    }
+
+    // update status ticket 
+    public function updateStatusTicket( Request $data ) {
+        $idTicket = $data->input('idticket'); 
+        $to = $data->input('changeto'); 
+        DB::table("ticket")->where('idticket', $idTicket)->update(['status' => $to]); 
+        echo $to; 
+    }
 
     public function getDishesByCat( Request $data ) {
         $id = $data->input('idcat'); 
@@ -214,7 +228,12 @@ class AdminController extends BaseController
         $categories_relation  = DB::table("category_relation")->where("dish_iddish", $id)->get(); 
         $ingredients_relation = DB::table("ingredient_relation")->where("dish_iddish", $id)->get(); 
         $ingredients_menu     = DB::table("ingredients")->get(); 
-        return view('admin/editDish', ['entity' => $dish, 'gallery' => $gallery, 'categories_menu' => $categories_menu, "categories_relation" => $categories_relation, 'ingredients_relation' => $ingredients_relation, 'ingredients_menu' => $ingredients_menu, 'id' => $id ]);  
+
+        $guarnicion_relation = DB::table("guarnicion_relation")->where("dish_iddish", $id)->get(); 
+        $guarnicions = DB::table("guarnicion")->get(); 
+ 
+        return view('admin/editDish', ['entity' => $dish, 'gallery' => $gallery, 'categories_menu' => $categories_menu, "categories_relation" => $categories_relation, 'ingredients_relation' => $ingredients_relation, 'ingredients_menu' => $ingredients_menu, 'id' => $id, 
+            'guarnicion_relation' => $guarnicion_relation, 'guarnicions' => $guarnicions ]);  
     } 
     // CATÁLOGOS HUÉSPEDES / TIPOS DE CLIENTES 
     // lista 
@@ -276,10 +295,11 @@ class AdminController extends BaseController
     }
 
     public function ticketList() {
-        $tickets = DB::select("SELECT * FROM ticket");
+
+        $tickets = DB::select("SELECT * FROM ticket ORDER BY to_time DESC");
         $client = ""; 
         foreach ($tickets as $key => $ticket) {
-            $client = DB::table("guest")->where("idguest", $ticket->id_client)->get(); 
+            $client = DB::select("SELECT * FROM guest G INNER JOIN guest_types GT ON G.idguest = GT.idguest_types WHERE G.idguest = 1");
             $tickets[$key]->client = $client; 
             $id = $ticket->idticket; 
             $ticket->img = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id")[0]->options;

@@ -81,9 +81,10 @@
         <style type="text/css">
             .container-dish-list {
                 margin-top: 40px;
+                margin-bottom: 40px;
             }
             .row-dish {
-                border: 1px solid gray;
+                border: 1px solid #424242;
                 margin-top: 10px;
                 border-radius: 12px;
                 padding: 20px 20px;
@@ -213,7 +214,7 @@
             <div class="col-lg-9 row-dish row-dish-{{$key}}">
                 <div class="col-lg-2">
                         <a href="{{asset('editDish')}}/{{$dish->iddish}}">
-                            @foreach($dish->gallery as $key => $img )
+                            @foreach( $dish->gallery as $key => $img )
                                 @if($key == 0 )
                                     <div class="prev-img-dish" style="background-image: url('{{$img->url}}')"> </div>
                                 @endif 
@@ -223,7 +224,7 @@
                 <div class="col-lg-10">
                     <div class="col-lg-9 np">
                         <div>
-                            <span class="title-dish">Hamburguesa con carne de RES</span>
+                            <span class="title-dish">{{$dish->name}}</span>
                         </div>
                         <div>
                             <span class="description-dish">lista de ingredientes</span>
