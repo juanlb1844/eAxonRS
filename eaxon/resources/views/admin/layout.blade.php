@@ -366,6 +366,31 @@
     .border-r { border-right: 1px solid #363636; }
     .inter-menu li { border-left: 1px solid #636363; }
     .separator { border-top: 1px solid #636363; }
+
+    .content-user-info {
+      text-align: center;
+    }
+    .user-avatar {
+      display: inline-block;
+      width: 70px; 
+      height: 70px; 
+      border-radius: 50%; 
+      background-position: center;
+      background-size: cover;
+      background-image: url('https://a0.muscache.com/im/pictures/user/9d2db02e-fe38-4c79-9233-72f221e7f4c2.jpg?im_w=240'); 
+      border: 2px solid gray; 
+    }
+    .content-user-info {
+      padding-top: 10px; 
+    }
+    .name-avatar-content {
+      padding-top: 10px;
+    }
+    .avatar-title {
+      font-size: 20px;   
+      font-weight: 600;
+    }
+    .avatar-desc { color: gray; display: block; }
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
@@ -373,6 +398,20 @@
 
             <div class="col-lg-12 border-b" style="text-align: center;">
               <img style="width: 70%;" src="{{asset('media-admin/eaxon.png')}}">
+            </div>
+
+            <div class="col-lg-12 container-user-info">
+              <div class="content-user-info">
+                <div class="img-content">
+                  <span class="user-avatar">
+                    
+                  </span>
+                </div>
+                <div class="name-avatar-content">
+                  <span class="avatar-title">John Doe</span>
+                  <span class="avatar-desc">Administrador</span>
+                </div>
+              </div>
             </div>
               
             <div class="col-lg-12">  
@@ -594,7 +633,6 @@
       setInterval(checkNew, 2000);
       //notifications(); 
 
- 
       function checkNew() {
         
 
