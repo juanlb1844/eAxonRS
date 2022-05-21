@@ -35,8 +35,12 @@ Route::post('updateListImgs', 'AdminController@updateListImgs');
 // admin    
 Route::get('ticket-list', 'AdminController@ticketList');   
 
+// GUEST 
 Route::get('/', 'AdminController@checkin'); 
-Route::get('/list', 'AdminController@list');
+Route::get('/list', 'AdminController@list'); 
+Route::get('/editGuest/{id}', 'AdminController@editGuest'); 
+Route::post('/uploadPhotoGuest', 'AdminController@uploadPhotoGuest');  
+
 Route::get('/dishList', 'AdminController@dishList'); 
 Route::get('/restaurantsList', 'AdminController@restaurantsList');
 Route::get('/newDish', 'AdminController@newDish'); 

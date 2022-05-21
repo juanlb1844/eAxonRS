@@ -181,7 +181,7 @@
                 <div class="col-lg-7 np">
                   <div class="info-user-container">
                     <div class="info-user-content">
-                      <span class="user-avatar"></span>
+                      <span class="user-avatar" style="background-image: url({{$t->client[0]->url}})"></span>
                       <span class="name-user">{{$t->client[0]->name}}</span>
                     </div>
                   </div>

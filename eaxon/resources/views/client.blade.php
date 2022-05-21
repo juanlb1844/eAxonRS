@@ -47,7 +47,9 @@
 		height: 30vw;
 		background-image: url('https://archive.org/download/profiles_202104/chicken.png'); 
 		background-size: cover; 
+		background-position: center;
 	}
+
 	.line-body {
 		font-size: 32px; 
 		color: white;
@@ -69,9 +71,11 @@
 			</div>
 			<div class="avatar-container">
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
-					<div class="avatar-content"> 
-						
-					</div>
+					@if( strlen($user->url) > 10 )
+						<div class="avatar-content" style="background-image: url('{{$user->url}}')"></div>
+					@else 
+						<div class="avatar-content"></div>
+					@endif
 				</a>
 			</div>
 			<span class="title-1">{{$user->name}}</span>

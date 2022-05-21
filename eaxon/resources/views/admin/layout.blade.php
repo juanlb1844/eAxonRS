@@ -370,7 +370,7 @@
     .content-user-info {
       text-align: center;
     }
-    .user-avatar {
+    .user-avatar-admin {
       display: inline-block;
       width: 70px; 
       height: 70px; 
@@ -391,19 +391,21 @@
       font-weight: 600;
     }
     .avatar-desc { color: gray; display: block; }
+
+    .container-logo { background-color: #cfcfcf; }
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side border-r" style="padding: 0px!important; overflow-y: auto;">
 
-            <div class="col-lg-12 border-b" style="text-align: center;">
+            <div class="col-lg-12 border-b container-logo" style="text-align: center;">
               <img style="width: 70%;" src="{{asset('media-admin/eaxon.png')}}">
             </div>
 
             <div class="col-lg-12 container-user-info">
               <div class="content-user-info">
                 <div class="img-content">
-                  <span class="user-avatar">
+                  <span class="user-avatar-admin">
                     
                   </span>
                 </div>

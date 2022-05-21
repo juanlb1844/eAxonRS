@@ -17,6 +17,20 @@
         background-color: black; 
     }
     #container-qr img { display: inline-block!important; }
+
+    .prev-img-guest-def { 
+        background-image: url('{{asset('media-admin/user-default.png')}}')
+     }
+    .prev-img-guest { 
+        display: inline-block;
+        width: 90px; 
+        height: 90px; 
+        border-radius: 12px; 
+        background-color: black; 
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+     }
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
@@ -34,7 +48,9 @@
                     <th>Tipo de cliente</th>
                     <th>Habitación</th>
                     <th>Alergias</th>
+                    <th>IMG</th>
                     <th>VER</th>
+                    <th>EDITAR</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,8 +76,22 @@
                         <span>{{$guest->notes}}</span>
                     </td>
                     <td>
+                        <div style="text-align: center;">
+                            @if( strlen($guest->url) > 10 ) 
+                                <span class="prev-img-guest" style="background-image: url({{$guest->url}}); background-size: cover;"></span>
+                            @else 
+                                <span class="prev-img-guest prev-img-guest-def"></span>
+                            @endif 
+                        </div>
+                    </td>
+                    <td>
                         <button class="btn" onclick="show('{{$guest->hash}}')">VER</button>
                     </td>  
+                    <td>
+                        <a href="{{asset('editGuest')}}/{{$guest->idguest}}">
+                            <button class="btn btn-primary">editar</button>
+                        </a>
+                    </td>
                 </tr>
                 @endforeach 
             </tbody>

@@ -196,16 +196,45 @@ class AdminController extends BaseController
         return view('admin/newDish', ['categories_menu' => $categories_menu, 'ingredients' => $ingredients, 'guarnicions' => $guarnicions ]);
     }
 
+    // GUEST 
+    // registrar huesped 
     public function checkin() { 
         $hotels = DB::select("SELECT * FROM hotel"); 
         $client_types = DB::table("guest_types")->get();  
         return view('admin/checkin', ['hotels' => $hotels, 'client_types' => $client_types]);  
     }
-
+    // lista de huéspedes 
      public function list() {
         $guests = DB::select("SELECT * FROM guest G LEFT JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types"); 
         return view('admin/list', ['guests' => $guests]);  
     }
+ 
+    public function editGuest( $id ) { 
+        $hotels = DB::select("SELECT * FROM hotel"); 
+        $client_types = DB::table("guest_types")->get();  
+        $guest = DB::table('guest')->where('idguest', $id)->get()[0]; 
+
+        return view('admin/editGuest', ['hotels' => $hotels, 'client_types' => $client_types, 'guest' => $guest]);  
+    }
+
+      // HOTEL 
+        public function uploadPhotoGuest(Request $request) {
+            $file = $request->file('file');
+            $path = public_path().'/application/guest/';  
+            $fileName = uniqid().$file->getClientOriginalName();
+            $file->move($path, $fileName); 
+            $link      = $this->getUrlFiles()."/public/application/guest/".$fileName;  
+            $idguest = $request->input('idguest');           
+             
+            DB::table('guest')->where('idguest', $idguest)->update(['url' => $link]); 
+
+            $resp = Array('link' => $link, 'id' => $idguest);  
+            $resp = json_encode($resp);   
+            echo $resp;    
+        }
+
+
+
     // lista 
     public function dishList() {
         $dishes = json_decode( DB::table('dish')->get() ); 
@@ -299,12 +328,15 @@ class AdminController extends BaseController
         $tickets = DB::select("SELECT * FROM ticket ORDER BY to_time DESC");
         $client = ""; 
         foreach ($tickets as $key => $ticket) {
-            $client = DB::select("SELECT * FROM guest G INNER JOIN guest_types GT ON G.idguest = GT.idguest_types WHERE G.idguest = 1");
+            $client = DB::select("SELECT * FROM guest G INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types WHERE idguest = ".$ticket->id_client);   
+
             $tickets[$key]->client = $client; 
             $id = $ticket->idticket; 
             $ticket->img = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id")[0]->options;
             $tickets[$key]->products = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id"); 
         } 
+     
+        
         //print_r( $client); return; 
         return view('admin/ticket-list', ['tickets' => $tickets]);    
     }
