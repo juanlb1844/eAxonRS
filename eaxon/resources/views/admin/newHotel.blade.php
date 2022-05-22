@@ -131,6 +131,7 @@
                 url_image = r.link; 
                 $('.url_image').val(r.link); 
                 $('.prev-image').css("background-image", "url("+r.link+")"); 
+                alert(r.link); 
                 /*  
                 $('.content-gallery-1').append('<div class="element-gallery imagen-'+r.id+' col-lg-2" link="'+r.link+'" style="background-image: url('+r.link+');"><input type="checkbox" class="status-photo" checked="" idphoto="1" /><button onclick="borrarFoto('+r.id+')" class="btn btn-default pull-right delete-img">&nbsp;</button></div>'); */
               } 
