@@ -125,6 +125,7 @@
             success: function( resp ) { 
                 let r = resp.xhr.responseText; 
                 r = JSON.parse(r); 
+                console.log( r ); 
                 url_image = r.link; 
                 $('.url_image').val(r.link); 
                 $('.prev-img').css("background-image", "url('"+r.link+"')"); 
