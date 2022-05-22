@@ -474,7 +474,7 @@ class AdminController extends BaseController
             $link      = $this->getUrlFiles()."/application/hotels/".$fileName;   
             $idProduct = $request->input('idProuct');         
             
-            $resp = Array('link' => $link); 
+            $resp = Array('link' => $link, 'uri' => $this->getUrlFiles() ); 
             $resp = json_encode($resp); 
             echo $resp;       
         }
