@@ -107,6 +107,7 @@
     let url_image = ""; 
 
     window.onload = function() {
+        alert("{{asset('uploadPhotoHotel')}}"); 
      // upload file  
         myDropzone = new Dropzone("#dropzone-1", {
             url: "{{asset('uploadPhotoHotel')}}",
