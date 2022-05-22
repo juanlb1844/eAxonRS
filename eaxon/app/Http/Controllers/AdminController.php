@@ -470,7 +470,7 @@ class AdminController extends BaseController
             $path = public_path().'/application/hotels/';  
             $fileName = uniqid().$file->getClientOriginalName();
             $file->move($path, $fileName); 
-            $link      = $this->getUrlFiles()."/public/application/hotels/".$fileName;  
+            $link      = "../public/application/hotels/".$fileName;  
             $idProduct = $request->input('idProuct');         
             
             $resp = Array('link' => $link); 
