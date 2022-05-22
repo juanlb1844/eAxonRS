@@ -137,6 +137,7 @@
             success: function( resp ) { 
                 let r = resp.xhr.responseText; 
                 r = JSON.parse(r); 
+                console.log( r ); 
                 url_image = r.link; 
                 $('.url_image').val(r.link); 
                 $('#img-prev').attr("src", r.link); 
