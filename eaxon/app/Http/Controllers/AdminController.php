@@ -367,7 +367,7 @@ class AdminController extends BaseController
             if( $_SERVER['HTTP_HOST'] == 'localhost') {
                 $url_base = self::url_local;  
             } else {
-                $url_base = self::url_server;  
+                $url_base = self::url_server."..";  
             }
             return( $url_base ); 
       }
