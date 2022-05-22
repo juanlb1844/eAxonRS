@@ -223,7 +223,7 @@ class AdminController extends BaseController
             $path = public_path().'/application/guest/';  
             $fileName = uniqid().$file->getClientOriginalName();
             $file->move($path, $fileName); 
-            $link      = $this->getUrlFiles()."/public/application/guest/".$fileName;  
+            $link      = $this->getUrlFiles()."/application/guest/".$fileName;  
             $idguest = $request->input('idguest');           
              
             DB::table('guest')->where('idguest', $idguest)->update(['url' => $link]); 
@@ -451,7 +451,7 @@ class AdminController extends BaseController
             $path = public_path().'/application/dishes/';  
             $fileName = uniqid().$file->getClientOriginalName();
             $file->move($path, $fileName); 
-            $link      = $this->getUrlFiles()."/public/application/dishes/".$fileName;  
+            $link      = $this->getUrlFiles()."/application/dishes/".$fileName;  
             $idProduct = $request->input('idProuct');         
 
             //$nparte = DB::select("SELECT * FROM nissan_nparte2 WHERE id = $idProduct")[0]->nparte; 
@@ -471,12 +471,12 @@ class AdminController extends BaseController
             $path = public_path().'/application/hotels/';  
             $fileName = uniqid().$file->getClientOriginalName();
             $file->move($path, $fileName); 
-            $link      = $this->getUrlFiles()."/public/application/hotels/".$fileName;   
+            $link      = $this->getUrlFiles()."/application/hotels/".$fileName;   
             $idProduct = $request->input('idProuct');         
             
             $resp = Array('link' => $link); 
             $resp = json_encode($resp); 
-            echo $resp;    
+            echo $resp;       
         }
 
 }
