@@ -123,7 +123,8 @@
  
         <div id="qrcode-2"></div>
         <div class="col-lg-12 pd1">
-            <button class="btn btn-primary" onclick="save()">guardar</button>
+            <!-- <button class="btn btn-primary" onclick="save()">guardar</button> -->
+            <button class="btn btn-primary btn-delete" onclick="deleteEntity()">borrar</button>
         </div>
  
  

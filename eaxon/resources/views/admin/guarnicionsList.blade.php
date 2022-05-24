@@ -22,7 +22,8 @@
         height: 120px; 
         border-radius: 12px; 
         background-position: center;
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 </style>
  
@@ -61,7 +62,7 @@
                             <span>${{$item->price}}</span>
                         </td>
                         <td>  
-                            <a href="{{asset('editIngredient')}}/{{$item->idguarnicion}}">
+                            <a href="{{asset('editGuarnicion')}}/{{$item->idguarnicion}}">
                                 <button class="btn" onclick="">VER</button>
                             </a>
                         </td>  

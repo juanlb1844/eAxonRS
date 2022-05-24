@@ -289,6 +289,10 @@ class AdminController extends BaseController
     public function newGuarnicion() {
         return view('admin/newGuarnicion'); 
     }
+    public function editGuarnicion( $id ) {
+        $guarnicion = DB::table('guarnicion')->where('idguarnicion', $id)->get()[0]; 
+        return view('admin/editGuarnicion', ['id' => $id, 'guarnicion' => $guarnicion]); 
+    }
 
     // INGREDIENTS 
     // lista de ingredientes 
@@ -365,7 +369,7 @@ class AdminController extends BaseController
       public function getUrlFiles() {
             $url_base = ''; 
             if( $_SERVER['HTTP_HOST'] == 'localhost') {
-                $url_base = self::url_local;  
+                $url_base = self::url_local."/public/";   
             } else {
                 $url_base = self::url_server;  
                 $url_base = "https://demo.eaxon.com.mx/";  

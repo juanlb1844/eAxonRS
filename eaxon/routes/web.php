@@ -65,6 +65,7 @@ Route::get('/editIngredient/{id}', 'AdminController@editIngredient');
 // guarniciones 
 Route::get('/guarnicionsList', 'AdminController@guarnicionsList'); 
 Route::get('/newGuarnicion', 'AdminController@newGuarnicion'); 
+Route::get('/editGuarnicion/{id}', 'AdminController@editGuarnicion'); 
  
 Route::get('/catalogues', function () { 
     return "hola"; 

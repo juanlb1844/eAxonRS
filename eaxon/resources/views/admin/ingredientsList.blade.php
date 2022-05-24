@@ -22,7 +22,8 @@
         height: 120px; 
         border-radius: 12px; 
         background-position: center;
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 </style>
  
