@@ -171,10 +171,10 @@
             </div>
             <div class="body-login">
               <div class="row-login">
-                <input class="form-control" id="user" type="" name="" placeholder="usuario">
+                <input class="form-control" id="user" type="text" name="" placeholder="usuario">
               </div>
               <div class="row-login">
-                <input class="form-control" id="pass" type="" name="" placeholder="contraseña">
+                <input class="form-control" id="pass" type="password" name="" placeholder="contraseña">
               </div>
               <div class="row-login">
                 <button class="btn btn-primary btn-enter btn-enter-local">Iniciar Sesión</button>
