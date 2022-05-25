@@ -393,6 +393,8 @@
     .avatar-desc { color: gray; display: block; }
 
     .container-logo { background-color: #cfcfcf; }
+
+    .exit:hover { cursor: pointer; }
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
@@ -525,7 +527,25 @@
                           <li>
                             <a href="{{asset('list')}}">
                               <span class="separator"></span>
+                              <span>Hostes</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Categorías</span>
+                            </a>
+                          </li>
+                          <li> 
+                            <a href="{{asset('activityList')}}">
+                              <span class="separator"></span>
                               <span>Actividades</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Configuración</span>
                             </a>
                           </li>
                         </ul> 
@@ -603,6 +623,11 @@
                           </li>
                         </ul>
                     </li>  
+                    <li class="col-lg-12">
+                      <div style="color: white, font-weight: 900; font-size: 22px;">
+                        <span class="exit" style="color: white;">EXIT</span>
+                      </div>
+                    </li>
                 </ul>
             </div> 
         </div>
@@ -626,6 +651,24 @@
 
 
      <script type="text/javascript">
+
+      $('.exit').click( function() {
+            $('#overlay').fadeIn(); 
+              let user = $('#user').val(); 
+              let pass = $('#pass').val(); 
+              $.ajax({ 
+                'url' : '{{asset("check-logout-admin")}}', 
+                'method'  : 'post',  
+                'data' : {
+                  'user' : user, 
+                  'pass' : pass
+                }, 
+                'success' : function( resp ) {
+                  $('#overlay').fadeOut(); 
+                    window.location.href = "{{asset('/login')}}"; 
+                }
+              }); 
+      }); 
 
   $(document).ready( function() {
 

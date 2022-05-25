@@ -13,59 +13,68 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
  
-// HOME  
-Route::get('/configHome', 'AdminController@configHome'); 
-Route::get('/configStatus', 'AdminController@configStatus');  
+// LOG IN 
+ 
+Route::get('/login', 'AdminController@login'); 
+Route::post('/check-login-admin', 'AdminController@checkLoginAdmin'); 
+Route::post('/check-logout-admin', 'AdminController@logoutAdmin');   
+// HOME   
+Route::get('/configHome', 'AdminController@configHome')->middleware('logueadoAdmin'); 
+Route::get('/configStatus', 'AdminController@configStatus')->middleware('logueadoAdmin');  
 
-Route::get('/newSiliderHome', 'AdminController@newSiliderHome'); 
-Route::get('/editSiliderHome/{id}', 'AdminController@editSiliderHome'); 
+Route::get('/newSiliderHome', 'AdminController@newSiliderHome')->middleware('logueadoAdmin'); 
+Route::get('/editSiliderHome/{id}', 'AdminController@editSiliderHome')->middleware('logueadoAdmin'); 
 Route::post('/getDishesByCat', 'AdminController@getDishesByCat');  
  
 Route::get('/try', 'AdminController@try'); 
 Route::post('/newDishEntityPost', 'AdminController@newDishEntityPost'); 
 Route::post('/editDishEntityPost', 'AdminController@editDishEntityPost'); 
  
-Route::get('/editDish/{id}', 'AdminController@editDish'); 
-Route::get('/categoriesDishList', 'AdminController@categoriesDishList'); 
-Route::get('/newDishCategory', 'AdminController@newDishCategory');  
-Route::get('/editCategorieDish/{id}', 'AdminController@editCategorieDish');   
+Route::get('/editDish/{id}', 'AdminController@editDish')->middleware('logueadoAdmin'); 
+Route::get('/categoriesDishList', 'AdminController@categoriesDishList')->middleware('logueadoAdmin'); 
+Route::get('/newDishCategory', 'AdminController@newDishCategory')->middleware('logueadoAdmin');  
+Route::get('/editCategorieDish/{id}', 'AdminController@editCategorieDish')->middleware('logueadoAdmin');   
  
-Route::post('updateListImgs', 'AdminController@updateListImgs'); 
+Route::post('updateListImgs', 'AdminController@updateListImgs')->middleware('logueadoAdmin'); 
  
 // admin    
-Route::get('ticket-list', 'AdminController@ticketList');   
+Route::get('ticket-list', 'AdminController@ticketList')->middleware('logueadoAdmin');   
 
-// GUEST 
-Route::get('/', 'AdminController@checkin'); 
-Route::get('/list', 'AdminController@list'); 
-Route::get('/editGuest/{id}', 'AdminController@editGuest'); 
+// ACTIVITIES 
+
+Route::get('/activityList', 'AdminController@activityList')->middleware('logueadoAdmin'); 
+
+// GUEST  
+Route::get('/', 'AdminController@checkin')->middleware('logueadoAdmin'); 
+Route::get('/list', 'AdminController@list')->middleware('logueadoAdmin'); 
+Route::get('/editGuest/{id}', 'AdminController@editGuest')->middleware('logueadoAdmin');
 Route::post('/uploadPhotoGuest', 'AdminController@uploadPhotoGuest');  
 
-Route::get('/dishList', 'AdminController@dishList'); 
-Route::get('/restaurantsList', 'AdminController@restaurantsList');
-Route::get('/newDish', 'AdminController@newDish'); 
-Route::get('/newMenu', 'AdminController@newMenu'); 
-Route::get('/editMenu/{id}', 'AdminController@editMenu');   
-Route::get('/newRestaurant', 'AdminController@newRestaurant'); 
-Route::get('/editRestaurant/{id}', 'AdminController@editRestaurant');  
-Route::get('/menuList', 'AdminController@menuList'); 
-Route::get('/hotelList', 'AdminController@hotelList');  
-Route::get('/newHotel', 'AdminController@newHotel');   
-Route::get('/listClientTypes', 'AdminController@listClientTypes');     
-Route::get('/newClientType', 'AdminController@newClientType');     
-Route::get('/editClientType/{id}', 'AdminController@editClientType');      
+Route::get('/dishList', 'AdminController@dishList')->middleware('logueadoAdmin');
+Route::get('/restaurantsList', 'AdminController@restaurantsList')->middleware('logueadoAdmin');
+Route::get('/newDish', 'AdminController@newDish')->middleware('logueadoAdmin');
+Route::get('/newMenu', 'AdminController@newMenu')->middleware('logueadoAdmin'); 
+Route::get('/editMenu/{id}', 'AdminController@editMenu')->middleware('logueadoAdmin'); 
+Route::get('/newRestaurant', 'AdminController@newRestaurant')->middleware('logueadoAdmin'); 
+Route::get('/editRestaurant/{id}', 'AdminController@editRestaurant')->middleware('logueadoAdmin'); 
+Route::get('/menuList', 'AdminController@menuList')->middleware('logueadoAdmin'); 
+Route::get('/hotelList', 'AdminController@hotelList')->middleware('logueadoAdmin');
+Route::get('/newHotel', 'AdminController@newHotel')->middleware('logueadoAdmin');   
+Route::get('/listClientTypes', 'AdminController@listClientTypes')->middleware('logueadoAdmin'); 
+Route::get('/newClientType', 'AdminController@newClientType')->middleware('logueadoAdmin');     
+Route::get('/editClientType/{id}', 'AdminController@editClientType')->middleware('logueadoAdmin'); 
    
-Route::get('/editHotel/{id}', 'AdminController@editHotel'); 
+Route::get('/editHotel/{id}', 'AdminController@editHotel')->middleware('logueadoAdmin');
 Route::post('/uploadPhotoHotel', 'AdminController@uploadPhotoHotel');  
  
 // ingredients  
-Route::get('/ingredientList', 'AdminController@ingredientList'); 
-Route::get('/newIngredient', 'AdminController@newIngredient');  
-Route::get('/editIngredient/{id}', 'AdminController@editIngredient');  
+Route::get('/ingredientList', 'AdminController@ingredientList')->middleware('logueadoAdmin');
+Route::get('/newIngredient', 'AdminController@newIngredient')->middleware('logueadoAdmin');
+Route::get('/editIngredient/{id}', 'AdminController@editIngredient')->middleware('logueadoAdmin'); 
 // guarniciones 
-Route::get('/guarnicionsList', 'AdminController@guarnicionsList'); 
-Route::get('/newGuarnicion', 'AdminController@newGuarnicion'); 
-Route::get('/editGuarnicion/{id}', 'AdminController@editGuarnicion'); 
+Route::get('/guarnicionsList', 'AdminController@guarnicionsList')->middleware('logueadoAdmin');
+Route::get('/newGuarnicion', 'AdminController@newGuarnicion')->middleware('logueadoAdmin');
+Route::get('/editGuarnicion/{id}', 'AdminController@editGuarnicion')->middleware('logueadoAdmin');
  
 Route::get('/catalogues', function () { 
     return "hola"; 

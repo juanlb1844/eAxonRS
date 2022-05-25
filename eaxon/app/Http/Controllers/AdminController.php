@@ -12,7 +12,29 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    // LOG IN 
+
+    public function login() {
+        return view('admin/login'); 
+    }
+
+    public function logoutAdmin() { 
+        \Session::put('logueadoAdmin', false); 
+    }
+    
+    public function checkLoginAdmin( Request $data ) {
+        $user = $data->input('user'); 
+        $pass = $data->input('pass'); 
  
+        if( $user == 'root' AND $pass == 'root' ) {
+            \Session::put('logueadoAdmin', true); 
+            //$request->session()->put('logueadoAdmin',  true);  
+        } else {
+            echo "error"; 
+        }
+    }
+
     // get ticket from 
     public function ticketFrom( $id ) {
         $ticket = DB::table('ticket')->where('idticket', '>=', $id)->get(); 
@@ -233,6 +255,21 @@ class AdminController extends BaseController
             echo $resp;    
         }
 
+    // ACTIVIDADES 
+        
+        public function activityList() {
+        $dishes = json_decode( DB::table('dish')->get() ); 
+        foreach ($dishes as $key => $dish) {
+            $dish->gallery = DB::table('galery_dish')->where('dish_iddish', $dish->iddish)->orderBy('order', 'asc')->get(); 
+            $dish->ingredients = DB::select("SELECT * FROM ingredient_relation IR INNER JOIN ingredients I ON IR.ingredients_idingredients = I.idingredients WHERE IR.dish_iddish = ".$dish->iddish);  
+        } 
+
+        $ingredients = DB::table("ingredients")->get(); 
+        $categories = DB::table("categories_menu")->get(); 
+        //print_r( json_encode($dishes)); return;  
+ 
+        return view('admin/activityList', ['dishes' => $dishes, 'ingredients' => $ingredients, 'categories' => $categories ]);   
+    }
 
 
     // lista 
