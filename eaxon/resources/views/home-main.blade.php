@@ -111,7 +111,7 @@
 		height: 50px; 
 		width: 50px;
 		border-radius: 50%;
-		background-image: url('https://a0.muscache.com/im/pictures/user/a6993565-2d8f-4d43-825a-134094c0faaa.jpg?im_w=240'); 
+		background-image: url('{{asset('/media-admin/user-default.png')}}'); 
 		background-position: center;
 		background-size: cover; 
 		background-repeat: no-repeat;
@@ -132,14 +132,16 @@
 			<div class="col-xs-8">
 				<div class="col-xs-4 np">
 					<div class="content-user">
-						<span class="user-avatar">
-							
-						</span>
+						@if( strlen($user->url) > 10 )
+							<span class="user-avatar" style="background-image: url('{{$user->url}}')"></span>
+						@else 
+							<span class="user-avatar"></span>
+						@endif 
 					</div>
 				</div>
 				<div class="col-xs-8 np">
 					<div style="padding-top: 15px; text-align: left;">
-						<span style="color: white; font-weight: 500; font-size: 17px;">Avatar L</span>
+						<span style="color: white; font-weight: 500; font-size: 17px;">{{$user->name}}</span>
 					</div>
 				</div>
 			</div>
