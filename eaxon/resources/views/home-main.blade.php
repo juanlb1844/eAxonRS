@@ -152,27 +152,34 @@
 
 		<div class="row-services col-xs-12">
 			<div class="content-services">
-				<div class="service-1 col-xs-4" style="padding: 5px;">
-					<div class="back-img col-xs-12"  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPolWrfvDPzEEm3KR6cV4ejqTX5PeidHfFf9nwvgAlt5TPVz0VQQXuiKbJckc6K_THvao&usqp=CAU'); ">
-						<div>
-							<span class="name-service">spa</span>
+				<a href='{{asset("/client/$hash/perfil/1")}}'>
+					<div class="service-1 col-xs-4" style="padding: 5px;">
+						<div class="back-img col-xs-12"  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPolWrfvDPzEEm3KR6cV4ejqTX5PeidHfFf9nwvgAlt5TPVz0VQQXuiKbJckc6K_THvao&usqp=CAU'); ">
+							<div>
+								<span class="name-service">spa</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="service-1 col-xs-4" style="padding: 5px;">
-					<div class="back-img col-xs-12"  style="background-image: url('https://media.gq.com.mx/photos/6155f165f3951529d43a0743/16:9/w_2560%2Cc_limit/GettyImages-56807633-lo-que-no-debes-pedir-de-room-service.jpg'); ">
-						<div>
-							<span class="name-service">alimentos</span>
+				</a>
+				<a href='{{asset("/client/$hash/perfil/1")}}'>
+					<div class="service-1 col-xs-4" style="padding: 5px;">
+						<div class="back-img col-xs-12"  style="background-image: url('https://media.gq.com.mx/photos/6155f165f3951529d43a0743/16:9/w_2560%2Cc_limit/GettyImages-56807633-lo-que-no-debes-pedir-de-room-service.jpg'); ">
+							<div>
+								<span class="name-service">alimentos</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="service-1 col-xs-4" style="padding: 5px;">
-					<div class="back-img col-xs-12"  style="background-image: url('https://www.limpiezaslm2.com/wp-content/uploads/2019/06/externalizaci%C3%B3n-de-la-limpieza-1200x900.jpg'); ">
-						<div>
-							<span class="name-service">limpieza</span>
+				</a>
+				<a href='{{asset("/client/$hash/perfil/1")}}'>
+					<div class="service-1 col-xs-4" style="padding: 5px;">
+						<div class="back-img col-xs-12"  style="background-image: url('https://www.limpiezaslm2.com/wp-content/uploads/2019/06/externalizaci%C3%B3n-de-la-limpieza-1200x900.jpg'); ">
+							<div>
+								<span class="name-service">limpieza</span>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
+
 			</div>
 		</div>
 
@@ -182,9 +189,11 @@
 			</div>
 			<div class="body-section">
 				<div class="content-section">
-					<div class="content-img">
-						<span class="action-section">ver más</span>
-					</div>
+					<a href='{{asset("/client/$hash/perfil/1")}}'>
+						<div class="content-img">
+							<span class="action-section">ver más</span>
+						</div>
+					 </a>
 					<div class="text-content">
 						<span class="name-content">Olas de arena</span>
 						<p class="content-description">Conduciremos a una playa remota en el Cabo Este, a 40 minutos de Cabo</p>
@@ -201,14 +210,16 @@
 			</div>
 			<div class="body-section">
 				<div class="content-section">
-					<div class="content-img" style="background-image: url('https://gourmetdemexico.com.mx/wp-content/uploads/2020/09/platillo-trazo.jpg')">
-						<span class="action-section">ver más</span>
-					</div>
+					<a href='{{asset("/client/$hash/perfil/1")}}'>
+						<div class="content-img" style="background-image: url('https://gourmetdemexico.com.mx/wp-content/uploads/2020/09/platillo-trazo.jpg')">
+							<span class="action-section">ver más</span>
+						</div>
+					</a>
 					<div class="text-content">
 						<span class="name-content">Pide a tu cuarto</span>
-						<p class="content-description">Conduciremos a una playa remota en el Cabo Este, a 40 minutos de Cabo</p>
+						<p class="content-description">Pide en a tu habitaión o programa algúna fecha importante desde tu celular</p>
 						<div class="tags-section">
-							#surfArena #afueras #viaje #deporte
+							#food #relaxAndFood #caboFood #mexico
 						</div>
 					</div>
 				</div>
@@ -221,14 +232,16 @@
 			</div>
 			<div class="body-section">
 				<div class="content-section">
-					<div class="content-img" style="background-image: url('https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2021/07/1140-beach-hat-bag-flip-flops-esp.jpg')">
-						<span class="action-section">ver más</span>
-					</div>
+					<a href='{{asset("/client/$hash/perfil/1")}}'>
+						<div class="content-img" style="background-image: url('https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2021/07/1140-beach-hat-bag-flip-flops-esp.jpg')">
+							<span class="action-section">ver más</span>
+						</div>
+					</a>
 					<div class="text-content">
 						<span class="name-content">¿Olvidaste algo?</span>
 						<p class="content-description">Compra tus accesorios y/o recuerdos en nuestra tienda</p>
 						<div class="tags-section">
-							#surfArena #afueras #viaje #deporte
+							#bikini #accesoriesBeach #mexico #mexicoMemories
 						</div>
 					</div>
 				</div>

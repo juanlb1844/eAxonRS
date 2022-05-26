@@ -191,7 +191,7 @@
 				<span class="header-title" id="MyClockDisplay" style="color: red; font-size: 22px!important;"></span>
 			</div>
 			<div class="col-lg-6 col-xs-3">
-				<!-- <span class="header-avatar pull-right"></span> -->}
+				<!-- <span class="header-avatar pull-right"></span> -->
 				<a href='{{asset("/cart/1/hash/$hash/perfil/1")}}'>
 					<span class="pull-right basket"></span>
 				</a>
