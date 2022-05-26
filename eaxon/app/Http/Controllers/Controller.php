@@ -13,6 +13,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    public function homeMain( $hash ) {
+        return view('home-main', ['hash' => $hash]);
+    }
+
     // get ticket by id 
     public function ticketById( $id ) {
         $ticket = DB::table('ticket')->where('idticket', $id)->get(); 

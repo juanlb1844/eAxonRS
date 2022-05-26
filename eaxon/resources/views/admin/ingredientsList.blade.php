@@ -39,8 +39,9 @@
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>Nombre</th>
+                    <th>NOMBRE</th>
                     <th>VER</th>
+                    <th>EDITAR</th>
                 </tr>
             </thead>
             <tbody>

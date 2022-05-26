@@ -208,7 +208,7 @@
           'success' : function( resp ) {
             $('#overlay').fadeOut(); 
             if( resp != 'error') {
-              window.location.href = "{{asset('/')}}"; 
+              window.location.href = "{{asset('/list')}}"; 
             } else {
               alert("Credenciales incorrectas");
             }

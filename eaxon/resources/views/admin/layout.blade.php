@@ -274,7 +274,7 @@
             background-color: #000000; border: 0px; border-radius: 4px;
             transition-property: all; 
             transition-duration: .2s; 
-            box-shadow: 0px 2px 5px 0px #b5b5b5;
+            box-shadow: none;
             padding: 5px 35px;
             font-weight: 900;
             font-size: 17px;
@@ -395,6 +395,10 @@
     .container-logo { background-color: #cfcfcf; }
 
     .exit:hover { cursor: pointer; }
+
+     th, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+                border: 1px solid #2f2f2f!important;
+        }
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
@@ -462,6 +466,18 @@
                               <a href="{{asset('listClientTypes')}}">
                                 <span class="separator"></span>
                                 <span class="listClientTypes">Tipo de clientes</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="{{asset('listClientTypes')}}">
+                                <span class="separator"></span>
+                                <span class="listClientTypes">Habitaciones</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="{{asset('listClientTypes')}}">
+                                <span class="separator"></span>
+                                <span class="listClientTypes">TAG'S</span>
                               </a>
                           </li>
                         </ul>
@@ -569,6 +585,29 @@
                             <a href="{{asset('list')}}">
                               <span class="separator"></span>
                               <span>Categorías</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </li> 
+                     <li class="col-lg-12 selected-admin-pedidos">
+                        <div> 
+                            <div class="col-lg-6 option-side-conteainer opt-misc">
+                            </div>  
+                            <div class="col-lg-6 txt-option">
+                                <span>Spa</span>
+                            </div>
+                        </div> 
+                        <ul class="inter-menu">
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Citas</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{asset('list')}}">
+                              <span class="separator"></span>
+                              <span>Servicios</span>
                             </a>
                           </li>
                         </ul>
