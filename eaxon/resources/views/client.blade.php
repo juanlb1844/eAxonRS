@@ -68,9 +68,9 @@
 		<div class="body-content">
 			<div class="line-body">
 				<span>¿Quién usará eAxón?</span>
-			</div>
+			</div> 
 			<div class="avatar-container">
-				<a href='{{asset("/client/$hash/perfil/1")}}'>
+				<a href='{{asset("/home-main/$hash/perfil/1")}}'>
 					@if( strlen($user->url) > 10 )
 						<div class="avatar-content" style="background-image: url('{{$user->url}}')"></div>
 					@else 
