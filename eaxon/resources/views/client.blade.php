@@ -83,7 +83,7 @@
 
 		<video width="320" height="240" controls id="video">
 
-	</div>
+	</div> 
 
 
 <script type="text/javascript">
