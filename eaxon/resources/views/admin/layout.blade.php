@@ -469,7 +469,7 @@
                               </a>
                           </li>
                           <li>
-                              <a href="{{asset('listClientTypes')}}">
+                              <a href="{{asset('listRooms')}}">
                                 <span class="separator"></span>
                                 <span class="listClientTypes">Habitaciones</span>
                               </a>

@@ -301,6 +301,18 @@ class AdminController extends BaseController
         return view('admin/editDish', ['entity' => $dish, 'gallery' => $gallery, 'categories_menu' => $categories_menu, "categories_relation" => $categories_relation, 'ingredients_relation' => $ingredients_relation, 'ingredients_menu' => $ingredients_menu, 'id' => $id, 
             'guarnicion_relation' => $guarnicion_relation, 'guarnicions' => $guarnicions ]);  
     } 
+
+    // HABITACIONES 
+
+    public function listRooms() { 
+        $entities = DB::table("room")->get(); 
+        return view('admin/listRooms', ["entities" => $entities]); 
+    }
+    public function getRooms() {
+        $rooms = DB::select("SELECT * FROM room");
+        return json_encode($rooms);  
+    }
+
     // CATÁLOGOS HUÉSPEDES / TIPOS DE CLIENTES 
     // lista 
     public function listClientTypes() {

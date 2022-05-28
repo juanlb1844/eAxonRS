@@ -3,7 +3,7 @@
 @section('page')
   
         <div class="col-lg-12 pd1">
-            <h1>Check in</h1>
+            <h1>CHECK IN</h1>
         </div>
          <div class="col-lg-4 col-md-4 col-12 pd1">
             <p>Hoteles</p>
@@ -29,17 +29,26 @@
                 <option value="MX">MX</option> 
             </select>
         </div>
-        <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Llegada</p>
-            <input class="form-control" type="date" name="">
+
+        <div class="col-lg-12 np">
+            <div class="col-lg-12" style="padding-left: 10px;">
+                <h2 style="margin: 0px;">estadía</h2>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Llegada</p>
+                <input class="form-control" type="date" name="">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Salida</p>
+                <input class="form-control" type="date" name="">
+            </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Salida</p>
-            <input class="form-control" type="date" name="">
-        </div>
+
+
         <div class="col-lg-2 col-md-4 col-12 pd1">
             <p>Habitación</p>
-            <input class="form-control" id="checkin-room" placeholder="habitación" type="text" name="">
+            <input style="display: none;" class="form-control" id="checkin-room" placeholder="habitación" type="text" name="">
+            <button class="btn btn-primary" id="selectRoom">seleccionar</button>
         </div>
         <div class="col-lg-4 col-md-4 col-12 pd1">
             <p>Tipo de cliente</p>
@@ -52,8 +61,8 @@
          <div class="col-lg-4 col-md-4 col-12 pd1">
             <p>Condición médica</p>
             <select class="form-control">
-                <option value="1">al 100</option>
-                <option value="1">enfermo</option>
+                <option value="1">saludable</option>
+                <option value="1">problemas cardiacos</option>
             </select>
         </div>
         <div class="col-lg-12 col-md-4 col-12 pd1">
@@ -65,10 +74,93 @@
         <div class="col-lg-12 pd1">
             <button class="btn btn-primary" onclick="save()">guardar</button>
         </div>
+
+  
+<div id="select-room" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="border-radius: 22px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="font-size: 25px;">Selecciona la habitación</h4>
+      </div>
+      <div class="modal-body" style="display: inline-block; width: 100%;">
+        <div class="col-lg-12 np">
+           
+                <div style="padding-top: 20px;">
+                 
+                    <table class="table table-hover table-bordered" style="widows: 100%;">
+                        <thead>
+                            <tr>
+                                <th>TÍTULO</th> 
+                                <th>ESTATUS</th>
+                                <th>CONDICIÓN</th>
+                                <th>PLANTA</th>
+                                <th>SECCIÓN</th>
+                                <th>TIPO</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body-rooms">
+                            <tr>
+                                <td>xx</td>
+                                <td>xx</td>
+                                <td>xx</td>
+                                <td>xx</td>
+                                <td>xx</td>
+                                <td>xx</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+           
+            <div class="col-lg-6">
+                <div id="container-qr" style="text-align: center;">
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-12 np">
+            <div style="text-align: center; padding-top: 20px;">
+                <a target="_blank" id="url-link" style="color:black; font-size: 20px;"></a>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Seleccionar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
  
  
 
 <script type="text/javascript">
+    function selectRoom( id, title ) { 
+        $('#selectRoom').text(title); 
+        $("#select-room").modal('toggle');
+        $('#checkin-room').val(title);  
+    }
+    $('#selectRoom').click( function() {
+        $("#select-room").modal('toggle');
+        $('.body-rooms').html("");
+        $.ajax({
+            'url' : '{{asset("getRooms")}}',
+            'method' : 'post', 
+            'data' : {},  
+            'success' : function( resp ) {
+                resp = JSON.parse(resp); 
+                resp.forEach( function( a, b ) {
+                    var s = "libre"; 
+                    var tr = "<tr onclick='selectRoom("+a.idroom+","+a.title+")'><td>"+a.title+"</td><td>"+s+"</td><td>"+a.status+"</td><td>"+a.planta+"</td><td>"+a.section+"</td><td>"+a.type+"</td></tr>"; 
+                    $('.body-rooms').append(tr); 
+                }); 
+                console.log( resp ); 
+            }
+        }); 
+
+    }); 
+
     function save() {
         let checkinName = $('#checkin-name').val(); 
         let checkinPhone = $('#checkin-phone').val(); 

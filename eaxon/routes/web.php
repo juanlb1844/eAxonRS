@@ -63,7 +63,10 @@ Route::get('/newHotel', 'AdminController@newHotel')->middleware('logueadoAdmin')
 Route::get('/listClientTypes', 'AdminController@listClientTypes')->middleware('logueadoAdmin'); 
 Route::get('/newClientType', 'AdminController@newClientType')->middleware('logueadoAdmin');     
 Route::get('/editClientType/{id}', 'AdminController@editClientType')->middleware('logueadoAdmin'); 
-   
+
+Route::get('/listRooms', 'AdminController@listRooms')->middleware('logueadoAdmin'); 
+Route::post('/getRooms', 'AdminController@getRooms')->middleware('logueadoAdmin');  
+    
 Route::get('/editHotel/{id}', 'AdminController@editHotel')->middleware('logueadoAdmin');
 Route::post('/uploadPhotoHotel', 'AdminController@uploadPhotoHotel');  
  
