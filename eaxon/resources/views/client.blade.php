@@ -79,6 +79,9 @@
 				</a>
 			</div>
 			<span class="title-1">{{$user->name}}</span>
+
+			<button onclick="initCam()">Leer QR</button>
+
 		</div>
 
 		<video width="320" height="240" controls id="video">
@@ -87,17 +90,19 @@
 
 
 <script type="text/javascript">
-	var constraints = { video: { width: 800, height: 800 } };
+	function initCam() {  
+		var constraints = { video: { width: 800, height: 800 } };
 
-	navigator.mediaDevices.getUserMedia(constraints)
-	.then(function(mediaStream) {
-	  var video = document.getElementById('video'); 
-	  video.srcObject = mediaStream;
-	  video.onloadedmetadata = function(e) {
-	    video.play();
-	  };
-	})
-	.catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+		navigator.mediaDevices.getUserMedia(constraints)
+		.then(function(mediaStream) {
+		  var video = document.getElementById('video'); 
+		  video.srcObject = mediaStream;
+		  video.onloadedmetadata = function(e) {
+		    video.play();
+		  };
+		})
+		.catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+	}
 </script>
 
 </body>
