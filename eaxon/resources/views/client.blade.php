@@ -150,9 +150,10 @@
 
 <script type="text/javascript">
 
- /* 
 
 	function initCam() {  
+		alert( document.getElementsByTagName('select')[0].className ); 
+ /* 
 		var constraints = { video: { width: 800, height: 800 } };
 
 		navigator.mediaDevices.getUserMedia(constraints)
@@ -164,8 +165,8 @@
 		  };
 		})
 		.catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
-	}
 	*/ 
+	}
 </script>
 
 </body>
