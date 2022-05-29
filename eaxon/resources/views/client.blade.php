@@ -57,6 +57,9 @@
 	}
 </style>
 
+<script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+
+
 </head>
 <body>
 
@@ -80,16 +83,30 @@
 			</div>
 			<span class="title-1">{{$user->name}}</span>
 
-			<button onclick="initCam()">Leer QR</button>
+			<button onclick="initCam()">Leer QRx</button>
 
 		</div>
 
 		<video width="320" height="240" controls id="video">
 
+			<div id="qr-reader" style="width: 600px"></div>
+
+
 	</div> 
 
 
 <script type="text/javascript">
+
+var resultContainer = document.getElementById('qr-reader-results');
+var lastResult, countResults = 0;
+
+function onScanSuccess(decodedText, decodedResult) {
+    console.log(`Code scanned = ${decodedText}`, decodedResult);
+}
+var html5QrcodeScanner = new Html5QrcodeScanner(
+	"qr-reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess);
+
 	function initCam() {  
 		var constraints = { video: { width: 800, height: 800 } };
 
