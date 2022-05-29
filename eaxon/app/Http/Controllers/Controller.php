@@ -65,6 +65,10 @@ class Controller extends BaseController
     	return view('client', ['hash' => $hash, 'user' => $user]);  
     }
 
+    public function welcome( ) { 
+        return view('welcome', []);  
+    }
+
      public function clientHome( $hash, $p) { 
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
         $sliders = null; 

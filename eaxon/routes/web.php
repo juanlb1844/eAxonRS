@@ -106,6 +106,8 @@ Route::get('trys', 'Controller@try');
 Route::get('/home-main/{hash}/perfil/{p}', 'Controller@homeMain'); 
  
 Route::get('/client/{hash}', 'Controller@client'); 
+Route::get('/welcome', 'Controller@welcome');  
+
 Route::get('/client/{hash}/perfil/{p}', 'Controller@clientHome'); 
 Route::get('/dish/{id}/hash/{hash}/perfil/{p}', 'Controller@clientDish');  
 
