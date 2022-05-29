@@ -69,6 +69,8 @@
 	#qr-reader-results button {
 		background-color: #59d66c; 
 		border-radius: 7px; 
+		padding: 5px 20px;
+		border: 0px;
 	}
 	/* 
 	#qr-reader-results div { border: none!important; }
