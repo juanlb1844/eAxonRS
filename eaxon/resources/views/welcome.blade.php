@@ -63,13 +63,15 @@
 	#qr-reader__status_span {
 		display: none;
 	}*/ 
-	#qr-reader-results {
+	#qr-reader-results > div:nth-child(1), #qr-reader-results {
 		border: none!important;
 	}
+	#qr-reader-results__dashboard_section_swaplink { display: none!important; }
+	#qr-reader-results > div:nth-child(1) > span:nth-child(1) > a, #qr-reader-results__status_span { display: none; }
 	#qr-reader-results button {
 		background-color: #59d66c; 
-		border-radius: 7px; 
-		padding: 5px 20px;
+		border-radius: 12px; 
+		padding: 10px 20px;
 		border: 0px;
 	}
 	/* 
@@ -148,6 +150,7 @@
             "qr-reader-results", { fps: 10, qrbox: 250, disableFlip : false});
         html5QrcodeScanner.render(onScanSuccess);  
 
+        document.querySelector("#qr-reader-results__dashboard_section_csr > div > button").innerText = "Escanear QR"; 
         
     });   
 </script>
