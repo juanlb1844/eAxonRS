@@ -97,12 +97,13 @@
     <div id="qr-reader-results"></div>
 
 	</div> 
-
+	
+	<!-- 
 	<div class="form-row justify-content-md-center">
-    <div class="form-group col-md-4 col-sm-4">
-        <div class="justify-content-md-center" id="reader" width="300px" height="300px"></div>
-    </div>
-</div>
+    	<div class="form-group col-md-4 col-sm-4">
+        	<div class="justify-content-md-center" id="reader" width="300px" height="300px"></div>
+    	</div>
+	</div> --> 
 
 
 <script>
