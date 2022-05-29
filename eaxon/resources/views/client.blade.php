@@ -87,25 +87,47 @@
 
 		</div>
 
-		<video width="320" height="240" controls id="video">
+	<!--	<video width="320" height="240" controls id="video"> --> 
 
-			<div id="qr-reader" style="width: 600px"></div>
-
+	<div id="qr-reader" style="width:500px"></div>
+    <div id="qr-reader-results"></div>
 
 	</div> 
 
 
+<script>
+    function docReady(fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete"
+            || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    docReady(function () {
+        var resultContainer = document.getElementById('qr-reader-results');
+        var lastResult, countResults = 0;
+        function onScanSuccess(decodedText, decodedResult) {
+            if (decodedText !== lastResult) {
+                ++countResults;
+                lastResult = decodedText;
+                // Handle on success condition with the decoded message.
+                console.log(`Scan result ${decodedText}`, decodedResult);
+            }
+        }
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+    });
+</script>
+
 <script type="text/javascript">
 
-var resultContainer = document.getElementById('qr-reader-results');
-var lastResult, countResults = 0;
-
-function onScanSuccess(decodedText, decodedResult) {
-    console.log(`Code scanned = ${decodedText}`, decodedResult);
-}
-var html5QrcodeScanner = new Html5QrcodeScanner(
-	"qr-reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess);
+ /* 
 
 	function initCam() {  
 		var constraints = { video: { width: 800, height: 800 } };
@@ -120,6 +142,7 @@ html5QrcodeScanner.render(onScanSuccess);
 		})
 		.catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
 	}
+	*/ 
 </script>
 
 </body>
