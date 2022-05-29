@@ -59,6 +59,7 @@
 
 
 	/* QR */ 
+	/*
 	#qr-reader__status_span {
 		display: none;
 	}
@@ -66,7 +67,7 @@
 		border: none!important;
 	}
 	#qr-reader-results div { border: none!important; }
-	#qr-reader-resultsr a { display: none!important; }
+	#qr-reader-results a { display: none!important; } */
 </style>
 
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
@@ -97,7 +98,7 @@
     <div id="qr-reader-results"></div>
 
 	</div> 
-	
+
 	<!-- 
 	<div class="form-row justify-content-md-center">
     	<div class="form-group col-md-4 col-sm-4">
