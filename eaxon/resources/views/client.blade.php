@@ -120,7 +120,7 @@ Html5Qrcode.getCameras().then(devices => {
                 }
             }
 
-            const html5QrCode = new Html5Qrcode("qr-reader");
+            const html5QrCode = new Html5Qrcode("reader");
             html5QrCode.start(
                 cameraId,
                 {
