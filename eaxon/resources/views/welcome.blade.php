@@ -20,7 +20,7 @@
 		padding: 0px; 
 	}
 	.header-top {
-		background-color: #050505; 
+		background-color: #181818; 
 		text-align: center;
 		padding: 10px 10px; 
 	}
@@ -32,28 +32,18 @@
 
 	.body-content {
 		text-align: center;
-		padding-top: 8vh; 
+		padding-top: 0px; 
 	}
 	.title-1 {
 		font-size: 28px; 
 		font-weight: 600; 
 		color: #ccc;
 	}
-
-	.avatar-content {
-		display: inline-block;
-		border: 2px solid black;
-		width: 30vw; 
-		height: 30vw;
-		background-image: url('https://archive.org/download/profiles_202104/chicken.png'); 
-		background-size: cover; 
-		background-position: center;
-	}
-
+ 
 	.line-body {
 		font-size: 32px; 
 		color: white;
-		padding: 20px 10px; 
+		padding: 10px 10px; 
 	}
 
 
@@ -86,12 +76,15 @@
 <body>
 
 	<div class="container-fluid mobile-content video" id="vide">
-		<div class="header-top">
-			<span class="header-title">eAxón</span>
+		<div class="header-top" style="padding-top: 40px;">
+			<!-- <span class="header-title">eAxón</span> --> 
+			<img style="width: 120px;" src="{{asset('/media-admin/logo-eaxon.png')}}">
+			<p class="title-1">eAxón</p>
+			<p></p>
 		</div>
 		<div class="body-content">
 			<div class="line-body">
-				<span>Let's Start <br> your Best Diving</span>
+				<span>Let's Start</span>
 			</div> 
 			<div class="avatar-container">
 				<div id="qr-reader" style="width:100%"></div>
