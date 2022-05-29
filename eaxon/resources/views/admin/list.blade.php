@@ -243,7 +243,7 @@
     <div class="modal-content" style="border-radius: 22px;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="color:black; font-size: 25px;">Accede a tu APP desde este QR</h4>
+        <h4 class="modal-title" style="font-size: 25px;">Accede a tu APP desde este QR</h4>
       </div>
       <div class="modal-body" style="display: inline-block;">
         <div class="col-lg-12 np">
@@ -260,7 +260,7 @@
         </div>
         <div class="col-lg-12 np">
             <div style="text-align: center; padding-top: 20px;">
-                <a target="_blank" id="url-link" style="color:black; font-size: 20px;"></a>
+                <a target="_blank" id="url-link" style="font-size: 20px;"></a>
             </div>
         </div>
       </div>

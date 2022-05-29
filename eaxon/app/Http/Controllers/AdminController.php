@@ -403,7 +403,7 @@ class AdminController extends BaseController
         $nationality  = $data->input('nationality'); 
         $alergias  = $data->input('alergias'); 
          
-        $random_base64 = base64_encode(random_bytes(18));
+        $random_base64 = base64_encode(random_bytes(4));
         $hash = serialize($random_base64);
 
         $hash = str_replace( array('"', '/'), array("", ""), $hash); 
