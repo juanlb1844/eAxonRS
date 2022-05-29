@@ -55,6 +55,13 @@
 		color: white;
 		padding: 20px 10px; 
 	}
+
+
+
+	/* QR */ 
+	#qr-reader__status_span {
+		display: none;
+	}
 </style>
 
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
