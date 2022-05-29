@@ -62,10 +62,11 @@
 	/*
 	#qr-reader__status_span {
 		display: none;
-	}
+	}*/ 
 	#qr-reader-results {
 		border: none!important;
 	}
+	/* 
 	#qr-reader-results div { border: none!important; }
 	#qr-reader-results a { display: none!important; } */
 </style>
