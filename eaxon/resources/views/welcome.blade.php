@@ -66,6 +66,10 @@
 	#qr-reader-results {
 		border: none!important;
 	}
+	#qr-reader-results button {
+		background-color: #59d66c; 
+		border-radius: 7px; 
+	}
 	/* 
 	#qr-reader-results div { border: none!important; }
 	#qr-reader-results a { display: none!important; } */
