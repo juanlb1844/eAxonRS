@@ -94,11 +94,19 @@
 
 	</div> 
 
+	<div class="form-row justify-content-md-center">
+    <div class="form-group col-md-4 col-sm-4">
+        <div class="justify-content-md-center" id="reader" width="300px" height="300px"></div>
+    </div>
+</div>
+
 
 <script>
  
+window.onload = function() {
 
 Html5Qrcode.getCameras().then(devices => {
+
         if (devices && devices.length) {
             var cameraId;
             var cameraLabel;
@@ -108,7 +116,7 @@ Html5Qrcode.getCameras().then(devices => {
                 cameraId = devices[1].id;
                 //This is for cellphones with 4 cameras. Usually the first 2 detected are the front so in my case selecting the third in the list worked.
                 if (cameraLabel.includes("front")) {
-                    cameraId = devices[2].id;
+                    cameraId = devices[1].id;
                 }
             }
 
@@ -133,6 +141,7 @@ Html5Qrcode.getCameras().then(devices => {
     }).catch(err => {
 
     });
+}
 
 /*
 
