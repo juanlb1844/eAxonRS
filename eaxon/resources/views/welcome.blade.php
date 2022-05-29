@@ -62,11 +62,11 @@
 	#qr-reader__status_span {
 		display: none;
 	}
-	#qr-reader {
+	#qr-reader-results {
 		border: none!important;
 	}
-	#qr-reader div { border: none!important; }
-	#qr-reader a { display: none!important; }
+	#qr-reader-results div { border: none!important; }
+	#qr-reader-resultsr a { display: none!important; }
 </style>
 
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
