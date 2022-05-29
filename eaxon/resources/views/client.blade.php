@@ -89,7 +89,7 @@
 
 	<!--	<video width="320" height="240" controls id="video"> --> 
 
-	<div id="qr-reader" style="width:500px"></div>
+	<div id="qr-reader" style="width:100%"></div>
     <div id="qr-reader-results"></div>
 
 	</div> 
