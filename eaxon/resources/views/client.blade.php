@@ -90,29 +90,29 @@
 			</div>
 			<span class="title-1">{{$user->name}}</span>
 
-			<button onclick="initCam()">Leer QRx</button>
+			<!-- <button onclick="initCam()">Leer QRx</button> --> 
 
 		</div>
 
 	<!--	<video width="320" height="240" controls id="video"> --> 
 
+	<!-- 
 	<div id="qr-reader" style="width:100%"></div>
-    <div id="qr-reader-results"></div>
+    <div id="qr-reader-results"></div> --> 
 
 	</div> 
 
+	<!-- 
 	<div class="form-row justify-content-md-center">
-    <div class="form-group col-md-4 col-sm-4">
-        <div class="justify-content-md-center" id="reader" width="300px" height="300px"></div>
-    </div>
-</div>
+    	<div class="form-group col-md-4 col-sm-4">
+        	<div class="justify-content-md-center" id="reader" width="300px" height="300px"></div>
+    	</div> 
+	</div> --> 
 
 
 <script>
  
- 
- 
-
+	/* 
     function docReady(fn) {
         // see if DOM is already available
         if (document.readyState === "complete"
@@ -141,9 +141,8 @@
         var html5QrcodeScanner = new Html5QrcodeScanner(
             "qr-reader", { fps: 10, qrbox: 250, disableFlip : false});
         html5QrcodeScanner.render(onScanSuccess);  
-
         
-    });   
+    });    */ 
 </script>
 
 <script type="text/javascript">
