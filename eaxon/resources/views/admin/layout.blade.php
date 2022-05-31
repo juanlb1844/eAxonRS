@@ -47,6 +47,7 @@
         background-color: #212228;
         color: white; 
         font-size: 20px; 
+        border: 1px solid #5d5d5d;
    }
    .panel-default {
               background-color: transparent; 
@@ -204,6 +205,11 @@
             background-image: url({{asset('media-admin/duck.svg')}}); 
             background-size: 85%; 
         } 
+        .opt-spa {
+          background-image: url({{asset('media-admin/spa.svg')}}); 
+          background-size: 85%; 
+        }
+
         .opt-activities {
             background-image: url({{asset('media-admin/activities.svg')}}); 
             background-size: 65%; 
@@ -390,7 +396,7 @@
       font-size: 20px;   
       font-weight: 600;
     }
-    .avatar-desc { color: gray; display: block; }
+    .avatar-desc { color: gray; }
 
     .container-logo { background-color: #cfcfcf; }
 
@@ -399,6 +405,25 @@
      th, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
                 border: 1px solid #2f2f2f!important;
         }
+
+    .img-per-edit {
+      width: 20px; display: inline-block;
+    }
+    .img-per-edit:hover{
+      cursor: pointer;
+    }
+
+ 
+    .more-icon {
+      width: 35px; 
+      transition-property: all; 
+      transition-duration: .2s;
+    }
+    .more-icon-switched {
+      transition-property: all; 
+      transition-duration: .2s;
+      transform: rotate(90deg); 
+    }
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
@@ -417,7 +442,10 @@
                 </div>
                 <div class="name-avatar-content">
                   <span class="avatar-title">John Doe</span>
-                  <span class="avatar-desc">Administrador</span>
+                  <div>
+                  <span class="avatar-desc">Administrador</span> <img class="img-per-edit" src="{{asset('media-admin/edit.svg')}}">
+                    
+                  </div>
                 </div>
               </div>
             </div>
@@ -432,10 +460,13 @@
                 <ul class="menu-options" style="padding-left: 40px;">
                   <li class="col-lg-12 selected-admin-pedidos">
                         <div @if( request()->route()->uri == 'ticket-list' ) class="selected-option" @endif> 
-                            <div class="col-lg-6 option-side-conteainer opt-ticket">
+                            <div class="col-lg-4 option-side-conteainer opt-ticket">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Tickets </span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -449,10 +480,13 @@
                     </li> 
                     <li class="col-lg-12 selected-admin-pedidos">
                         <div @if( request()->route()->uri == 'list' OR request()->route()->uri == 'listClientTypes' ) class="selected-option col-lg-12" @endif > 
-                            <div class="col-lg-6 option-side-conteainer opt-dashboard">
+                            <div class="col-lg-4 option-side-conteainer opt-dashboard">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Checkin</span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -486,11 +520,14 @@
                         <div @if( request()->route()->uri == 'restaurantsList' OR request()->route()->uri == 'categoriesDishList' OR request()->route()->uri == 'menuList' OR request()->route()->uri == 'ingredientList' OR request()->route()->uri == 'guarnicionsList' OR request()->route()->uri == 'dishList' OR request()->route()->uri == 'newRestaurant' OR request()->route()->uri == 'newDishCategory' OR request()->route()->uri =='newDish') 
                                   class="selected-option col-lg-12" 
                               @endif> 
-                            <div class="col-lg-6 option-side-conteainer opt-dish">
+                            <div class="col-lg-4 option-side-conteainer opt-dish">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Cocina</span>
                             </div> 
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                            </div>
                         </div> 
                         <ul class="inter-menu">
                           <li>
@@ -533,10 +570,13 @@
                     </li>   
                      <li class="col-lg-12 selected-admin-pedidos">
                         <div @if( request()->route()->uri == 'x') class="" @endif)>
-                            <div class="col-lg-6 option-side-conteainer opt-activities">
+                            <div class="col-lg-4 option-side-conteainer opt-activities">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Actividades</span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -568,10 +608,13 @@
                     </li>  
                      <li class="col-lg-12 selected-admin-pedidos">
                         <div> 
-                            <div class="col-lg-6 option-side-conteainer opt-misc">
+                            <div class="col-lg-4 option-side-conteainer opt-misc">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Miscelanea</span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -591,10 +634,13 @@
                     </li> 
                      <li class="col-lg-12 selected-admin-pedidos">
                         <div> 
-                            <div class="col-lg-6 option-side-conteainer opt-misc">
+                            <div class="col-lg-4 option-side-conteainer opt-spa">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Spa</span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -616,10 +662,13 @@
                         <div @if( request()->route()->uri == 'hotelList') 
                                   class="selected-option col-lg-12" 
                               @endif>
-                            <div class="col-lg-6 option-side-conteainer opt-hotels">
+                            <div class="col-lg-4 option-side-conteainer opt-hotels">
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Hoteles</span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div>
                         <ul class="inter-menu">
@@ -641,10 +690,13 @@
                         <div  @if( request()->route()->uri == 'configHome' || request()->route()->uri == 'configStatus') 
                                   class="selected-option col-lg-12" 
                               @endif>
-                            <div class="col-lg-6 option-side-conteainer opt-clock">
+                            <div class="col-lg-4 option-side-conteainer opt-clock">
                             </div>  
                             <div class="col-lg-6 txt-option">
-                                <span>Home</span>
+                                <span>App</span>
+                            </div>
+                            <div class="col-lg-2">
+                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -682,8 +734,10 @@
       $('.selected-admin-pedidos').click( function( event ){
          if ( $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').css('display') == 'none' ) {
             $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').slideDown(200); 
+            $(event.target).closest('.selected-admin-pedidos').find('.more-icon').addClass('more-icon-switched'); 
          } else {
             $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').slideUp(200); 
+            $(event.target).closest('.selected-admin-pedidos').find('.more-icon').removeClass('more-icon-switched'); 
          }
       }); 
     </script>

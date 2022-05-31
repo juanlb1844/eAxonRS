@@ -402,13 +402,16 @@ class AdminController extends BaseController
         $idguest_types  = $data->input('idguest_types'); 
         $nationality  = $data->input('nationality'); 
         $alergias  = $data->input('alergias'); 
-         
+        $url  = $data->input('url'); 
+        $from = $data->input('from'); 
+        $to   = $data->input('to'); 
+
         $random_base64 = base64_encode(random_bytes(4));
         $hash = serialize($random_base64);
 
         $hash = str_replace( array('"', '/'), array("", ""), $hash); 
- 
-        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel, guest_types_idguest_types, nationality, notes) VALUES('$name', '$hash', '$phone', '$room', $hotel, $idguest_types, '$nationality', '$alergias')"); 
+
+        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel, guest_types_idguest_types, nationality, notes, url, from_date, to_date) VALUES('$name', '$hash', '$phone', '$room', $hotel, $idguest_types, '$nationality', '$alergias', '$url', '$from', '$to')"); 
     }
       
      public function try() {

@@ -237,11 +237,19 @@
 
     </div>
  
+<style type="text/css">
+    .close {
+        color: white!important;
+        font-size: 38px;
+        text-shadow: none;
+        position: inherit;
+    }
+</style>
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="border-radius: 22px;">
-      <div class="modal-header">
+      <div class="modal-header" style="border-bottom: 1px solid #2f2f2f!important;">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title" style="font-size: 25px;">Accede a tu APP desde este QR</h4>
       </div>
@@ -264,7 +272,7 @@
             </div>
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="border-top: 1px solid #2f2f2f!important;">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
@@ -287,7 +295,7 @@
             text: url+hash, 
             width: 270,
             height: 270,
-            colorDark : "#5868bf",
+            colorDark : "#000000",
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
         });
