@@ -712,6 +712,12 @@
                               <span class="configStatus">Status</span>
                             </a>
                           </li>
+                          <li>
+                            <a href="{{asset('apk/eaxon.apk')}}">
+                              <span class="separator"></span>
+                              <span class="configStatus">Descargar</span>
+                            </a>
+                          </li>
                         </ul>
                     </li>  
                     <li class="col-lg-12">
