@@ -466,7 +466,7 @@
                                 <span>Tickets </span>
                             </div>
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -485,8 +485,8 @@
                             <div class="col-lg-6 txt-option">
                                 <span>Checkin</span>
                             </div>
-                            <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                            <div class="col-lg-2"> 
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -526,7 +526,7 @@
                                 <span>Cocina</span>
                             </div> 
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -576,7 +576,7 @@
                                 <span>Actividades</span>
                             </div>
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -614,7 +614,7 @@
                                 <span>Miscelanea</span>
                             </div>
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -640,7 +640,7 @@
                                 <span>Spa</span>
                             </div>
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
@@ -668,7 +668,7 @@
                                 <span>Hoteles</span>
                             </div>
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div>
                         <ul class="inter-menu">
@@ -696,7 +696,7 @@
                                 <span>App</span>
                             </div>
                             <div class="col-lg-2">
-                              <img class="more-icon" src="http://localhost/eaxon/eaxon/public/media-admin/row-right.svg">
+                              <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
                             </div>
                         </div> 
                         <ul class="inter-menu">
