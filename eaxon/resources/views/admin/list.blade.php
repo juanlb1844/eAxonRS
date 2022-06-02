@@ -556,6 +556,8 @@
                 var dia_mes = from_date_t.getDate(); 
                 var from_date_t = getNameDates("month", "S", from_date_t.getUTCMonth()) + " "+ dia_mes +" "+ getNameDates("day", "S", from_date_t.getDay()); 
 
+                alert(from_date_t.getDay()); 
+
                 $('.date-to-side').html(from_date_t);  
 
 
