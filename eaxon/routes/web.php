@@ -48,7 +48,8 @@ Route::get('/activityList', 'AdminController@activityList')->middleware('loguead
 Route::get('/', 'AdminController@checkin')->middleware('logueadoAdmin'); 
 Route::get('/list', 'AdminController@list')->middleware('logueadoAdmin'); 
 Route::get('/editGuest/{id}', 'AdminController@editGuest')->middleware('logueadoAdmin');
-Route::post('/uploadPhotoGuest', 'AdminController@uploadPhotoGuest');  
+Route::post('/getGuestDetails', 'AdminController@getGuestDetails')->middleware('logueadoAdmin');
+Route::post('/uploadPhotoGuest', 'AdminController@uploadPhotoGuest');   
 
 Route::get('/dishList', 'AdminController@dishList')->middleware('logueadoAdmin');
 Route::get('/restaurantsList', 'AdminController@restaurantsList')->middleware('logueadoAdmin');

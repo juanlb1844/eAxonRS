@@ -227,7 +227,7 @@ class AdminController extends BaseController
     }
     // lista de huéspedes 
      public function list() {
-        $guests = DB::select("SELECT * FROM guest G LEFT JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types"); 
+        $guests = DB::select("SELECT * FROM guest G LEFT JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
         return view('admin/list', ['guests' => $guests]);  
     }
  
@@ -243,7 +243,7 @@ class AdminController extends BaseController
         public function uploadPhotoGuest(Request $request) {
             $file = $request->file('file');
             $path = public_path().'/application/guest/';  
-            $fileName = uniqid().$file->getClientOriginalName();
+            $fileName = uniqid(). str_replace(" ", "-", $file->getClientOriginalName()); 
             $file->move($path, $fileName); 
             $link      = $this->getUrlFiles()."/application/guest/".$fileName;  
             $idguest = $request->input('idguest');           
@@ -394,6 +394,12 @@ class AdminController extends BaseController
         return view('admin/ticket-list', ['tickets' => $tickets]);    
     }
 
+    public function getGuestDetails( Request $data ) {
+        $id = $data->input('id'); 
+        $guest = DB::table("guest")->where('idguest', $id)->get();
+        return json_encode($guest[0]); 
+    }
+
     public function guest(Request $data) {
         $name  = $data->input('name'); 
         $phone = $data->input('phone');  
@@ -505,7 +511,7 @@ class AdminController extends BaseController
       public function uploadPhoto(Request $request) {
             $file = $request->file('file');
             $path = public_path().'/application/dishes/';  
-            $fileName = uniqid().$file->getClientOriginalName();
+            $fileName = uniqid(). str_replace(" ", "-", $file->getClientOriginalName());
             $file->move($path, $fileName); 
             $link      = $this->getUrlFiles()."/application/dishes/".$fileName;  
             $idProduct = $request->input('idProuct');         
@@ -520,12 +526,11 @@ class AdminController extends BaseController
             echo $resp;   
         }
 
-    // HOTEL 
-
+        // HOTEL 
         public function uploadPhotoHotel(Request $request) {
             $file = $request->file('file');
             $path = public_path().'/application/hotels/';  
-            $fileName = uniqid().$file->getClientOriginalName();
+            $fileName = uniqid(). str_replace(" ", "-", $file->getClientOriginalName());
             $file->move($path, $fileName); 
             $link      = $this->getUrlFiles()."/application/hotels/".$fileName;   
             $idProduct = $request->input('idProuct');         

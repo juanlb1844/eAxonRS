@@ -90,7 +90,7 @@
                 padding: 20px 20px;
             }
             .prev-img-dish {
-                width: 140px;  
+                width: 100%;  
                 height: 140px; 
                 /*background-color:red;*/ 
                 border-radius: 7px; 
@@ -143,22 +143,7 @@
             .container-add {
                 padding-top: 30px;
             }
-            .create-btn {
-                    background-color: #46b04a;
-                    font-weight: 600;
-                    font-size: 17px;
-                    padding: 12px 35px;
-                    width: 250px;
-                    background-repeat: no-repeat;
-                    background-position: right;
-                    background-size: 27px;
-                    text-align: left;
-                    background-position-x: 92%; 
-                    box-shadow: none; 
-            }
-            .create-btn:hover, .create-btn:active, .create-btn:selected{ 
-                background-color: #3a8c3d!important; 
-            }
+           
             .f-size-4 {
                 font-size: 20px; 
                 display: none; 
@@ -211,8 +196,8 @@
         </div>
 
         @foreach( $dishes as $keyy => $dish ) 
-            <div class="col-lg-9 row-dish row-dish-{{$key}}">
-                <div class="col-lg-2">
+            <div class="col-lg-9 col-md-9 row-dish row-dish-{{$key}}">
+                <div class="col-lg-2 col-md-2">
                         <a href="{{asset('editDish')}}/{{$dish->iddish}}">
                             @foreach( $dish->gallery as $key => $img )
                                 @if($key == 0 )
@@ -221,7 +206,7 @@
                             @endforeach 
                         </a>  
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-10 col-md-10">
                     <div class="col-lg-9 np">
                         <div>
                             <span class="title-dish">{{$dish->name}}</span>
@@ -243,7 +228,7 @@
                             </div>
                         </div>
                     </div>    
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-md-3">
                         <div>
                             <span class="price-dish"> <span class="c-gray">$ </span>{{$dish->price}}</span>
                         </div>

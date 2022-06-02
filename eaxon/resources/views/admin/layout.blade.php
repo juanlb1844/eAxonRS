@@ -181,6 +181,15 @@
   }
 </style>
 
+<style type="text/css">
+  /* MEDIAS */ 
+  @media ( max-width: 1600px ) {
+    .menu-options {
+      padding-left: 0px!important; 
+    }
+  }
+</style>
+
     <style type="text/css">
         .option-side-conteainer {
             display: inline-block; 
@@ -378,8 +387,8 @@
     }
     .user-avatar-admin {
       display: inline-block;
-      width: 70px; 
-      height: 70px; 
+      width: 60px; 
+      height: 60px; 
       border-radius: 50%; 
       background-position: center;
       background-size: cover;
@@ -424,6 +433,35 @@
       transition-duration: .2s;
       transform: rotate(90deg); 
     }
+
+    .exit-section {
+      border-top: 1px solid #4b4b4b;
+      border-radius: 0px!important;
+      margin-top: 20px!important;
+      padding-top: 20px!important;
+      color: white; font-size: 22px!important;
+      font-weight: 600;
+    }
+
+
+
+
+     .create-btn {
+                    background-color: #46b04a;
+                    font-weight: 600;
+                    font-size: 17px;
+                    padding: 12px 35px;
+                    width: 250px;
+                    background-repeat: no-repeat;
+                    background-position: right;
+                    background-size: 27px;
+                    text-align: left;
+                    background-position-x: 92%; 
+                    box-shadow: none; 
+            }
+            .create-btn:hover, .create-btn:active, .create-btn:selected{ 
+                background-color: #3a8c3d!important; 
+            }
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
@@ -574,6 +612,9 @@
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Actividades</span>
+                                <span style="display: inline-block;font-size: 13px;background-color: #2568ef;padding: 0px 4px;border-radius: 7px;color: #ffffff;     position: absolute;
+    right: -20px;
+    top: 5px;">pro</span>
                             </div>
                             <div class="col-lg-2">
                               <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
@@ -612,6 +653,9 @@
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Miscelanea</span>
+                                <span style="display: inline-block;font-size: 13px;background-color: #2568ef;padding: 0px 4px;border-radius: 7px;color: #ffffff;     position: absolute;
+    right: -20px;
+    top: 5px;">pro</span>
                             </div>
                             <div class="col-lg-2">
                               <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
@@ -638,6 +682,9 @@
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Spa</span>
+                                <span style="display: inline-block;font-size: 13px;background-color: #2568ef;padding: 0px 4px;border-radius: 7px;color: #ffffff;     position: absolute;
+    right: -20px;
+    top: 5px;">pro</span>
                             </div>
                             <div class="col-lg-2">
                               <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
@@ -720,9 +767,16 @@
                           </li>
                         </ul>
                     </li>  
-                    <li class="col-lg-12">
-                      <div style="color: white, font-weight: 900; font-size: 22px;">
-                        <span class="exit" style="color: white;">EXIT</span>
+                    <li class="col-lg-12 exit-section">
+                      <div> 
+                        <img src="{{asset('media-admin/exit-2.svg')}}" style="width: 30px;">
+                        <span class="exit" style="color: white; font-size: 19px;"> Exit</span>
+                      </div>
+                    </li>
+                    <li class="col-lg-12" style="margin-bottom: 40px;">
+                      <div> 
+                        <img src="{{asset('media-admin/help.svg')}}" style="width: 30px;">
+                        <span class="exit" style="color: white; font-weight: 600; font-size: 18px;"> Ayuda</span>
                       </div>
                     </li>
                 </ul>
