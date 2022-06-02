@@ -554,7 +554,6 @@
                 console.log(from_date_t); 
                 
                 var dia_mes = from_date_t.getDate(); 
-                alert(from_date_t.getDay()); 
                 var from_date_t = getNameDates("month", "S", from_date_t.getUTCMonth()) + " "+ dia_mes +" "+ getNameDates("day", "S", from_date_t.getDay()); 
 
 
