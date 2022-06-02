@@ -587,7 +587,6 @@
                 $('.name-info-side').html(resp.name);  
             } 
         });  
-        $('.img-inf-guest').css('background-image', 'url("'+img+'")'); 
     }
 
     function show( hash ) {
