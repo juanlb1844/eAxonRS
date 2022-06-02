@@ -517,9 +517,9 @@
     // obtener strings para formato de fechas 
     function getNameDates(type, lan, num ) {
         
-        var m_es_full = Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"); 
+        var m_es_full = Array("en", "feb", "mar", "abr", "ma", "jun", "jul", "ago", "sep", "oct", "nov", "dic"); 
 
-        var d_es_full = Array("do", "lu", "ma", "mi", "ju", "vi", "sa"); 
+        var d_es_full = Array("domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"); 
         if(type == "month" && lan == "S") {
             return m_es_full[num]; 
         } 
@@ -546,7 +546,7 @@
 
 
                 var dia_mes = from_date_f.getDate(); 
-                var date_from_f = getNameDates("month", "S", from_date_f.getUTCMonth()) + " "+ dia_mes +" "+ getNameDates("day", "S", from_date_f.getDay());  
+                var date_from_f = getNameDates("day", "S", from_date_f.getDay()) +" "+ dia_mes+" "+getNameDates("month", "S", from_date_f.getUTCMonth());  
                  
                 $('.date-from-side').html(date_from_f); 
  
@@ -554,7 +554,7 @@
                 console.log(from_date_t); 
                 
                 var dia_mes = from_date_t.getDate(); 
-                var from_date_t = getNameDates("month", "S", from_date_t.getUTCMonth()) + " "+ dia_mes +" "+ getNameDates("day", "S", from_date_t.getDay()); 
+                var from_date_t = getNameDates("day", "S", from_date_t.getDay())+ " "+ dia_mes +" "+ getNameDates("month", "S", from_date_t.getUTCMonth()); 
 
 
                 $('.date-to-side').html(from_date_t);  
