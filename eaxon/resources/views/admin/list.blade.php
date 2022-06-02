@@ -519,7 +519,7 @@
         
         var m_es_full = Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"); 
 
-        var d_es_full = Array("sa", "do", "lu", "ma", "mi", "ju", "vi"); 
+        var d_es_full = Array("do", "lu", "ma", "mi", "ju", "vi", "sa"); 
         if(type == "month" && lan == "S") {
             return m_es_full[num]; 
         } 
