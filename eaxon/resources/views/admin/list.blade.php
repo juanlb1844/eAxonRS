@@ -519,13 +519,13 @@
         
         var m_es_full = Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"); 
 
-        var d_es_full = Array("lu", "mar", "miér", "jue", "vier", "sa", "do"); 
+        var d_es_full = Array("sa", "do", "lu", "ma", "mi", "ju", "vi"); 
         if(type == "month" && lan == "S") {
             return m_es_full[num]; 
-        }
+        } 
 
         if(type == "day" && lan == "S") {
-            return d_es_full[num-1]; 
+            return d_es_full[num]; 
         }
 
     }
