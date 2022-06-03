@@ -44,6 +44,7 @@
         /*background-color: #212228;*/ 
         font-size: 17px; 
         font-weight: 400;
+        height: 37px;
    }
    .panel-default {
               background-color: transparent; 
@@ -125,6 +126,9 @@
   background-position: center;
   background-repeat: no-repeat;
   background-image: url('{{asset('media-admin/banner-login.webp')}}'); 
+  background-image: url('https://cdn.dribbble.com/users/965988/screenshots/14650619/media/0977d59038d8d07983bd4c897ab4346b.png'); 
+  background-image: url('https://cdn.dribbble.com/users/949592/screenshots/4203630/media/f0d52087baac8e15463cb73e2d7a29f1.jpg'); 
+  
 }
 .section-login {
   border-left: 1px solid #f5f2f5; 
@@ -134,10 +138,13 @@
 .header-login span.title { font-weight: 900; font-size: 27px; display: block; }
 .header-login span.subtitle { font-weight: 400; font-size: 14px; color: #999999; }
 
-.content-login-section { padding: 10px 70px; }
+.content-login-section { padding: 10px 20%; }
 .row-login { min-height: 50px; }
 
-.btn-enter { min-height: 40px; width: 100%; border-radius: 9px; height: 35px; font-weight: 600; }
+.btn-enter { min-height: 45px; width: 100%; border-radius: 7px; height: 35px; font-weight: 600; background-color: #0183e3; font-size: 17px; }
+.btn-enter:hover, .btn-enter:active, .btn-enter:visited {
+  background-color: #050370!important;
+}
 
 .enter-google {
   background-color: white; 
@@ -160,14 +167,14 @@
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <div class="col-lg-7 section-slider" style="padding: 0px!important; overflow-y: auto;">
          <div class="content-company">
-           <span>eAxón</span>
+           <img src="https://demo.eaxon.com.mx/media-admin/eaxon.png" style="width: 200px;">
          </div>
         </div> 
         <div class="col-lg-5 section-login">
           <div class="content-login-section">
             <div class="header-login">
               <span class="title">ACCEDE A TU CUENTA</span>
-              <span class="subtitle">¿no tienes una cuenta? <a href=""> créala aquí </a> </span>
+              <span class="subtitle">¿no tienes una cuenta? <a href="{{asset('register')}}"> créala aquí </a> </span>
             </div>
             <div class="body-login">
               <div class="row-login">
@@ -175,14 +182,15 @@
               </div>
               <div class="row-login">
                 <input class="form-control" id="pass" type="password" name="" placeholder="contraseña">
+                <p>&nbsp;</p>
               </div>
               <div class="row-login">
                 <button class="btn btn-primary btn-enter btn-enter-local">Iniciar Sesión</button>
               </div>
               <div class="row-login">
-                <button class="btn btn-primary btn-enter enter-google"> 
+                <!-- <button class="btn btn-primary btn-enter enter-google"> 
                   <span>Entrar con Google</span>
-                </button>
+                </button> --> 
               </div>
                <div class="row-login">
                 <span class="invitation">Empieza con una cuenta de prueba de 30 días</span>
