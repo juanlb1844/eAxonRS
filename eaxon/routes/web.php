@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | que sobre el cielo de tu capilla forajeremos otra forma de arte 
 |
 */ 
+// REGISTRATION 
+
+Route::get('/register', 'Controller@register'); 
  
 // LOG IN 
  

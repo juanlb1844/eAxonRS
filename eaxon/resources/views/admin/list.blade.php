@@ -138,7 +138,9 @@
                 </thead>
                 <tbody>
                     @php 
-                        $idlast = $guests[count($guests)-1]->idguest; 
+                        $idlast = 0; 
+                        if( count($guests) > 1 )
+                            $idlast = $guests[count($guests)-1]->idguest; 
                     @endphp 
                     @foreach( $guests as $key => $guest )
                          
@@ -250,7 +252,7 @@
                         
                     </span>
                     <div class="col-lg-12">
-                        <p class="name-info-side">John Doe</p>
+                        <p class="name-info-side">**** ***</p>
                     </div>
                     <div class="col-lg-12">
                         <div class="col-lg-4">

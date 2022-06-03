@@ -13,6 +13,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    public function register() {
+        return view('registration/layout'); 
+    }
+
     public function homeMain( $hash ) {
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0];
         return view('home-main', ['hash' => $hash, 'user' => $user]); 
