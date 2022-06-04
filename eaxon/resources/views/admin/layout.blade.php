@@ -784,7 +784,7 @@
             </div> 
         </div>
 
-        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 40px; max-height: 100vh; overflow: auto;">
+        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 40px; max-height: 100vh; overflow: hidden;">
             @yield('page')   
         </div>
 
