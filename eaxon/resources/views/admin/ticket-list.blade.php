@@ -99,13 +99,25 @@
             width: 60px; 
             height: 60px; 
             border-radius: 50%; 
-            background-color: red; 
             border: 1px solid gray;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             background-image: url('https://a0.muscache.com/im/pictures/user/782a3840-f42e-4196-b246-b31d4cb7d6ff.jpg?im_w=240'); 
           }
+
+          .user-avatar-def {
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/004/515/057/small/watercolor-texture-background-free-vector.jpg'); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: gray;
+            font-size: 35px;
+            font-weight: 600;
+            padding-top: 5px; 
+            text-align: center;
+          }
+
           .info-user-container {
             padding-top: 0px; 
             text-align: center;
@@ -145,7 +157,38 @@
           .status-recibido:focus{ background-color: #4caf50!important; }
         </style>
 
-        <div class="col-lg-8 np">
+          <style type="text/css">
+            .header-page {
+                border-bottom: 0px solid #EDEDED; 
+                margin-bottom: 10px; 
+            }
+            .header-page .filters-cat { padding-left: 0px; }
+            .header-page .filters-cat li {
+                display: inline-block;
+                margin-right: 15px; 
+                font-size: 17px;
+                padding-bottom: 10px;
+            }
+            .header-page .filters-cat li:hover {
+                cursor: pointer;
+                font-weight: 600;
+            }
+            .filter-selected {
+                border-bottom: 4px solid #46b04a; 
+            }
+        </style>
+ 
+         <div class="col-lg-8 header-page np">
+             <ul class="filters-cat np">
+                 <li class="filter-selected">Sin resolver</li>
+                 <li>Atendiendo</li>
+                 <li>En camino</li>
+                 <li>Resueltos 2h atrás</li>
+                 <ul class="pull-right">Organizar por: <select class="form-control"><option>tipo</option></select> </ul>
+             </ul>
+         </div>
+
+        <div class="col-lg-8 rows-tickets">
 
            @foreach( $tickets as $key => $t )
 
@@ -161,9 +204,18 @@
             $h_time = intVal( date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h')); 
             $m_time = intVal( date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%i')); 
 
+            $name_pref = ".."; 
+            
+            $name_arr = ( explode(' ', $t->client[0]->name) ); 
+            if( count($name_arr) > 1 ) {
+              $name_pref = substr($name_arr[0], 0, 1)."".substr($name_arr[1], 0, 1); 
+            } else {
+              $name_pref = substr($name_arr[0], 0, 1); 
+          }
+
            @endphp
 
-          <div class="container-ticket-row row" idticket="{{$t->idticket}}">
+          <div class="container-ticket-row row" style="border-left: 7px solid {{$t->client[0]->flag}}" idticket="{{$t->idticket}}">
             <div class="contaner-ticket col-lg-12">
               <div class="col-lg-2 time-data">
                 <div class="time-data-hour"><span>{{  date("h:m a", strtotime($t->hora_de_peticion) ) }}</span></div>
@@ -181,7 +233,15 @@
                 <div class="col-lg-7 np">
                   <div class="info-user-container">
                     <div class="info-user-content">
-                      <span class="user-avatar" style="background-image: url({{$t->client[0]->url}})"></span>
+
+                      @if( strlen($t->client[0]->url) )
+                        <span class="user-avatar" style="background-image: url({{$t->client[0]->url}})"></span>
+                      @else 
+                        <span class="user-avatar user-avatar-def">
+                          <span>{{$name_pref}}</span>
+                        </span>
+                      @endif 
+
                       <span class="name-user">{{$t->client[0]->name}}</span>
                     </div>
                   </div>
@@ -191,7 +251,7 @@
                     <ul style="padding-left: 5px;">
                       <li>Alergico: {{$t->client[0]->notes}}</li>
                       <li>Cliente: {{$t->client[0]->title}}</li>
-                      <li>Habitación: {{$t->client[0]->room}}</li>
+                      <li>Lugar: H {{$t->client[0]->room}}</li>
                     </ul>
                   </div>
                 </div>

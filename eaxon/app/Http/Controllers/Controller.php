@@ -60,7 +60,8 @@ class Controller extends BaseController
             ]); 
             //print_r( $k );  
         }
-        
+         
+        \Session::put('dishes', null);
         echo $idticket;
     }
 

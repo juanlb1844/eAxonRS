@@ -502,6 +502,7 @@
                             </div>  
                             <div class="col-lg-6 txt-option">
                                 <span>Tickets </span>
+                                       <span class="num-notification" style="display: inline-block;font-size: 13px;background-color: #7ed66c;padding: 0px 10px;border-radius: 7px;color: #ffffff;     position: absolute; right: -20px; top: 5px;">1</span>
                             </div>
                             <div class="col-lg-2">
                               <img class="more-icon" src="{{asset('/media-admin/row-right.svg')}}">
@@ -791,6 +792,8 @@
 
 
     <script type="text/javascript">
+
+      //Navegador lateral | menú
       $('.selected-admin-pedidos').click( function( event ){
          if ( $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').css('display') == 'none' ) {
             $(event.target).closest('.selected-admin-pedidos').find('.inter-menu').slideDown(200); 
@@ -805,10 +808,11 @@
 
      <script type="text/javascript">
 
+      //salir  
       $('.exit').click( function() {
             $('#overlay').fadeIn(); 
-              let user = $('#user').val(); 
-              let pass = $('#pass').val(); 
+              let user = "";
+              let pass = ""; 
               $.ajax({ 
                 'url' : '{{asset("check-logout-admin")}}', 
                 'method'  : 'post',  
@@ -824,72 +828,52 @@
       }); 
 
   $(document).ready( function() {
-
+ 
       let idactual = $( $('.container-ticket-row')[0] ).attr("idticket"); 
-      let idnew = $( $('.container-ticket-row')[0] ).attr("idticket"); 
+      let idnew    = $( $('.container-ticket-row')[0] ).attr("idticket"); 
 
       setInterval(checkNew, 2000);
       //notifications(); 
 
       function checkNew() {
-        
-
         console.log( idactual ); 
         console.log( idnew );
-
+        idnew = parseInt(idnew); 
           $.ajax({
-            'url' : "{{asset('ticketFrom/"+idnew+"')}}", 
+            'url' : "ticketFrom/"+idnew, 
             'method' : 'get', 
             'success' : function( resp ) {
-                resp = JSON.parse(resp);  
-                last = resp[resp.length-1].idticket; 
-                console.log( resp[resp.length-1].idticket ); 
-                if( last > idnew ) {
-                    notifications(); 
-                    idnew = last; 
+                resp = JSON.parse(resp); 
+                console.log("--");
+                  console.log( resp );  
+                console.log("--");
+                ticketsSA = resp.ticketsSA; 
+                $('.num-notification').html(ticketsSA.length); 
+               
+                console.log(resp.ticketsN); 
+                resp = resp.ticketsN; 
+                if( resp.length > 0 ) {
+                  last = resp[resp.length-1].idticket; 
+                  console.log( resp[resp.length-1].idticket ); 
+                  if( last > idnew ) {
+                      notifications(); 
+                      idnew = last;
+
+                      var row = '<div class="container-ticket-row row" idticket="10">'; 
+                      $('.rows-tickets').prepend(row); 
+
+                  }
                 }
+
+
               }
           });
-        
       }
 
-
-      let cant_n = 0;  
+      let cant_n     = 0;  
       let cant_sales = 0; 
-      function notifications() {
-        console.log("..");
-
-         //resp = JSON.parse(resp); 
-         notification( "RESTAURANTE", "Nuevo ticket", "{{asset('/ticket-list')}}" ); 
-            /*$('#cantNewNotify').html(resp.clients.cant_panel); 
-            if( resp.clients.cant_panel > 0 ) {
-                  $('#cantNewNotify').css('opacity', '1'); 
-            }
-            $('#cantSalesNotify').html(resp.sales.cant_panel); 
-            if( resp.sales.cant_panel > 0 ) {
-                  $('#cantSalesNotify').css('opacity', '1');   
-            }*/ 
-            /*
-            console.log( resp.clients ); 
-            if( resp.clients.cant > 0 && cant_n == 0 ) {
-              notification( resp.clients.name, "Se ha registado un nuevo cliente", resp.clients.location ); 
-              cant_n++;  
-            }
-            console.log( resp.sales );  
-            console.log( resp.sales.cant );
-            if( resp.sales.cant > 0 && cant_sales == 0 ) {
-              notification( resp.sales.name, "Se ha registado una nueva venta", resp.sales.location); 
-              cant_sales++; */
-
-        /* 
-        $.ajax({
-          'url' : "{{asset('notifications')}}", 
-          'method' : 'get', 
-          'success' : function( resp ) {
-            
-            }
-          } 
-        }); */ 
+      function notifications() { 
+         notification( "Nuevo ticket", "Restaurante", "{{asset('/ticket-list')}}" ); 
       }
  
   }); 
@@ -925,7 +909,7 @@
  
               // If the user is okay, let's create a notification
               if (permission === "granted") {
-                const notification = new Notification("Hi there!");
+                const notification = new Notification("Notificaciones activas!");
               }
             });
           } else {

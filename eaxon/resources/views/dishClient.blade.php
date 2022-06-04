@@ -508,6 +508,7 @@
       }, 
       'success' : function( resp ) {
         $("#overlay").fadeOut();  
+        window.location.href = "{{asset("cart/1/hash/$hash/perfil/1")}}"; 
       } 
     }); 
   }

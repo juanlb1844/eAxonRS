@@ -35,11 +35,12 @@ class AdminController extends BaseController
         }
     }
 
-    // get ticket from 
+    // get ticket from  
     public function ticketFrom( $id ) {
-        $ticket = DB::table('ticket')->where('idticket', '>=', $id)->get(); 
-        return json_encode($ticket);    
-    }
+        $ticketsNuevos = DB::table('ticket')->where('idticket', '>', $id)->get(); 
+        $ticketsSinAtender = DB::table('ticket')->where('status', 'atender')->get(); 
+        return json_encode(Array('ticketsN' => $ticketsNuevos, 'ticketsSA' => $ticketsSinAtender, 'id' => $id));     
+    }  
 
     // update status ticket 
     public function updateStatusTicket( Request $data ) {
@@ -480,7 +481,8 @@ class AdminController extends BaseController
         $identity = $data->input('id_entity');   
         $categories_relation = $data->input('categories_relation'); 
         $ingredients_relation = $data->input('ingredients_relation'); 
-
+        $guarnicions_relation = $data->input('guarnicions_relation'); 
+ 
         $entity_name = $data->input('entity_name'); 
         $data = $data->input('fileds'); 
         $table = null; 
@@ -496,10 +498,16 @@ class AdminController extends BaseController
         foreach ($categories_relation as $key => $id) {
             DB::table("category_relation")->insert(["categories_menu_idcategories_menu" => $id, "dish_iddish" => $las_id]); 
         }
+        
         DB::select("DELETE FROM ingredient_relation WHERE dish_iddish = $las_id"); 
         foreach ($ingredients_relation as $key => $id) {  
             DB::table("ingredient_relation")->insert(["ingredients_idingredients" => $id, "dish_iddish" => $las_id]); 
         }
+
+        DB::select("DELETE FROM guarnicion_relation WHERE dish_iddish = $las_id"); 
+        foreach ($guarnicions_relation as $key => $id) {  
+            DB::table("guarnicion_relation")->insert(["guarnicion_idguarnicion" => $id, "dish_iddish" => $las_id]); 
+        } 
         
         if( $resources ) {
             foreach ($resources as $key => $res) {

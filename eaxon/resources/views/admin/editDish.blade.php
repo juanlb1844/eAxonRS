@@ -276,10 +276,12 @@
     }
  
     function saveEntity() {
+        
         let entity_name = $('div[entity-name]').attr('entity-name'); 
-
         let categories_relation = $('.categories-relation').val(); 
         let ingredients_relation = $('.ingredients-relation').val(); 
+        let guarnicions_relation = $('.guarnicions-relation').val(); 
+        
 
         let data_form = Array(); 
         $('div[data-entity]').find('[field]').each( 
@@ -300,11 +302,12 @@
         $.ajax({ 
             'url' : '{{asset("editDishEntityPost")}}', 
             'method' : 'POST',  
-            'data' : {
+            'data' : { 
                 'fileds' : data_form, 
                 'id_entity': {{$id}}, 
                 'categories_relation' : categories_relation, 
                 'ingredients_relation' : ingredients_relation, 
+                'guarnicions_relation' : guarnicions_relation, 
                 'resources' : images_list_upload, 
                 'entity_name' : entity_name 
             }, 
