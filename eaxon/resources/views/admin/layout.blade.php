@@ -149,6 +149,7 @@
    
   html, body{ 
       font-family: 'Rajdhani'!important;   
+      overflow: hidden;
   } 
   .menu-options li {
       display: block;
@@ -784,7 +785,7 @@
             </div> 
         </div>
 
-        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 40px; max-height: 100vh; overflow: hidden;">
+        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 40px; max-height: 100vh; overflow: auto;">
             @yield('page')   
         </div>
 
