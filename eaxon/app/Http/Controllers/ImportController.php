@@ -35,6 +35,15 @@ class ImportController extends BaseController
                 Array("name" => "Chihuahua"),
             ); 
             DB::table('state')->insert($states); 
+ 
+             //Estados 
+            $types = Array(
+                Array("title" => "sencilla", "price_per_night" => 6000), 
+                Array("title" => "doble", "price_per_night" => 10000), 
+                Array("title" => "ejecutiva", "price_per_night" => 12000), 
+                Array("title" => "precidencial", "price_per_night" => 20000), 
+            ); 
+            DB::table('type_room')->insert($types); 
 
     }
 

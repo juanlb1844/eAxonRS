@@ -32,6 +32,7 @@
                     <th>CONDICIÓN</th>
                     <th>PLANTA</th>
                     <th>TIPO</th>
+                    <th>PRECIO</th>
                     <th>VER</th>
                 </tr>
             </thead>
@@ -45,16 +46,12 @@
                         </td>
                         <td>
                             <span>
-                                @if( $cat->guest_idguest > 0 )
-                                    ocupada
-                                @else 
-                                    libre
-                                @endif 
+                                {{$cat->status}}
                             </span>
                         </td>
                         <td>
                             <span>
-                                {{$cat->status}}
+                                {{$cat->conditionn}}
                             </span>
                         </td>
                         <td>
@@ -63,8 +60,13 @@
                             </span>
                         </td>
                          <td>
-                            <span>
-                                {{$cat->type}}
+                            <span> 
+                                {{$cat->titletype}}
+                            </span>
+                        </td>
+                        <td>
+                            <span> 
+                                {{$cat->price_per_night}}
                             </span>
                         </td>
                         <td>
@@ -77,11 +79,10 @@
             </tbody>
         </table>
         <div clas="foo-list">
-            <a href="{{asset('newClientType')}}">
+            <a href="{{asset('newRoom')}}">
                 <button class="btn btn-primary">Nuevo</button>
             </a>
         </div>
     </div>
-  
 
  @endsection

@@ -82,10 +82,16 @@ Route::get('/editIngredient/{id}', 'AdminController@editIngredient')->middleware
 Route::get('/guarnicionsList', 'AdminController@guarnicionsList')->middleware('logueadoAdmin');
 Route::get('/newGuarnicion', 'AdminController@newGuarnicion')->middleware('logueadoAdmin');
 Route::get('/editGuarnicion/{id}', 'AdminController@editGuarnicion')->middleware('logueadoAdmin');
+// habitaciones 
+Route::get('/newRoom', 'AdminController@newRoom')->middleware('logueadoAdmin');
+Route::get('/editRoom/{id}', 'AdminController@editRoom')->middleware('logueadoAdmin');
  
 Route::get('/catalogues', function () { 
     return "hola"; 
 });
+
+ 
+route::get('/gant', 'AdminController@gant')->middleware('logueadoAdmin');
 
 
 // admin posts 

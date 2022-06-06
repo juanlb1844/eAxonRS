@@ -63,6 +63,7 @@
             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Título del hotel</p>
                 <input class="form-control" field="data" name-field="name" type-field="input" placeholder="título del hotel" type="text" name="">
+                <input class="form-control" field="data" name-field="users_register_idusers_register" type-field="input" type="text" name="users_register_idusers_register" value="1" style="display: none;">  
             </div> 
             <div class="col-lg-4 col-md-4 col-12 pd1">
                 <p>Razón social</p>

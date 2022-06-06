@@ -307,9 +307,11 @@ class AdminController extends BaseController
 
     public function listRooms() { 
         $entities = DB::table("room")->get(); 
+        $entities = DB::select("SELECT R.title title, R.idroom idroom, R.status status, R.planta planta, R.section section, R.type type, R.condition conditionn, R.hotel_idhotel hotel_idhotel, R.type_room_idtype_room type_room_idtype_room,
+ RT.title titletype, RT.price_per_night price_per_night FROM room R INNER JOIN type_room RT ON R.type_room_idtype_room = RT.idtype_room"); 
         return view('admin/listRooms', ["entities" => $entities]); 
-    }
-    public function getRooms() {
+    } 
+    public function getRooms() { 
         $rooms = DB::select("SELECT * FROM room");
         return json_encode($rooms);  
     }
@@ -342,6 +344,22 @@ class AdminController extends BaseController
     public function editGuarnicion( $id ) {
         $guarnicion = DB::table('guarnicion')->where('idguarnicion', $id)->get()[0]; 
         return view('admin/editGuarnicion', ['id' => $id, 'guarnicion' => $guarnicion]); 
+    }
+    // HABITACIONES 
+    public function newRoom() {  
+        $hotels = DB::table('hotel')->get(); 
+        $types = DB::table('type_room')->get(); 
+        return view('admin/newRoom', ['hotels' => $hotels, 'types' => $types ]);  
+    } 
+    public function editRoom( $id ){
+        $hotels = DB::table('hotel')->get(); 
+        $types = DB::table('type_room')->get(); 
+        $room = DB::table('room')->where('idroom', $id)->get()[0];  
+        return view('admin/editRoom', ['hotels' => $hotels, 'types' => $types, 'room' => $room, 'id' => $id ]);  
+    }
+
+    public function gant() {
+        return view('admin/gant'); 
     }
 
     // INGREDIENTS 

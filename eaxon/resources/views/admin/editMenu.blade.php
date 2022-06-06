@@ -28,7 +28,7 @@
             </div>
             <div class="col-lg-12 pd1">
                 <button class="btn btn-primary" onclick="updateEntity()">guardar</button>
-                 <button class="btn btn-primary btn-delete" onclick="deleteEntity()">borrar</button>
+                <button class="btn btn-primary btn-delete" onclick="deleteEntity()">borrar</button>
             </div>
         </div>
  
