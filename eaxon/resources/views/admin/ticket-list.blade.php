@@ -193,28 +193,24 @@
            @foreach( $tickets as $key => $t )
 
            @php 
-            date_default_timezone_set('America/Mexico_City'); 
-            //print_r( date("h:m:s", strtotime($t->hora_de_peticion) ) ); 
-            //print_r( date('m/d/Y h:i:s a', time()) ); 
-            //print_r(  date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h Horas con %i minutos') );
- 
-            $from_time = date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h Horas con %i minutos'); 
-            $from_time_2 = date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h Hora con %i minutos'); 
-            $from_time_3 = date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%i minutos'); 
-            $h_time = intVal( date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h')); 
-            $m_time = intVal( date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%i')); 
+              date_default_timezone_set('America/Mexico_City'); 
+   
+              $from_time = date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h Horas con %i minutos'); 
+              $from_time_2 = date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h Hora con %i minutos'); 
+              $from_time_3 = date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%i minutos'); 
+              $h_time = intVal( date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%h')); 
+              $m_time = intVal( date_diff ( new DateTime(($t->hora_de_peticion) ), ( new DateTime() ) )->format('%i')); 
 
-            $name_pref = ".."; 
-            
-            $name_arr = ( explode(' ', $t->client[0]->name) ); 
-            if( count($name_arr) > 1 ) {
-              $name_pref = substr($name_arr[0], 0, 1)."".substr($name_arr[1], 0, 1); 
-            } else {
-              $name_pref = substr($name_arr[0], 0, 1); 
-          }
-
+              $name_pref = "..";  
+              
+              $name_arr = ( explode(' ', $t->client[0]->name) ); 
+              if( count($name_arr) > 1 ) {
+                $name_pref = substr($name_arr[0], 0, 1)."".substr($name_arr[1], 0, 1); 
+              } else {
+                $name_pref = substr($name_arr[0], 0, 1); 
+            } 
            @endphp
-
+ 
           <div class="container-ticket-row row" style="border-left: 7px solid {{$t->client[0]->flag}}" idticket="{{$t->idticket}}">
             <div class="contaner-ticket col-lg-12">
               <div class="col-lg-2 time-data">

@@ -401,15 +401,17 @@ class AdminController extends BaseController
         $client = ""; 
         foreach ($tickets as $key => $ticket) {
             $client = DB::select("SELECT * FROM guest G INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types WHERE idguest = ".$ticket->id_client);   
+            if( count($client) > 0 ) {
+                $tickets[$key]->client = $client; 
+                $id = $ticket->idticket; 
+                $ticket->img = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id")[0]->options;
+                $tickets[$key]->products = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id"); 
+            } else {
+                unset($tickets[$key]); 
+            }
 
-            $tickets[$key]->client = $client; 
-            $id = $ticket->idticket; 
-            $ticket->img = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id")[0]->options;
-            $tickets[$key]->products = DB::select("SELECT * FROM ticket_products_cart WHERE ticket_idticket = $id"); 
         } 
-     
         
-        //print_r( $client); return; 
         return view('admin/ticket-list', ['tickets' => $tickets]);    
     }
 

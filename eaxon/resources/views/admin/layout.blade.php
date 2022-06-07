@@ -549,9 +549,9 @@
                               </a>
                           </li>
                           <li>
-                              <a href="{{asset('listClientTypes')}}">
+                              <a href="{{asset('gant')}}">
                                 <span class="separator"></span>
-                                <span class="listClientTypes">TAG'S</span>
+                                <span class="listClientTypes">Gant</span>
                               </a>
                           </li>
                         </ul>
