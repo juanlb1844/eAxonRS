@@ -228,9 +228,10 @@ class AdminController extends BaseController
     // lista de huéspedes 
      public function list() {
          
+         /* 
         $from = DB::select("SELECT * FROM event WHERE from = '2022-04-13'");   
         print_r(json_encode($from)); 
-        return; 
+        return; */ 
 
         $guests = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
         foreach ($guests as $key => $guest) {
