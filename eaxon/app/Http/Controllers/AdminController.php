@@ -233,9 +233,9 @@ class AdminController extends BaseController
         print_r(json_encode($from)); 
         return; */ 
 
-        $guests = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
+        $guests = DB::select("SELECT * FROM guest G INNER JOIN event E ON G.idguest = E.guest_idguest INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
         foreach ($guests as $key => $guest) {
-            $guest->rooms = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent INNER JOIN room R ON RR.room_idroom = R.idroom WHERE E.idevent = ".$guest->idevent); 
+            $guest->rooms = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent INNER JOIN room R ON RR.room_idroom = R.idroom WHERE E.idevent = ".$guest->idevent); 
         }
         /*print_r( json_encode($guests) ); 
         return; */
