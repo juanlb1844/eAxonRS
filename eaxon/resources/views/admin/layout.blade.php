@@ -833,7 +833,7 @@
       let idactual = $( $('.container-ticket-row')[0] ).attr("idticket"); 
       let idnew    = $( $('.container-ticket-row')[0] ).attr("idticket"); 
 
-      setInterval(checkNew, 2000);
+      //setInterval(checkNew, 2000);
       //notifications(); 
 
       function checkNew() {

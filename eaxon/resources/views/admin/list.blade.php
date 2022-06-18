@@ -41,8 +41,6 @@
     .prev-img-guest-def {
         padding-top: 5px;
     }
-
-    
 </style>
  
     <div class="col-lg-12 col-sm-12"> 
@@ -96,13 +94,24 @@
             .list-data tbody td { vertical-align: middle!important; text-align: center;}
             .list-data tbody td:first-child { text-align: left;}
 
-
             .list-data .type-guest {
                 background-color: #f44336;
                 border-radius: 12px;
                 padding: 2px 10px;
-                color: #000000;
+                color: white;
                 border: 1px solid #2a2a2a;
+            }
+
+            .room-selected {
+                border-radius: 10px;
+                background-color: #607d8b;
+                padding: 2px 10px;
+                display: inline-block;
+                margin-left: 10px;
+            }
+            .room-selected .action-room { 
+                color: black;
+                text-decoration: underline;
             }
         </style>
 
@@ -129,8 +138,8 @@
                     <tr>
                         <th>NOMBRE</th>
                         <th>TELÉFONO</th>
+                        <th>HABITACIONES</th>
                         <th>TIPO DE CLIENE</th>
-                        <th>HABITACIÓN</th>
                         <th>ALERGIAS</th>
                         <th>IMG</th>
                         <th>ACCIÓN</th>
@@ -169,10 +178,12 @@
                             </span>
                         </td>
                         <td>
-                            <span class="type-guest">{{$guest->title}}</span>
+                            <span class="type-guest" style="background-color: {{$guest->flag}}">{{$guest->title}}</span>
                         </td>
                         <td>
-                            <span>{{$guest->room}}</span>
+                            @foreach($guest->rooms as $room )
+                                <span class="room-selected">{{$room->title}} <span class="action-room">ver</span></span>
+                            @endforeach 
                         </td>
                         <td>
                             <span>{{$guest->notes}}</span>
@@ -505,7 +516,7 @@
                                                       { title : 'NOMBRE'}, 
                                                       { title : 'TELÉFONO'}, 
                                                       { title : 'TIPO DE CLIENE'}, 
-                                                      { title : 'HABITACIÓN'}, 
+                                                      { title : 'HABITACIÓN'},
                                                       { title : 'ALERGIAS'}, 
                                                       { title : 'IMG'}, 
                                                       { title : "ACCIÓN"} ], 

@@ -51,66 +51,43 @@
 </style>
   
     <div class="col-lg-12 pd1">
-        <h1>CHECK IN</h1>
+        <h1 style="font-weight: bolder;">RESERVACIÓN</h1>
     </div>
 
-    <div class="col-lg-8 np">
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Hoteles</p>
-            <select field="data" id="hotel" name-field="hotel_idhotel" type-field="input" class="form-control">
-                @foreach( $hotels as $hotel ) 
-                    <option value="{{$hotel->idhotel}}">{{$hotel->name}}</option> 
-                @endforeach 
-            </select> 
-        </div> 
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Nombre de huesped</p>
-            <input class="form-control" id="checkin-name" placeholder="nombre" type="text" name="">
+    <style type="text/css">
+        .section { font-weight: bolder; font-size: 20px; letter-spacing: 1px; }
+    </style>
+        
+    <div class="col-lg-9 np">
+        <div class="col-lg-12 section">
+            <span>PERFIL</span>
         </div>
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Cel</p>
-            <input class="form-control" id="checkin-phone" placeholder="teléfono" type="text" name="">
-        </div>
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Nacionalidad</p>
-            <select id="nationality" class="form-control">
-                <option value="EU">EU</option>
-                <option value="CA">CA</option>
-                <option value="MX">MX</option> 
-            </select>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div style="text-align: center;">
-             <div class="col-lg-12">
-                <div class="prev-image"></div>    
-             </div>
-             <div class="col-lg-12 col-md-8 col-sm-9">
-                <div class="dropzone col-lg-12" id="dropzone-1"></div> 
-            </div>
-        </div>
-    </div>
-
-        <div class="col-lg-12 np">
-            <div class="col-lg-12" style="padding-left: 10px;">
-                <h2 style="margin: 0px;">estadía</h2>
+        <div class="col-lg-12 np"> 
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Hoteles</p>
+                <select field="data" id="hotel" name-field="hotel_idhotel" type-field="input" class="form-control">
+                    @foreach( $hotels as $hotel ) 
+                        <option value="{{$hotel->idhotel}}">{{$hotel->name}}</option> 
+                    @endforeach 
+                </select> 
+            </div> 
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Nombre de huesped</p>
+                <input class="form-control" id="checkin-name" placeholder="nombre" type="text" name="">
             </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
-                <p>Llegada</p>
-                <input class="form-control" min="2022-05-31" id="time-from" type="date" name="">
+                <p>Cel</p>
+                <input class="form-control" id="checkin-phone" placeholder="teléfono" type="text" name="">
             </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
-                <p>Salida</p>
-                <input class="form-control" min="2022-06-01" id="time-to" type="date" name="">
+                <p>Nacionalidad</p>
+                <select id="nationality" class="form-control">
+                    <option value="EU">EU</option>
+                    <option value="CA">CA</option>
+                    <option value="MX">MX</option> 
+                </select>
             </div>
             <div class="col-lg-4 col-md-4 col-12 pd1">
-                <p>Habitación</p>
-                <input style="display: none;" class="form-control" id="checkin-room" placeholder="habitación" type="text" name="">
-                <button class="btn btn-primary" id="selectRoom">seleccionar</button>
-            </div>
-        </div>
- 
-        <div class="col-lg-4 col-md-4 col-12 pd1">
             <p>Tipo de cliente</p>
             <select class="form-control" id="idguest_types">
                 @foreach( $client_types as $k => $type )
@@ -146,10 +123,98 @@
             <p>CV</p>
             <input class="form-control" id="checkin-name" placeholder="CV" type="text" name="">
         </div>
-        <div class="col-lg-12 col-md-4 col-12 pd1">
+        <div class="col-lg-8 col-md-4 col-12 pd1">
             <p>Alergias</p>
             <textarea class="form-control" id="alergias" placeholder="alergias" type="text" name=""></textarea>
         </div>
+        </div>
+
+        <style type="text/css">
+            .multiinput {
+                border: 1px solid gray;
+                min-height: 40px;
+                padding-top: 2px;
+                padding-left: 20px;
+            }
+            .element-multi {
+                background-color: gray; 
+                display: inline-block;
+                padding: 0px 10px; 
+                font-size: 17px; 
+                padding-right: 0px; 
+                vertical-align: middle;
+                text-align: center;
+                margin-right: 10px; 
+                min-width: 60px;
+                margin-bottom: 5px; 
+                margin-top: 4px; 
+            }
+            .del-element {
+                display: inline-block;
+                background-color: #fe8500;
+                position: relative;
+                width: 20px;
+                height: 25px;
+                line-height: 27px;
+                font-size: 41px;
+            }
+            .del-element:hover {
+                cursor: pointer;
+                background-color: #ba3f00;
+            }
+            .select-more {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        </style>
+
+        <div class="col-lg-12 np">
+            <div class="col-lg-12 np">
+            <div class="col-lg-12 section">
+                <span>ESTADIA</span>
+            </div>
+            <div class="col-lg-3 col-md-4 col-12 pd1">
+                <p>Llegada</p>
+                <input class="form-control" min="2022-05-31" id="time-from" type="date" name="">
+            </div>
+            <div class="col-lg-3 col-md-4 col-12 pd1">
+                <p>Salida</p>
+                <input class="form-control" min="2022-06-01" id="time-to" type="date" name="">
+            </div>
+            <div class="col-lg-3 col-md-4 col-12 pd1">
+                <p>Habitaciónes</p>
+                <input style="display: none;" class="form-control" id="checkin-room" placeholder="habitación" type="text" name="">
+
+                <div class="multiinput">
+                    <!-- <span class="element-multi">1<span class="del-element pull-right">×</span></span> --> 
+                    <button class="btn btn-primary pull-right select-more" id="selectRoom">. . .</button>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-12 pd1">
+                <p>Tarifa</p>
+                <button class="btn btn-primary" id="">seleccionar...</button>
+            </div>
+        </div>
+ 
+        
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3">
+        <div style="text-align: center;">
+             <div class="col-lg-12">
+                <div class="prev-image"></div>    
+             </div>
+             <div class="col-lg-12 col-md-8 col-sm-9">
+                <div class="dropzone col-lg-12" id="dropzone-1"></div> 
+            </div>
+        </div>
+    </div>
+
+        
  
         <div id="qrcode-2"></div>
         <div class="col-lg-12 pd1">
@@ -235,11 +300,25 @@
         });  
     }
 
-    function selectRoom( id, title ) { 
-        $('#selectRoom').text(title); 
-        $("#select-room").modal('toggle');
-        $('#checkin-room').val(title);  
+    function getRooms() {
+        rooms = Array(); 
+        $('.multiinput span[type-room="room"]').each( function(a, b){ 
+            rooms.push($(b).attr("id-room")); 
+        });      
+        return rooms;    
     }
+
+    function selectRoom( id, title ) { 
+        //$('#selectRoom').text(title); 
+        $("#select-room").modal('toggle');
+        $('#checkin-room').val(id);   
+        $('.multiinput').append('<span class="element-multi room-'+id+'" type-room="room" id-room="'+id+'" onclick="deleteRoom('+id+')">'+title+'<span class="del-element pull-right">×</span></span>');   
+    }
+
+    function deleteRoom( id ) {
+        $('.room-'+id).remove(); 
+    }
+
     $('#selectRoom').click( function() {
         $("#select-room").modal('toggle');
         $('.body-rooms').html("");
@@ -251,7 +330,7 @@
                 resp = JSON.parse(resp); 
                 resp.forEach( function( a, b ) {
                     var s = "libre"; 
-                    var tr = "<tr onclick='selectRoom("+a.idroom+","+a.title+")'><td>"+a.title+"</td><td>"+s+"</td><td>"+a.status+"</td><td>"+a.planta+"</td><td>"+a.section+"</td><td>"+a.type+"</td></tr>"; 
+                    var tr = "<tr onclick='selectRoom(\""+a.idroom+"\",\""+a.title+"\")'><td>"+a.title+"</td><td>"+s+"</td><td>"+a.status+"</td><td>"+a.planta+"</td><td>"+a.section+"</td><td>"+a.type+"</td></tr>"; 
                     $('.body-rooms').append(tr); 
                 }); 
                 console.log( resp ); 
@@ -288,8 +367,10 @@
         timeTo = new Date( timeTo ); 
         var timeToStr = timeTo.getFullYear()+"-"+(timeTo.getMonth() + 1)+"-"+(parseInt( timeTo.getUTCDate() ) );
 
+        checkinRoom = getRooms(); 
+
         if( checkinRoom.length < 1 ) {
-            alert("Asigna una habitación"); 
+            alert("Asigna al menos una habitación"); 
             return; 
         }
         if( checkinName.length < 1 ) {
@@ -309,16 +390,16 @@
             'url' : '{{asset("guest")}}', 
             'method' : 'post',  
             'data' : { 
-                'name' : checkinName,  
+                'name'  : checkinName,  
                 'phone' : checkinPhone, 
-                'room' : checkinRoom, 
+                'room'  : checkinRoom, 
                 'hotel' : checkinHotel, 
                 'nationality' : nationality,
                 'url' : url_image, 
                 'idguest_types' : idguest_types, 
                 'alergias' : alergias, 
-                'from' : from_date, 
-                'to' : timeToStr
+                'from'     : from_date, 
+                'to'       : timeToStr
             }, 
             'success' : function(resp) {
                 window.location.href = "{{asset('list')}}"; 

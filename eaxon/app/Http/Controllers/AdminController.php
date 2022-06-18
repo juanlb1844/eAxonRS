@@ -14,7 +14,6 @@ class AdminController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     // LOG IN 
-
     public function login() {
         return view('admin/login'); 
     }
@@ -228,7 +227,17 @@ class AdminController extends BaseController
     }
     // lista de huéspedes 
      public function list() {
-        $guests = DB::select("SELECT * FROM guest G LEFT JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
+         
+        $from = DB::select("SELECT * FROM event WHERE from = '2022-04-13'");   
+        print_r(json_encode($from)); 
+        return; 
+
+        $guests = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
+        foreach ($guests as $key => $guest) {
+            $guest->rooms = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent INNER JOIN room R ON RR.room_idroom = R.idroom WHERE E.idevent = ".$guest->idevent); 
+        }
+        /*print_r( json_encode($guests) ); 
+        return; */
         return view('admin/list', ['guests' => $guests]);  
     }
  
@@ -422,13 +431,13 @@ class AdminController extends BaseController
     }
 
     public function guest(Request $data) {
-        $name  = $data->input('name'); 
-        $phone = $data->input('phone');  
-        $room  = $data->input('room'); 
-        $hotel  = $data->input('hotel'); 
+        $name           = $data->input('name'); 
+        $phone          = $data->input('phone');  
+        $rooms           = $data->input('room'); 
+        $hotel          = $data->input('hotel'); 
         $idguest_types  = $data->input('idguest_types'); 
-        $nationality  = $data->input('nationality'); 
-        $alergias  = $data->input('alergias'); 
+        $nationality    = $data->input('nationality'); 
+        $alergias       = $data->input('alergias'); 
         $url  = $data->input('url'); 
         $from = $data->input('from'); 
         $to   = $data->input('to'); 
@@ -438,7 +447,18 @@ class AdminController extends BaseController
 
         $hash = str_replace( array('"', '/'), array("", ""), $hash); 
 
-        DB::select("INSERT INTO guest(name, hash, phone, room, hotel_idhotel, guest_types_idguest_types, nationality, notes, url, from_date, to_date) VALUES('$name', '$hash', '$phone', '$room', $hotel, $idguest_types, '$nationality', '$alergias', '$url', '$from', '$to')"); 
+        DB::select("INSERT INTO guest(name, hash, phone, hotel_idhotel, guest_types_idguest_types, nationality, notes, url) VALUES('$name', '$hash', '$phone', $hotel, $idguest_types, '$nationality', '$alergias', '$url')"); 
+
+        $last_id =  DB::getPdo()->lastInsertId(); 
+        
+        DB::table('event')->insert(["from" => $from, "to" => $to, "guest_idguest" => $last_id]); 
+
+        $last_id =  DB::getPdo()->lastInsertId(); 
+        
+        foreach ($rooms as $key => $room) {
+             DB::table('rooms_relation')->insert(["room_idroom" => $room , "event_idevent" => $last_id]);  
+        }
+
     }
       
      public function try() {
