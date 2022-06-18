@@ -247,7 +247,7 @@
                     <ul style="padding-left: 5px;">
                       <li>Alergico: {{$t->client[0]->notes}}</li>
                       <li>Cliente: {{$t->client[0]->title}}</li>
-                      <li>Lugar: H {{$t->client[0]->room}}</li>
+                      <li>Lugar: Room</li>
                     </ul>
                   </div>
                 </div>
