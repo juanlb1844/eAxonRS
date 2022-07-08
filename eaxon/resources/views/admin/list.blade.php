@@ -2,8 +2,12 @@
 
 @section('page')
 
-
+<link rel="stylesheet" href="{{asset('caleandar-master/css/demo.css')}}"/>
+<link rel="stylesheet" href="{{asset('caleandar-master/css/theme1.css')}}"/>    
+<script type="text/javascript" src="{{asset('caleandar-master/js/caleandar.js')}}"></script>
+  
 <style type="text/css">
+    .invisible { display: none; }
     td span {
         color: white; 
         font-size: 17px; 
@@ -17,18 +21,19 @@
         background-color: black; 
     }
     #container-qr img { display: inline-block!important; }
+    #container-qr-2 img { display: inline-block!important; }
 
     .prev-img-guest-def { 
         background-image: url('{{asset('media-admin/user-default.png')}}'); 
-        padding-top: 20px;
+        padding-top: 5px;
         background-color: black;
         background-image: url(https://static.vecteezy.com/system/resources/thumbnails/004/515/057/small/watercolor-texture-background-free-vector.jpg);
         background-size: cover;
      }
     .prev-img-guest { 
         display: inline-block;
-        width: 60px; 
-        height: 60px; 
+        width: 45px; 
+        height: 45px; 
         border-radius: 50%; 
         background-color: black; 
         background-position: center;
@@ -36,18 +41,18 @@
         background-repeat: no-repeat;
      }
      .guest-initials {
-        font-size: 37px; color: gray;font-weight: 900;
+        font-size: 32px; color: gray;font-weight: 900;
     }
     .prev-img-guest-def {
-        padding-top: 5px;
+        padding-top: 0px;
     }
 </style>
  
-    <div class="col-lg-12 col-sm-12"> 
+    <div class="col-lg-12 col-sm-12 np"> 
 
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-md-8 col-sm-8 np">
          
-         <div class="col-lg-12 pd1">
+         <div class="col-lg-12 pd1" style="padding-bottom: 0px;">
             <span class="title-page">CLIENTES</span>
             <span class="description-page">Registra a tus clientes y obtendrás el código QR para que lo escanee y pueda acceder 
                                                 <br> a la plataforma para poder comunicarse contigo. </span> 
@@ -59,23 +64,24 @@
             <style type="text/css">
             .header-page {
                 border-bottom: 0px solid #EDEDED; 
-                margin-bottom: 40px; 
-                margin-bottom: 25px;
-                margin-top: 40px;
+                margin-bottom: 0px;
+                margin-top: 0px;
             }
             .header-page .filters-cat { padding-left: 0px; }
             .header-page .filters-cat li {
                 display: inline-block;
                 margin-right: 15px; 
                 font-size: 17px;
-                padding-bottom: 10px;
+                padding-bottom: 0px;
             }
-            .header-page .filters-cat li:hover {
+            .header-page .filters-cat li:hover { 
                 cursor: pointer;
-                font-weight: 600;
+                font-weight: 500;
             }
             .filter-selected {
-                border-bottom: 4px solid #46b04a; 
+                /*border-bottom: 4px solid #46b04a;*/ 
+                color: #61e466;
+                font-weight: 500;
             }
 
             .list-data thead th { text-align: center; }
@@ -108,15 +114,19 @@
                 padding: 2px 10px;
                 display: inline-block;
                 margin-left: 10px;
+                margin-top: 5px;
             }
+            table .sorting_desc, table .sorting_asc, table .sorting { vertical-align: middle!important; }
             .room-selected .action-room { 
                 color: black;
                 text-decoration: underline;
             }
+            .btn-show, .btn-edit-client { margin-top: 5px; font-weight: 700; color: black; }
+            .btn-edit-client img { width: 20px; }
         </style>
 
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
     <div class="col-lg-12">
         <a href="{{asset('')}}">
@@ -142,13 +152,13 @@
                         <th>TIPO DE CLIENE</th>
                         <th>ALERGIAS</th>
                         <th>IMG</th>
-                        <th>ACCIÓN</th>
+                        <!-- <th>ACCIÓN</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     @php 
                         $idlast = 0; 
-                        if( count($guests) > 1 )
+                        if( count($guests) > 0 )
                             $idlast = $guests[count($guests)-1]->idguest; 
                     @endphp 
                     @foreach( $guests as $key => $guest )
@@ -187,7 +197,7 @@
                         </td>
                         <td>
                             <span>{{$guest->notes}}</span>
-                        </td>
+                        </td> 
                         <td>
                             <div style="text-align: center;">
                                 @if( strlen($guest->url) > 10 ) 
@@ -199,12 +209,15 @@
                                 @endif 
                             </div>
                         </td>
-                        <td>
-                            <button class="btn" onclick="show('{{$guest->hash}}')">ver</button>
+                        <!-- <td>
+                            <!-- <button class="btn btn-show" onclick="show('{{$guest->hash}}')">QR</button> -->
+                            <!-- 
                             <a href="{{asset('editGuest')}}/{{$guest->idguest}}">
-                                <button class="btn">editar</button>
-                            </a>
-                        </td>
+                                <button class="btn btn-edit-client">
+                                    <img src="{{asset('media-admin/edit.svg')}}">
+                                </button>
+                            </a> --> 
+                        </td>  
                     </tr>
                     @endforeach 
                 </tbody>
@@ -218,11 +231,16 @@
             font-size: 22px; 
             font-weight: 900;
         }
-        .main-info-sidebar-inf { text-align: center; padding-top: 10px; border-bottom: 1px solid #2f2f2f; padding-bottom: 10px; }
+        .main-info-sidebar-inf { 
+            text-align: center; 
+            padding-top: 10px; 
+            border-bottom: 1px solid #2f2f2f; 
+            padding-bottom: 10px; 
+        }
         .img-inf-guest {
             display: inline-block;
-            width: 100px;
-            height: 100px; 
+            width: 90px;
+            height: 90px; 
             background-color: #2f2f2f; 
             border-radius: 50%; 
             background-position: center;
@@ -250,22 +268,79 @@
             border-radius: 12px;
         }
         .name-info-side { font-size: 17px; }
+        .sidebar-information {
+            padding-top: 20px; 
+        }
+
+
+        .content-aside-block {
+            background-color: #404040;; 
+            border-radius: 7px; 
+            padding: 10px 10px!important;
+            margin-top: 40px;
+        }
+        .text-aside-content {
+            text-align: left;
+            padding-top: 20px!important;
+        }
+        .aside-title {
+            font-size: 22px; 
+            font-weight: bolder; 
+            line-height: 20px;
+        }
+        .ago-registered {
+            font-size: 12px; 
+            display: block;
+        }
+        .block-sidebar-fast {
+            margin-bottom: 10px;
+            margin-top: 20px; 
+        }
     </style>
 
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-md-4 col-sm-4 np sidebar-content invisible">
         <div class="sidebar-information">
             <div class="content-sidebar-inf">
                 <div class="header-sidebar-inf">
-                    <span class="title-sidebar-inf">Perfil</span>
-                </div>
-                <div class="main-info-sidebar-inf col-lg-12">
-                    <span class="img-inf-guest">
-                        
-                    </span>
-                    <div class="col-lg-12">
-                        <p class="name-info-side">**** ***</p>
+                    <div class="col-lg-12 np">
+                        <div class="col-lg-6 np">
+                            <span class="title-sidebar-inf">PERFIL</span>
+                        </div>
+                        <div class="col-lg-6 np" style="text-align: right;">
+                            <a href="" class="btn-editt-client-href">
+                                <button class="btn btn-edit-client">
+                                    <img src="{{asset('media-admin/edit.svg')}}">
+                                </button>
+                            </a>
+                                <button class="btn btn-show show-qr" data-url="xx" onclick="show('')">QR</button>
+                            <a href="" class="btn-edit-client-href">
+                                <button class="btn btn-edit-client">
+                                    <img src="{{asset('media-admin/append.svg')}}">
+                                </button>
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-lg-12">
+                </div>
+                <div class="main-info-sidebar-inf col-lg-12 np">
+                    <div class="col-lg-12 np">
+                        <div class="content-aside-block col-lg-12 np">
+                            <div class="col-lg-8 np"> 
+                                <div class="col-lg-4 np">
+                                    <span class="img-inf-guest">
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="col-lg-12 np text-aside-content">
+                                        <span class="aside-title name-info-side">...</span>
+                                        <span class="ago-registered">********</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="text-align: right;">
+                                 <div id="container-qr-2" style="text-align: right;"></div>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 block-sidebar-fast">
                         <div class="col-lg-4">
                             <img class="icon-info" src="{{asset('media-admin/flag-simple.svg')}}">
                             <p class="notes-info-side">**</p>
@@ -318,6 +393,12 @@
                         background-color: #404040;
                         border-radius: 7px;
                     }
+                    #caleandar { display: inline-block; padding-top: 20px; }
+                    .cld-datetime {
+                        margin-bottom: 20px; 
+                        font-weight: bolder; 
+                        font-size: 17px; 
+                    }
                 </style>
 
                 <div class="col-lg-12">
@@ -330,82 +411,9 @@
                         <div style="text-align: center;">
                             <p class="date-to-side">** ** **</p>
                         </div>
-                    </div>
+                    </div> 
                     <div class="container-eaxon-calendar col-lg-12 np">
-                        <table class="table-calendar">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        DO
-                                    </th>
-                                    <th>
-                                        LO
-                                    </th>
-                                    <th>
-                                        MA
-                                    </th>
-                                    <th>
-                                        MI
-                                    </th>
-                                    <th>
-                                        JU
-                                    </th>
-                                    <th>
-                                        VI
-                                    </th>
-                                    <th>
-                                        SA
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>29</td>
-                                    <td>30</td>
-                                    <td>31</td>
-                                    <td>1</td>
-                                    <td class="today-calendar">2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                    <td>9</td>
-                                    <td>10</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>13</td>
-                                    <td>14</td>
-                                    <td>15</td>
-                                    <td>16</td>
-                                    <td>17</td>
-                                    <td>18</td>
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    <td>20</td>
-                                    <td>21</td>
-                                    <td>22</td>
-                                    <td>23</td>
-                                    <td>24</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td>26</td>
-                                    <td>27</td>
-                                    <td>28</td>
-                                    <td>29</td>
-                                    <td>30</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div id="caleandar"></div>
                     </div>
                 </div>
 
@@ -474,65 +482,36 @@
   </div>
 </div>
 
-<style type="text/css">
-    table.dataTable tbody tr {
-        background-color: #212228;
-    }
-    .table-bordered {
-        border: 0px solid #ddd;
-    }   
-    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-        color: #b9b9b9!important;
-        font-weight: 600;
-    }
-    .dataTables_length select {
-        background-color: #212228;
-        border-radius: 7px;
-        margin: 0px 10px;
-    }
-    .dataTables_wrapper .dataTables_filter input {
-        margin-left: 0.5em;
-        background-color: #212228;
-        border: 1px solid #545454;
-        border-radius: 7px;
-        height: 30px;
-        padding: 10px;
-    }
-    table.dataTable.no-footer {
-        border-bottom: 0px solid #111;
-    }
-    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover { 
-        background: linear-gradient(to bottom, #212228 0%, #212228 100%);
-        border: 1px solid #2f2f2f;
-    }
-</style>
+
+
+<script type="text/javascript" src="{{asset('caleandar-master/js/demo.js')}}"></script>
 
 <script type="text/javascript">
-        
-      showDetails({{$idlast}});  
+      
+      showDetails({{$idlast}}); 
 
       table = $('.table').DataTable({  
-                                          columns : [ 
-                                                      { title : 'NOMBRE'}, 
-                                                      { title : 'TELÉFONO'}, 
-                                                      { title : 'TIPO DE CLIENE'}, 
-                                                      { title : 'HABITACIÓN'},
-                                                      { title : 'ALERGIAS'}, 
-                                                      { title : 'IMG'}, 
-                                                      { title : "ACCIÓN"} ], 
-                                        "language" :  { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},  
-                                        destroy: true, 
-                                         //"order"    : [[ 0, "desc" ]], 
-                                        "initComplete": function() { 
-                                    } 
-                            }); 
+                          columns : [ 
+                                      { title : 'NOMBRE'}, 
+                                      { title : 'TELÉFONO'}, 
+                                      { title : 'TIPO DE CLIENE'}, 
+                                      { title : 'HABITACIÓN'},
+                                      { title : 'ALERGIAS'}, 
+                                      { title : 'IMG'}, 
+                                      /*{ title : "ACCIÓN"}*/ ], 
+                                      
+                        "language" :  { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},  
+                        destroy: true, 
+                         //"order"    : [[ 0, "desc" ]], 
+                        "initComplete": function() { 
+                    } 
+    });  
 
     // obtener strings para formato de fechas 
     function getNameDates(type, lan, num ) {
-        
-        var m_es_full = Array("en", "feb", "mar", "abr", "ma", "jun", "jul", "ago", "sep", "oct", "nov", "dic"); 
+        var m_es_full = Array("en", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"); 
 
-        var d_es_full = Array("domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"); 
+        var d_es_full = Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"); 
         if(type == "month" && lan == "S") {
             return m_es_full[num]; 
         } 
@@ -540,10 +519,44 @@
         if(type == "day" && lan == "S") {
             return d_es_full[num]; 
         }
-
     }
-    
+
+    Date.prototype.addDays = function (days) {
+        const date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    };
+ 
+    function updateCalendar( year_from, month_from, day_from, year_to, month_to, day_to ) {
+        $("#caleandar").html(""); 
+        
+        var events = [
+          {'Date': new Date(year_from, month_from, day_from), 'Title': 'Check in'},
+          {'Date': new Date(year_to, month_to, day_to), 'Title': 'Check out', 'Link': 'https://google.com'},
+        ];  
+
+        d_from = new Date(year_from, month_from, day_from); 
+        d_to   = new Date(year_to, month_to, day_to); 
+        while( (d_from < d_to) ) {
+            d_from = d_from.addDays(1); 
+            //console.log("--------------");
+            events.push({'Date': new Date(d_from.getFullYear(), d_from.getUTCMonth(), d_from.getDate()), 'Title': ''}); 
+            //console.log("--------------"); 
+        }
+
+        var settings = {};
+        var element = document.getElementById('caleandar');
+        caleandar(element, events, settings);
+    }
+
+    let d = null; 
     function showDetails(id) {
+        let hr = window.location.href; 
+        hr     = hr.replace('list',''); 
+        $('.sidebar-content').removeClass('invisible'); 
+        $('.btn-edit-client-href').attr('href', hr+"?id="+id); 
+        $('.btn-editt-client-href').attr('href', hr+"editGuest/"+id); 
+        
         $.ajax({
             'url' : '{{asset('getGuestDetails')}}', 
             'data' : {
@@ -552,18 +565,43 @@
             'method' : 'post', 
             'success' : function function_name(resp) {
                 resp = JSON.parse(resp); 
+
+                $(".show-qr").attr("data-url", resp.hash);
+
+                $('#container-qr-2').html(''); 
+                var qrcode = new QRCode(document.getElementById("container-qr-2"), { 
+                    text: resp.hash, 
+                    width: 100,
+                    height: 100,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
                 console.log(resp); 
+
+                var rooms_perfil = ""; 
+                resp.rooms.forEach( function(a, b) {
+                    rooms_perfil += "<span class='room-pefil'>"+a.title+"</span>"; 
+                }); 
+
+                $('.room-info-side').html(rooms_perfil); 
 
                 var from_date_f = new Date(resp.from_date); 
                 console.log(from_date_f); 
 
-
                 var dia_mes = from_date_f.getDate(); 
+                    
+                d = from_date_f; 
+
                 var date_from_f = getNameDates("day", "S", from_date_f.getDay()) +" "+ dia_mes+" "+getNameDates("month", "S", from_date_f.getUTCMonth());  
                  
                 $('.date-from-side').html(date_from_f); 
  
                 var from_date_t = new Date(resp.to_date); 
+                
+                updateCalendar(from_date_f.getFullYear(), from_date_f.getUTCMonth(), dia_mes, from_date_t.getFullYear(), from_date_t.getUTCMonth(), from_date_t.getDate() ); 
+
                 console.log(from_date_t); 
                 
                 var dia_mes = from_date_t.getDate(); 
@@ -588,7 +626,7 @@
                 if( resp.notes.length > 2 ) {
                     $('.notes-info-side').html(resp.notes); 
                 } else {
-                    $('.notes-info-side').html("NA"); 
+                    $('.notes-info-side').html("sin alergias"); 
                 }
 
                 if( resp.url.length > 2 ) {
@@ -603,9 +641,10 @@
     }
 
     function show( hash ) {
-        $('#container-qr').html(''); 
+        hash = $(".show-qr").attr("data-url"); 
+        $('#container-qr').html('');  
         $('#myModal').modal('toggle'); 
-        let url = "{{asset('client')}}/"; 
+        let url = "{{asset('client')}}/";  
         $('#url-link').html(url+hash); 
         $('#url-link').attr("href", url+hash); 
          var qrcode = new QRCode(document.getElementById("container-qr"), { 
@@ -616,6 +655,7 @@
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
         });
+
     }
 </script>
 

@@ -44,15 +44,17 @@ Route::post('updateListImgs', 'AdminController@updateListImgs')->middleware('log
 Route::get('ticket-list', 'AdminController@ticketList')->middleware('logueadoAdmin');   
 
 // ACTIVITIES 
-
 Route::get('/activityList', 'AdminController@activityList')->middleware('logueadoAdmin'); 
 
 // GUEST  
 Route::get('/', 'AdminController@checkin')->middleware('logueadoAdmin'); 
+
 Route::get('/list', 'AdminController@list')->middleware('logueadoAdmin'); 
 Route::get('/editGuest/{id}', 'AdminController@editGuest')->middleware('logueadoAdmin');
 Route::post('/getGuestDetails', 'AdminController@getGuestDetails')->middleware('logueadoAdmin');
 Route::post('/uploadPhotoGuest', 'AdminController@uploadPhotoGuest');   
+ 
+Route::post('/loadGuest', 'AdminController@loadGuest')->middleware('logueadoAdmin'); 
 
 Route::get('/dishList', 'AdminController@dishList')->middleware('logueadoAdmin');
 Route::get('/restaurantsList', 'AdminController@restaurantsList')->middleware('logueadoAdmin');
@@ -70,6 +72,7 @@ Route::get('/editClientType/{id}', 'AdminController@editClientType')->middleware
 
 Route::get('/listRooms', 'AdminController@listRooms')->middleware('logueadoAdmin'); 
 Route::post('/getRooms', 'AdminController@getRooms')->middleware('logueadoAdmin');  
+Route::post('/availableRooms', 'AdminController@availableRooms')->middleware('logueadoAdmin'); 
     
 Route::get('/editHotel/{id}', 'AdminController@editHotel')->middleware('logueadoAdmin');
 Route::post('/uploadPhotoHotel', 'AdminController@uploadPhotoHotel');  
@@ -85,7 +88,9 @@ Route::get('/editGuarnicion/{id}', 'AdminController@editGuarnicion')->middleware
 // habitaciones 
 Route::get('/newRoom', 'AdminController@newRoom')->middleware('logueadoAdmin');
 Route::get('/editRoom/{id}', 'AdminController@editRoom')->middleware('logueadoAdmin');
- 
+  
+Route::get('/getAllCustomers', 'AdminController@getAllCustomers')->middleware('logueadoAdmin'); 
+
 Route::get('/catalogues', function () { 
     return "hola"; 
 });

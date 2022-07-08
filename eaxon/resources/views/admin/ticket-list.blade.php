@@ -283,7 +283,7 @@
             </div> 
           </div>
           @endforeach 
-
+           <h1>no hay tickets sin resolver</h1>
         </div>
 
         <!-- 

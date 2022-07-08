@@ -2,9 +2,11 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.css"/>
-<link rel="stylesheet" type="text/css" href="https://begima.com.mx/public/js/sortable/theme.css"/> 
-<script type="text/javascript" src="https://begima.com.mx/public/js/sortable/Sortable.min.js"/></script>
 
+
+<link rel="stylesheet" type="text/css" href="{{asset('/js/sortable/theme.css')}}"/> 
+<script type="text/javascript" src="{{asset('/js/sortable/Sortable.min.js')}}"/></script>
+ 
 
   <style type="text/css">
   .element-gallery {
@@ -142,20 +144,26 @@
 
         // order elements 
         var gridDemo = $('.content-gallery-1')[0];  
-        new Sortable(gridDemo, {
-            animation: 150,
-            ghostClass: 'blue-background-class', 
-            onEnd: function (/**Event*/evt) { 
-              image_link = $(evt.item).attr('link'); 
-              console.log( evt.oldIndex );    
-              console.log( image_link ); 
-              images_list.push(image_link); 
-              console.log( evt.to ); 
-              $('.element-gallery').each( function(a, b) {
-                console.log($(b).attr('link')); 
-              });  
-            }, 
-        });
+
+        try{
+
+        } catch ( a ) {
+            new Sortable(gridDemo, {
+                animation: 150,
+                ghostClass: 'blue-background-class', 
+                onEnd: function (/**Event*/evt) { 
+                  image_link = $(evt.item).attr('link'); 
+                  console.log( evt.oldIndex );    
+                  console.log( image_link ); 
+                  images_list.push(image_link); 
+                  console.log( evt.to ); 
+                  $('.element-gallery').each( function(a, b) {
+                    console.log($(b).attr('link')); 
+                  });  
+                }, 
+            });
+
+        }
 
         // upload file 
         myDropzone = new Dropzone("#dropzone-1", {

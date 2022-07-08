@@ -62,6 +62,8 @@
 	#qr-reader__status_span {
 		display: none;
 	}
+
+	.error-mge { font-size: 25px; color: white; }
 </style>
 
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
@@ -76,6 +78,7 @@
 			<span class="header-title">eAxón</span>
 		</div>
 		<div class="body-content">
+			@if( $user )
 			<div class="line-body">
 				<span>¿Quién usará eAxón?</span>
 			</div> 
@@ -89,6 +92,9 @@
 				</a>
 			</div>
 			<span class="title-1">{{$user->name}}</span>
+			@else 
+				<div class="error-mge">Este código QR no existe o ya expiró</div>
+			@endif 
 
 			<!-- <button onclick="initCam()">Leer QRx</button> --> 
 

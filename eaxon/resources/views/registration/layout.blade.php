@@ -105,17 +105,54 @@
 	}
 
 	.inactive { display: none; }
+	.reg-info { font-size: 17px;  }
+
+	.subleyend {
+		font-size: 17px; display: block;
+	}
+	.success-message {
+		text-align: center;
+	}
+	.success-message .success-mge {
+		font-size: 27px; 
+		display: block; 
+		font-weight: 600;
+		text-align: center;
+	}
+	.success-message .main-msge {
+		font-size: 32px; 
+		font-weight: 900;
+	}
+	.name-app {
+		font-weight: 900; 
+		font-size: 27px; 
+		color: #050350;
+	}
+	.color-b {
+		color: #10d6c0; 
+	}
 </style>
 
 </head>
 <body>
 
 	<div class="container-fluid page-container">
-		<div class="col-lg-12 np">
-			<img id="logo" src="https://demo.eaxon.com.mx/media-admin/eaxon.png">
+		<div class="col-lg-12 np"> 
+			<a href="https://www.eaxon.com.mx">
+				<img id="logo" src="https://demo.eaxon.com.mx/media-admin/eaxon.png">
+			</a>
 		</div>
 		<div class="page-container-block col-lg-12"> 
-			<div class="page-content-block">
+			<div class="page-content-block" style="    display: flex;">
+				<div class="success-message inactive">
+					<span class="main-msge">¡Felicidades!</span>
+					<span class="success-mge">Haz creado tu cuenta de <span class="name-app"><span class="color-b">e</span>Axón</span>, estamos a tu disposición para que tu servicio sea el mejor!</span>
+					<div class="col-lg-12 row-data" style="padding: 20px; text-align: center;">
+						<a href="{{asset('login')}}">
+							<button class="btn btn-primary">entrar</button>
+						</a>
+					</div>    
+				</div>
 				<div class="form-registration row" id="first-step">
 					<div class="col-lg-12 title-block">
 						<span>Iniciar una prueba de eAxón</span>
@@ -125,13 +162,13 @@
 						<input class="form-control form-imput" id="client-email" type="email" name="email"> 
 						<span style="color:red" id="mge-1"></span>
 					</div>
-					<div class="col-lg-12 row-data">
+					<div class="col-lg-12 row-data" style="display: contents;">
 						<button class="btn btn-primary" id="next">siguiente</button>
 					</div>
 				</div>
 				<div class="form-registration row inactive" id="second-step">
 					<div class="col-lg-12 title-block">
-						<span>Último paso</span>
+						<span>Datos del administrador <span class="subleyend">(después puedes cambiar estos datos)</span></span>
 					</div>
 					<div class="col-lg-12 row-data">
 						<div class="col-lg-6 np" style="padding-right: 10px!important;">
@@ -157,7 +194,37 @@
 						<span style="color:red" id="mge-2"></span>
 					</div>
 					<div class="col-lg-12 row-data">
-						<button class="btn btn-primary" id="last">finalizar</button>
+						<button class="btn btn-primary" id="last-step">siguiente</button>
+					</div>
+				</div>
+				<div class="form-registration row inactive" id="three-step">
+					<div class="col-lg-12 title-block">
+						<span>Datos de la empresa</span>
+					</div>
+					<div class="col-lg-12 row-data">
+						<div class="col-lg-6 np" style="padding-right: 10px!important;">
+							<span class="title-field">Nombre de la compañía</span>
+							<input class="form-control form-imput" id="client-name" type="text" name="name"> 
+						</div>
+						<div class="col-lg-6 np">
+							<span class="title-field">Número de habitaciones</span>
+							<select class="form-control form-imput" id="client-lastname" type="text" name="lastname"> 
+								<option>10-100</option>
+								<option>100-500</option>
+								<option>500-1000</option>
+								<option>mayor de 1000</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-12 np">
+						<span class="title-field">Asigna una contraseña</span>
+						<input class="form-control form-imput" id="client-tel" type="tel" name="tel"> 
+					</div>
+					<div class="col-lg-12 row-data reg-info">
+						<p>Al hacer clic en "Regístrate para comenzar la prueba" aceptas el Acuerdo de <a href="">Suscripción General de eAxón</a> y la <a href="">Política de privacidad.</a></p>
+					</div>
+					<div class="col-lg-12 row-data">
+						<button class="btn btn-primary" id="last">crear cuenta</button>
 					</div>
 				</div>
 			</div>
@@ -186,30 +253,59 @@
 	</div>
 
 	<script type="text/javascript">
-		var clientEmail = ""; 
-		var clienName = ""; 
-		var lastName = ""; 
-		var clientTel = ""; 
-		var clientWork = ""; 
+		var state = "1"; 
+
+		var clientEmail 	 = ""; 
+		var clienName 		 = ""; 
+		var lastName 		 = ""; 
+		var clientTel 		 = ""; 
+		var clientWork       = ""; 
 		var clientDepartment = ""; 
+
+		$("#last").click( function() {
+			$(".form-registration").addClass("inactive"); 
+			$(".success-message").removeClass("inactive"); 
+		}); 
+
+		history.pushState(null, document.title, location.href);
+
+		window.addEventListener('popstate', function (event) {
+		  history.pushState(null, document.title, location.href);
+		  if( state == "2" ) {
+		  	$("#first-step").removeClass("inactive");
+			$("#second-step").addClass("inactive");
+			state = "1"; 
+		  } else if( state == "3" ) {
+		  	$("#second-step").removeClass("inactive"); 
+			$("#three-step").addClass("inactive"); 
+			state = "2"; 
+		  } else if( state == "1" ) {
+		  	if( confirm("¿Seguro quieres salir del registro?") ) {
+		  		window.location.href = "https://eaxon.com.mx"; 
+		  	} else {
+		  		alert("A"); 
+		  	}
+		  }
+		 });
+ 		
+ 		// primero 
 		$("#next").click( function() {
-
 			clientEmail = $("#client-email").val(); 
-
 			if(clientEmail.length < 5 ) {
 				$("#mge-1").html("favor de introducir un email válido"); 
 				return; 
-			}
-
+			} 
 			$("#first-step").addClass("inactive");
 			$("#second-step").removeClass("inactive");
+			state = "2"; 
 		}); 
-
-		$("#last").click( function() {
-			clienName = $("#client-name").val(); 
-			lastName = $("#client-lastname").val(); 
-			clientTel = $("#client-tel").val(); 
-			clientWork = $("#client-work").val(); 
+ 		
+ 		// seccond    
+		$("#last-step").click( function() {
+			clienName        = $("#client-name").val(); 
+			lastName         = $("#client-lastname").val(); 
+			clientTel        = $("#client-tel").val(); 
+			clientWork 		 = $("#client-work").val(); 
 			clientDepartment = $("#client-department").val(); 
 		
 			if(clienName.length < 2 || lastName.length < 2 || clientTel.length < 2 || clientWork.length < 2 || clientDepartment.length < 2 ) {
@@ -217,6 +313,9 @@
 				return; 
 			} else {
 				$("#mge-2").html(""); 
+				$("#second-step").addClass("inactive"); 
+				$("#three-step").removeClass("inactive"); 
+				state = "3"; 
 			}
 		}); 
 	</script>

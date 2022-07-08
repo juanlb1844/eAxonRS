@@ -17,7 +17,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Checkin</title>
+<title>Dashboard | eAxón</title>
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -34,6 +34,126 @@
 
 <script src="https://rawgit.com/dbrekalo/fastselect/master/dist/fastselect.standalone.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fastselect/0.7.3/fastselect.css">
+
+
+<script type="text/javascript" src="{{asset('ohsnap.js')}}"></script>
+
+<!-- LAYOUT --> 
+<style type="text/css">
+  html, body.mode-dark{
+      background-color: #212228;
+      color: white; 
+    }
+
+  html, body.mode-white{
+      background-color: transparent;
+      color: black; 
+    }
+
+     /* theme */ 
+    .title-page {
+        font-weight: 900; 
+        font-size: 35px; 
+        display: block;
+    }
+    .description-page {
+        font-size: 20px; 
+        line-height: 20px;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+
+    .container-side-mode-dark {
+      background: #212228;
+      /*position: fixed;*/
+      z-index: 99;
+      max-height: 100vh;
+      min-height: 100vh;
+      overflow: auto;
+  }
+
+  .container-side-mode-white {
+      background: #56b7ec;
+      /*position: fixed;*/
+      z-index: 99;
+      max-height: 100vh;
+      min-height: 100vh;
+      overflow: auto;
+  }
+</style>
+<!-- LAYOUT // --> 
+
+
+<style type="text/css">
+  /* ALERTS */
+/* inspired by Twitter Bootstrap */
+
+/* Oh Snap */
+
+#ohsnap {
+  position: fixed;
+  bottom: 5px;
+  right:5px;
+  margin-left: 5px;
+  z-index:99;
+}
+
+.alert {
+  text-align: right;
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px solid #eed3d7;
+  border-radius: 4px;
+  float: right;
+  clear: right;
+  background-color: white;
+}
+
+.alert-red {
+  color: white;
+  background-color: #DA4453;
+}
+.alert-green {
+  color: white;
+  background-color: #37BC9B;
+}
+.alert-blue {
+  color: white;
+  background-color: #4A89DC;
+}
+.alert-yellow {
+  color: white;
+  background-color: #F6BB42;
+}
+.alert-orange {
+  color:white;
+  background-color: #E9573F;
+}
+
+.buttons {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.buttons a {
+  margin:auto;
+  margin-bottom:10px;
+  float: none !important;
+  text-align: center;
+
+}
+
+.buttons a span { 
+  padding-left: 0px; 
+}
+
+#ohsnap { text-shadow: none; }
+@media (max-width: 450px) {
+  .buttons {
+    margin-bottom: 334px;
+  }
+}
+</style>
 
 
  <style type="text/css">
@@ -83,7 +203,9 @@
 
 </head>
  
-<body>
+<body class="mode-dark">  
+
+  <div id="ohsnap"></div>
 
   <!-- cargar --> 
    <div id="overlay">
@@ -171,15 +293,32 @@
       padding-left: 10px;  
       margin-right: 10px; 
   }
-  .container-side {
-      background: #212228;
-      /*position: fixed;*/
-      z-index: 99;
-      min-height: 100vh;
-  }
+ 
   .panel-right {
       padding: 45px 0px; width: 120%; padding-left: 25vh
   }
+
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27cfd1 #323232;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #323232;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #27cfd1;
+  border-radius: 20px;
+  border: 3px solid #323232;
+}
 </style>
 
 <style type="text/css">
@@ -316,12 +455,6 @@
           }
           .inter-menu { display: none; padding-left: 20px; width: 100%; }
 
-
-          html, body{
-            background-color: #212228;
-            color: white; 
-          }
-
   /* nuevo menú */ 
     .selected-option {
       background-color: white;
@@ -359,19 +492,6 @@
       font-weight: bolder; 
     }
 
-
-     /* theme */ 
-    .title-page {
-        font-weight: 900; 
-        font-size: 35px; 
-        display: block;
-    }
-    .description-page {
-        font-size: 20px; 
-        line-height: 20px;
-        padding-bottom: 10px;
-        display: inline-block;
-    }
     .more-info { font-size: 17px; font-weight: 700; }
     .modal-content {
       background-color: #131313;
@@ -466,7 +586,7 @@
 </style>
  
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side border-r" style="padding: 0px!important; overflow-y: auto;">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 container-side container-side-mode-dark border-r" style="padding: 0px!important; overflow-y: auto;">
 
             <div class="col-lg-12 border-b container-logo" style="text-align: center;">
               <img style="width: 70%;" src="{{asset('media-admin/eaxon.png')}}">
@@ -480,9 +600,54 @@
                   </span>
                 </div>
                 <div class="name-avatar-content">
-                  <span class="avatar-title">John Doe</span>
+                  <span class="avatar-title">Juan Bravo</span>
                   <div>
                   <span class="avatar-desc">Administrador</span> <img class="img-per-edit" src="{{asset('media-admin/edit.svg')}}">
+
+                  <div class="col-lg-12 row content-mode">
+                      <input type="checkbox" id="switch-mode"/><label id="switch-mode-leyend" for="switch-mode">Toggle</label>
+                      <span>black</span>
+                  </div>
+
+                  <style type="text/css">
+                    .content-mode { text-align: center; }
+                    #switch-mode[type=checkbox]{
+                        height: 0;
+                        width: 0;
+                        visibility: hidden;
+                      }
+                      #switch-mode-leyend {
+                        cursor: pointer;
+                        text-indent: -9999px;
+                        width: 100%;
+                        height: 30px;
+                        background: grey;
+                        display: block;
+                        border-radius: 100px;
+                        position: relative;
+                      }
+                      #switch-mode-leyend:after {
+                        content: '';
+                        position: absolute;
+                        top: 5px;
+                        left: 5px;
+                        width: 30%;
+                        height: 20px;
+                        background: #fff;
+                        border-radius: 90px;
+                        transition: 0.3s;
+                      }
+                      #switch-mode:checked + #switch-mode-leyend {
+                        background: #bada55;
+                      }
+                      #switch-mode:checked + #switch-mode-leyend:after {
+                        left: calc(100% - 5px);
+                        transform: translateX(-100%);
+                      }
+                      #switch-mode-leyend:active:after {
+                        width: 130px;
+                      }
+                  </style>
                     
                   </div>
                 </div>
@@ -493,9 +658,8 @@
                 <!-- 
                 <div style="text-align: center; padding-top: 0px!important;">
                     <h3 style="font-weight: 900; margin: 5px; font-size: 35px; letter-spacing: 1px; color: #46b04a; background-color: #2c2c2c; border-radius: 4px; display: inline-block; padding: 4px 20px; border: 1px solid #193f1a;">eAx</span>ón</h3>
-                </div> --> 
-
-                 
+                </div> 
+                -->  
                 <ul class="menu-options" style="padding-left: 40px;">
                   <li class="col-lg-12 selected-admin-pedidos">
                         <div @if( request()->route()->uri == 'ticket-list' ) class="selected-option" @endif> 
@@ -785,14 +949,37 @@
             </div> 
         </div>
 
-        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 40px; max-height: 100vh; overflow: auto;">
+        <div class="col-lg-10 col-md-10 content-page" style="padding-top: 5px; max-height: 100vh; overflow: auto;">
             @yield('page')   
         </div>
 
     </div>
 
-
     <script type="text/javascript">
+
+      $("#switch-mode").change( function() {
+        if( $("#switch-mode").prop("checked") ) {
+          changeMode("white"); 
+        } else {
+          changeMode("black"); 
+        }
+      }); 
+
+      function changeMode( param ) {
+        if( param == "white" ) {
+          $('.mode-dark').addClass("mode-white"); 
+          $('.mode-dark').removeClass("mode-dark"); 
+          $('.container-side-mode-dark').addClass("container-side-mode-white"); 
+          $('.container-side-mode-dark').removeClass("container-side-mode-dark"); 
+          $('.dataTables_paginate').css("color", "black!important");   
+        } else if( param == 'black') { 
+          $('.mode-white').addClass("mode-dark"); 
+          $('.mode-white').removeClass("mode-white"); 
+          $('.container-side-mode-white').addClass("container-side-mode-dark"); 
+          $('.container-side-mode-white').removeClass("container-side-mode-white"); 
+          $('.dataTables_paginate').css("color", "white!important");  
+        }
+      }
 
       //Navegador lateral | menú
       $('.selected-admin-pedidos').click( function( event ){
@@ -1005,6 +1192,97 @@ const removeNotification = (event) => {
 
 </script>
   
+  <style type="text/css">
+    table.dataTable tbody tr {
+        background-color: #212228;
+    }
+    .table-bordered {
+        border: 0px solid #ddd;
+    }   
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+        color: #b9b9b9!important;
+        font-weight: 600;
+    }
+    .dataTables_length select {
+        background-color: #212228;
+        border-radius: 7px;
+        margin: 0px 10px;
+    }
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        background-color: #212228;
+        border: 1px solid #545454;
+        border-radius: 7px;
+        height: 30px;
+        padding: 10px;
+    }
+    table.dataTable.no-footer {
+        border-bottom: 0px solid #111;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover { 
+        background: linear-gradient(to bottom, #212228 0%, #212228 100%);
+        border: 1px solid #2f2f2f;
+    }
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 5px 9px;
+    }
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+        color: white!important;
+        font-weight: 600; 
+        padding-top: 10;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+            color: white !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: white!important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    border: 1px solid #46b04a;
+    color: #46b04a!important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #111;
+    background-color: #585858;
+    /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #585858), color-stop(100%, #111)); */
+    /* background: -webkit-linear-gradient(top, #585858 0%, #111 100%); */
+    background: -moz-linear-gradient(top, #585858 0%, #111 100%);
+    background: -ms-linear-gradient(top, #585858 0%, #111 100%);
+    background: -o-linear-gradient(top, #585858 0%, #111 100%);
+    /* background: linear-gradient(to bottom, #585858 0%, #111 100%); */
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #111;
+    background-color: #585858!important;
+}
+
+    .eventday {
+        background-color: #2196f3; 
+    }
+    .currMont:has( > .eventday ) { 
+        background-color: red!important;
+    }
+
+
+    .room-pefil {
+        border: 1px solid gray;
+        padding: 0px 10px; 
+        display: inline-block;
+        margin-right: 5px; 
+        border-radius: 4px; 
+    }
+
+    th, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid #2f2f2f!important;
+}
+
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {
+    background-color: #0e0e0e;
+}
+</style>
  
 </body>
 </html>

@@ -66,8 +66,13 @@ class Controller extends BaseController
     }
 
     public function client( $hash ) { 
-    	$user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
-    	return view('client', ['hash' => $hash, 'user' => $user]);  
+    	$user = DB::select("SELECT * FROM guest WHERE hash = '$hash'"); 
+        if( count($user) > 0 ) {
+            $user = $user[0]; 
+    	    return view('client', ['hash' => $hash, 'user' => $user]);  
+        } else {
+            return view('client', ['hash' => $hash, 'user' => null]);  
+        }
     }
 
     public function welcome( ) { 

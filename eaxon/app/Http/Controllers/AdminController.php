@@ -219,21 +219,48 @@ class AdminController extends BaseController
     }
 
     // GUEST 
+
+    // obtener datos e historial de huesped (carga de huesped existente)
+    public function loadGuest( Request $data ) {
+        $id = $data->input('idguest'); 
+        
+        $guest = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest WHERE G.idguest = $id")[0];
+        foreach ($guest as $k => $g) {
+            $guest->events = DB::select("SELECT * FROM EVENT WHERE guest_idguest = $id");  
+        }
+
+        print_r(json_encode($guest) ); 
+    }
+
     // registrar huesped 
     public function checkin() { 
-        $hotels = DB::select("SELECT * FROM hotel"); 
+        
+        $load = false; 
+        $guest = null; 
+        if( isset($_GET['id']) ) {
+            $idGuest = $_GET['id']; 
+            $load = true; 
+            $guest = DB::select("SELECT * FROM guest WHERE idguest = $idGuest")[0]; 
+
+            $guest->events = DB::select("SELECT * FROM event WHERE guest_idguest = $idGuest");  
+        }
+
+        $hotels       = DB::select("SELECT * FROM hotel"); 
         $client_types = DB::table("guest_types")->get();  
-        return view('admin/checkin', ['hotels' => $hotels, 'client_types' => $client_types]);  
+
+        return view('admin/checkin', ['hotels' => $hotels, 'client_types' => $client_types, 'load' => $load, 'guest' => $guest]);  
     }
+
     // lista de huéspedes 
      public function list() {
-         
          /* 
         $from = DB::select("SELECT * FROM event WHERE from = '2022-04-13'");   
         print_r(json_encode($from)); 
-        return; */ 
+        return; 
+        */  
+        $guests = DB::select("SELECT * FROM guest G RIGHT JOIN event E ON G.idguest = E.guest_idguest INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types GROUP BY G.idguest");   
 
-        $guests = DB::select("SELECT * FROM guest G INNER JOIN event E ON G.idguest = E.guest_idguest INNER JOIN guest_types GT ON G.guest_types_idguest_types = GT.idguest_types ORDER BY G.idguest ASC");   
+
         foreach ($guests as $key => $guest) {
             $guest->rooms = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent INNER JOIN room R ON RR.room_idroom = R.idroom WHERE E.idevent = ".$guest->idevent); 
         }
@@ -241,13 +268,25 @@ class AdminController extends BaseController
         return; */
         return view('admin/list', ['guests' => $guests]);  
     }
- 
-    public function editGuest( $id ) { 
+    
+    // prediction no duplicate guests 
+    public function getAllCustomers( ) {
+        $guests = DB::select("SELECT NAME AS nombre, nationality AS cities, idguest AS idguest FROM guest"); 
+        return json_encode($guests); 
+    }
+
+    public function editGuest( $id ) {  
         $hotels = DB::select("SELECT * FROM hotel"); 
         $client_types = DB::table("guest_types")->get();  
-        $guest = DB::table('guest')->where('idguest', $id)->get()[0]; 
+        $guest = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest WHERE G.idguest = $id");  
 
-        return view('admin/editGuest', ['hotels' => $hotels, 'client_types' => $client_types, 'guest' => $guest]);  
+        /* 
+        print_r( json_encode($guest) ); 
+        return; */ 
+ 
+        return view('admin/editGuest', ['hotels'       => $hotels, 
+                                        'client_types' => $client_types,
+                                        'guest'        => $guest ]); 
     }
 
       // HOTEL 
@@ -321,9 +360,57 @@ class AdminController extends BaseController
  RT.title titletype, RT.price_per_night price_per_night FROM room R INNER JOIN type_room RT ON R.type_room_idtype_room = RT.idtype_room"); 
         return view('admin/listRooms', ["entities" => $entities]); 
     } 
+
+    public function availableRooms( Request $data ) { 
+ 
+        $from_n = '2022-02-02'; 
+        $to_n   = '2022-06-05'; 
+
+        $from_n = $data->input('from'); 
+        $to_n = $data->input('to');   
+
+        $allRooms = DB::select("SELECT * FROM room"); 
+
+        $remove_from = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE from_date BETWEEN '$from_n' AND '$to_n'");  
+
+        $remove_to = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE to_date BETWEEN '$from_n' AND '$to_n'");  
+
+        $remove_from = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE '$from_n' BETWEEN from_date AND to_date"); 
+        $remove_to = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE '$to_n' BETWEEN from_date AND to_date"); 
+
+
+        //print_r( json_encode($this->deleteIn($allRooms, $remove_from) ) ); return;
+        $cleaned = $this->deleteIn($this->deleteIn($allRooms, $remove_to), $remove_from); 
+        print_r( json_encode($cleaned) );  
+    }
+
+    // excluir las habitaciones ocupadas 
+    public function deleteIn( $array_all, $array_delete ) {
+        $to_return = null;    
+        $finded    = true; 
+
+        if( $array_all ) {
+            foreach ($array_all as $k => $all) {
+                //print_r( $all->idroom );      
+                $finded = true; 
+                foreach ($array_delete as $key => $del ) {
+                    if ( $del->room_idroom == $all->idroom ) {
+                        //  echo "mensaje";  
+                        $finded = false; 
+                    }
+                }
+                if( $finded ) {
+                    $to_return[] = $all; 
+                }
+            }
+        }
+
+        return ( $to_return ); 
+    }
+
     public function getRooms() { 
         $rooms = DB::select("SELECT * FROM room");
-        return json_encode($rooms);  
+        return json_encode($rooms); 
     }
 
     // CATÁLOGOS HUÉSPEDES / TIPOS DE CLIENTES 
@@ -427,14 +514,18 @@ class AdminController extends BaseController
 
     public function getGuestDetails( Request $data ) {
         $id = $data->input('id'); 
-        $guest = DB::table("guest")->where('idguest', $id)->get();
-        return json_encode($guest[0]); 
+        //$guest = DB::table("guest")->where('idguest', $id)->get();
+        $guests = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest WHERE G.idguest = $id");
+        foreach ($guests as $key => $guest) {
+            $guest->rooms = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent INNER JOIN room R ON RR.room_idroom = R.idroom WHERE E.idevent = ".$guest->idevent); 
+        } 
+        return json_encode($guests[0]); 
     }
 
     public function guest(Request $data) {
         $name           = $data->input('name'); 
         $phone          = $data->input('phone');  
-        $rooms           = $data->input('room'); 
+        $rooms          = $data->input('room'); 
         $hotel          = $data->input('hotel'); 
         $idguest_types  = $data->input('idguest_types'); 
         $nationality    = $data->input('nationality'); 
@@ -442,17 +533,22 @@ class AdminController extends BaseController
         $url  = $data->input('url'); 
         $from = $data->input('from'); 
         $to   = $data->input('to'); 
+        $idguest = $data->input('idguest'); 
 
         $random_base64 = base64_encode(random_bytes(4));
         $hash = serialize($random_base64);
 
         $hash = str_replace( array('"', '/'), array("", ""), $hash); 
 
-        DB::select("INSERT INTO guest(name, hash, phone, hotel_idhotel, guest_types_idguest_types, nationality, notes, url) VALUES('$name', '$hash', '$phone', $hotel, $idguest_types, '$nationality', '$alergias', '$url')"); 
-
-        $last_id =  DB::getPdo()->lastInsertId(); 
+        $last_id = null; 
+        if( $idguest ) {
+            $last_id = $idguest;  
+        } else {
+            DB::select("INSERT INTO guest(name, hash, phone, hotel_idhotel, guest_types_idguest_types, nationality, notes, url) VALUES('$name', '$hash', '$phone', $hotel, $idguest_types, '$nationality', '$alergias', '$url')"); 
+            $last_id =  DB::getPdo()->lastInsertId(); 
+        }
         
-        DB::table('event')->insert(["from" => $from, "to" => $to, "guest_idguest" => $last_id]); 
+        DB::table('event')->insert(["from_date" => $from, "to_date" => $to, "guest_idguest" => $last_id]); 
 
         $last_id =  DB::getPdo()->lastInsertId(); 
         

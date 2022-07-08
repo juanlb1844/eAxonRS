@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.css"/>
 
 
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css">
+
+
 <style type="text/css">
   .element-gallery {
     height: 170px; 
@@ -51,40 +54,110 @@
 </style>
   
     <div class="col-lg-12 pd1">
-        <h1>CHECK IN</h1>
+        <h1 style="font-weight: 900;">PERFIL DE CLIENTE</h1>
     </div>
 
-    <div class="col-lg-8 np">
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Hoteles</p>
-            <select field="data" id="hotel" name-field="hotel_idhotel" type-field="input" class="form-control">
-                @foreach( $hotels as $hotel ) 
-                    <option value="{{$hotel->idhotel}}">{{$hotel->name}}</option> 
-                @endforeach 
-            </select> 
-        </div> 
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Nombre de huesped</p>
-            <input class="form-control" id="checkin-name" placeholder="nombre" type="text" name="" value="{{$guest->name}}">
+    <div class="col-lg-9">
+        <div class="col-lg-12 np">
+            <div class="col-lg-3 col-md-4 col-12 pd1">
+                <p>Hoteles</p>
+                <select field="data" id="hotel" name-field="hotel_idhotel" type-field="input" class="form-control">
+                    @foreach( $hotels as $hotel ) 
+                        <option value="{{$hotel->idhotel}}">{{$hotel->name}}</option> 
+                    @endforeach 
+                </select> 
+            </div> 
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Nombre de huesped</p>
+                <input class="form-control" id="checkin-name" placeholder="nombre" type="text" name="" value="{{$guest[0]->name}}">
+
+            </div>
+            <div class="col-lg-2 col-md-4 col-12 pd1">
+                <p>Nacionalidad</p>
+                <select id="nationality" class="form-control">
+                    <option value="EU">EU</option>
+                    <option value="CA">CA</option>
+                    <option value="MX">MX</option> 
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 col-12 pd1">
+                <p>Cel</p>
+                <input class="form-control" id="checkin-phone" placeholder="teléfono" type="text" name="" value="{{$guest[0]->phone}}">
+            </div>
         </div>
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Cel</p>
-            <input class="form-control" id="checkin-phone" placeholder="teléfono" type="text" name="" value="{{$guest->phone}}">
+            <div class="col-lg-12 np">
+                <!-- 
+                <div class="col-lg-12" style="padding-left: 10px;">
+                    <h2 style="margin: 0px;">estadía</h2>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12 pd1">
+                    <p>Llegada</p>
+                    <input class="form-control" min="2022-05-31" id="time-from" type="date" name="">
+                </div>
+                <div class="col-lg-4 col-md-4 col-12 pd1">
+                    <p>Salida</p>
+                    <input class="form-control" min="2022-06-01" id="time-to" type="date" name="">
+                </div> --> 
+                <!-- <div class="col-lg-4 col-md-4 col-12 pd1">
+                    <p>Habitaciónes</p>
+                    <input style="display: none;" class="form-control" id="checkin-room" placeholder="habitación" type="text" name="" value="">
+                    <button class="btn btn-primary" id="selectRoom"></button>
+                </div> --> 
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Tipo de cliente</p>
+                <select class="form-control" id="idguest_types">
+                    @foreach( $client_types as $k => $type )
+                        <option value="{{$type->idguest_types}}" value="{{$type->idguest_types}}">{{$type->title}}</option>
+                    @endforeach  
+                </select>
+            </div>
+             <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Condición médica</p>
+                <select class="form-control">
+                    <option value="1">default</option>
+                    <option value="2">saludable</option>
+                    <option value="3">problemas cardiacos</option>
+                </select>
+            </div>
+            <!-- 
+             <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Forma de llegada</p>
+                <select class="form-control">
+                    <option value="1">default</option>
+                    <option value="2">caminando</option>
+                    <option value="3">eaxon empresas</option>
+                </select>
+            </div> --> 
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>Tarjeta de crédito</p>
+                <input class="form-control" id="checkin-name" placeholder="**** **** **** ****" type="text" name="">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>FECHA</p>
+                <input class="form-control" id="checkin-name" placeholder="MM/YY" type="text" name="">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 pd1">
+                <p>CV</p>
+                <input class="form-control" id="checkin-name" placeholder="CV" type="text" name="">
+            </div>
+            <div class="col-lg-12 col-md-4 col-12 pd1">
+                <p>Alergias</p>
+                <textarea class="form-control" id="alergias" placeholder="alergias" type="text" name="">{{$guest[0]->notes}}</textarea>
+            </div>
+
+        <div id="qrcode-2"></div>
+        <div class="col-lg-12 pd1">
+            <button class="btn btn-primary" onclick="save()">guardar</button>
+            <button class="btn btn-primary" onclick="deleteGuest()">eliminar</button>
         </div>
-        <div class="col-lg-6 col-md-4 col-12 pd1">
-            <p>Nacionalidad</p>
-            <select id="nationality" class="form-control">
-                <option value="EU">EU</option>
-                <option value="CA">CA</option>
-                <option value="MX">MX</option> 
-            </select>
-        </div>
+
     </div>
-        <div class="col-lg-4">
+    <div class="col-lg-3">
             <div style="text-align: center;">
                  <div class="col-lg-12">
-                    @if( strlen($guest->url) > 1 ) 
-                        <div class="prev-image" style="background-image: url('{{$guest->url}}')"></div> 
+                    @if( strlen($guest[0]->url) > 1 ) 
+                        <div class="prev-image" style="background-image: url('{{$guest[0]->url}}')"></div> 
                     @else 
                         <div class="prev-image"></div> 
                     @endif     
@@ -93,72 +166,74 @@
                     <div class="dropzone col-lg-12" id="dropzone-1"></div> 
                 </div>
             </div>
-        </div>
-        <div class="col-lg-12 np">
-            <div class="col-lg-12" style="padding-left: 10px;">
-                <h2 style="margin: 0px;">estadía</h2>
+
+            <style type="text/css">
+                .container-events {
+                    padding-top: 20px; 
+                }
+                .row-event {
+                    background-color: #2196f3; 
+                    border-radius: 7px; 
+                    padding: 10px; 
+                    margin-bottom: 20px; 
+                }
+                .row-event:hover {
+                    cursor: pointer;
+                }
+                .event-dates span {
+                    display: block; 
+                    font-size: 17px; 
+                    font-weight: 600;
+                }
+                .event-side {
+                    font-size: 27px; 
+                    font-weight: bolder;
+                    text-align: left;
+                }
+            </style>
+
+            <div class="col-lg-12 np">
+                <div class="container-events">
+                    <div class="col-lg-12 row-event">
+                        <div class="col-lg-7 event-dates">
+                            <span>Check in&nbsp;&nbsp;&nbsp;: 23 ENE 2022</span>
+                            <span>Check out: 25 ENE 2022</span>
+                        </div>
+                        <div class="col-lg-5 event-side">
+                            <span>$1,700.00</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 row-event">
+                        <div class="col-lg-7 event-dates">
+                            <span>Check in&nbsp;&nbsp;&nbsp;: 23 ENE 2022</span>
+                            <span>Check out: 25 ENE 2022</span>
+                        </div>
+                        <div class="col-lg-5 event-side">
+                            <span>$1,700.00</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 row-event">
+                        <div class="col-lg-7 event-dates">
+                            <span>Check in&nbsp;&nbsp;&nbsp;: 23 ENE 2022</span>
+                            <span>Check out: 25 ENE 2022</span>
+                        </div>
+                        <div class="col-lg-5 event-side">
+                            <span>$1,700.00</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 row-event">
+                        <div class="col-lg-7 event-dates">
+                            <span>Check in&nbsp;&nbsp;&nbsp;: 23 ENE 2022</span>
+                            <span>Check out: 25 ENE 2022</span>
+                        </div>
+                        <div class="col-lg-5 event-side">
+                            <span>$1,700.00</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-12 pd1">
-                <p>Llegada</p>
-                <input class="form-control" min="2022-05-31" id="time-from" type="date" name="">
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 pd1">
-                <p>Salida</p>
-                <input class="form-control" min="2022-06-01" id="time-to" type="date" name="">
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 pd1">
-                <p>Habitación</p>
-                <input style="display: none;" class="form-control" id="checkin-room" placeholder="habitación" type="text" name="" value="{{$guest->room}}}}">
-                <button class="btn btn-primary" id="selectRoom">{{$guest->room}}</button>
-            </div>
-        </div>
- 
-        <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Tipo de cliente</p>
-            <select class="form-control" id="idguest_types">
-                @foreach( $client_types as $k => $type )
-                    <option value="{{$type->idguest_types}}" value="{{$type->idguest_types}}">{{$type->title}}</option>
-                @endforeach  
-            </select>
-        </div>
-         <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Condición médica</p>
-            <select class="form-control">
-                <option value="1">default</option>
-                <option value="2">saludable</option>
-                <option value="3">problemas cardiacos</option>
-            </select>
-        </div>
-         <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Forma de llegada</p>
-            <select class="form-control">
-                <option value="1">default</option>
-                <option value="2">caminando</option>
-                <option value="3">eaxon empresas</option>
-            </select>
-        </div>
-        <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>Tarjeta de crédito</p>
-            <input class="form-control" id="checkin-name" placeholder="**** **** **** ****" type="text" name="">
-        </div>
-        <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>FECHA</p>
-            <input class="form-control" id="checkin-name" placeholder="MM/YY" type="text" name="">
-        </div>
-        <div class="col-lg-4 col-md-4 col-12 pd1">
-            <p>CV</p>
-            <input class="form-control" id="checkin-name" placeholder="CV" type="text" name="">
-        </div>
-        <div class="col-lg-12 col-md-4 col-12 pd1">
-            <p>Alergias</p>
-            <textarea class="form-control" id="alergias" placeholder="alergias" type="text" name="">{{$guest->notes}}</textarea>
-        </div>
- 
-        <div id="qrcode-2"></div>
-        <div class="col-lg-12 pd1">
-            <button class="btn btn-primary" onclick="save()">guardar</button>
-            <button class="btn btn-primary" onclick="deleteGuest()">eliminar</button>
-        </div>
+    </div>
+
 
 <div id="select-room" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -207,7 +282,7 @@
 <script type="text/javascript">
 
     function deleteGuest() {
-        var id = '{{$guest->idguest}}'; 
+        var id = '{{$guest[0]->idguest}}'; 
         if( confirm('¿estás seguro?')) {
             
             let entity_id = id; 
