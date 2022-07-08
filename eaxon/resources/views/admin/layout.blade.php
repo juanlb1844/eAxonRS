@@ -606,7 +606,7 @@
 
                   <div class="col-lg-12 row content-mode">
                       <input type="checkbox" id="switch-mode"/><label id="switch-mode-leyend" for="switch-mode">Toggle</label>
-                      <span>black</span>
+                      <span></span>
                   </div>
 
                   <style type="text/css">
