@@ -122,7 +122,7 @@
 		margin: 5px 0px;
 		padding-top: 10px;
 	}
-	.pt { padding-top: 10px; }
+	.pt { padding-top: 10px!important; }
 </style>  
 
 </head>
