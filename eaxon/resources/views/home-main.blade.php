@@ -169,7 +169,7 @@
 					<div class="service-1 col-xs-4" style="padding: 5px;">
 						<div class="back-img col-xs-12"  style="background-image: url('https://media.gq.com.mx/photos/6155f165f3951529d43a0743/16:9/w_2560%2Cc_limit/GettyImages-56807633-lo-que-no-debes-pedir-de-room-service.jpg'); ">
 							<div>
-								<span class="name-service">alimentos</span>
+								<span class="name-service">restaurante</span>
 							</div>
 						</div>
 					</div>
