@@ -20,7 +20,7 @@
 		padding: 0px; 
 	}
 	.header-top {
-		background-color: #050505; 
+		background-color: #ffffff; 
 		text-align: center;
 		padding: 10px 10px; 
 	}
@@ -75,7 +75,8 @@
 	<div class="container-fluid mobile-content video" id="vide">
 		<div class="header-top">
 			<!-- <span>{{$hash}}</span> --> 
-			<span class="header-title">eAxón</span>
+			<img style="width: 120px;" src="{{asset('/media-admin/eaxon.png')}}">
+			<!--<span class="header-title">eAxón</span>--> 
 		</div>
 		<div class="body-content">
 			@if( $user )

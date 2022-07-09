@@ -159,7 +159,7 @@
 					</div>
 					<div class="col-lg-12 row-data">
 						<span class="title-field">Correo electrónico</span>
-						<input class="form-control form-imput" id="client-email" type="email" name="email"> 
+						<input class="form-control form-imput" autocomplete="new-password" id="client-email" type="email" name="email">   
 						<span style="color:red" id="mge-1"></span>
 					</div>
 					<div class="col-lg-12 row-data" style="display: contents;">
@@ -175,20 +175,20 @@
 					<div class="col-lg-12 row-data">
 						<div class="col-lg-6 np" style="padding-right: 10px!important;">
 							<span class="title-field">Nombre</span>
-							<input class="form-control form-imput" id="client-name" type="text" name="name"> 
+							<input class="form-control form-imput" autocomplete="off" id="client-name" type="text" name="name"> 
 						</div>
 						<div class="col-lg-6 np">
 							<span class="title-field">Apellido</span>
-							<input class="form-control form-imput" id="client-lastname" type="text" name="lastname"> 
+							<input class="form-control form-imput" autocomplete="off" id="client-lastname" type="text" name="lastname"> 
 						</div>
 					</div>
 					<div class="col-lg-12 np">
 						<span class="title-field">Teléfono</span>
-						<input class="form-control form-imput" id="client-tel" type="tel" name="tel"> 
+						<input class="form-control form-imput" autocomplete="off" id="client-tel" type="tel" name="tel"> 
 					</div>
 					<div class="col-lg-12 np">
 						<span class="title-field">Puesto de trabajo</span>
-						<input class="form-control form-imput" id="client-work" type="" name="work"> 
+						<input class="form-control form-imput" autocomplete="off" id="client-work" type="" name="work"> 
 					</div>
 					<div class="col-lg-12 np">
 						<span class="title-field">Departamento</span>
@@ -219,8 +219,8 @@
 						</div>
 					</div>
 					<div class="col-lg-12 np">
-						<span class="title-field">Asigna una contraseña</span>
-						<input class="form-control form-imput" type="password" id="client-tel" type="tel" name="tel"> 
+						<span class="title-field">Asigna una contraseña</span> 
+						<input class="form-control form-imput" autocomplete="off" type="password" id="client-tel" type="tel" name="tel"> 
 					</div>
 					<div class="col-lg-12 row-data reg-info">
 						<p>Al hacer clic en "Regístrate para comenzar la prueba" aceptas el Acuerdo de <a href="">Suscripción General de eAxón</a> y la <a href="">Política de privacidad.</a></p>

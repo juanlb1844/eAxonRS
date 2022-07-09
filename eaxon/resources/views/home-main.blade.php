@@ -96,10 +96,11 @@
 	}
 	.name-service {
 		display: inline-block;
-		background-color: #e54947; 
-		padding: 2px 10px; 
+		background-color: white; 
+		padding: 5px 10px; 
 		border-radius: 7px;
-		color: white;
+		color: black;
+		font-size: 14px; 
 	}
 
 	.row-section, .row-services {
@@ -129,7 +130,7 @@
 	 
 	<div class="container-fluid np">
 		<div class="header-main col-xs-12">
-			<div class="col-xs-8">
+			<div class="col-xs-9">
 				<div class="col-xs-4 np">
 					<div class="content-user">
 						@if( strlen($user->url) > 10 )
@@ -145,9 +146,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 				<div style="padding-top: 12px;">
-					<span style="font-size: 20px; font-weight: 600;">¡hola!</span>
+					<span style="font-size: 20px; font-weight: 600;"></span>
 				</div>
 			</div>
 		</div>
@@ -173,7 +174,7 @@
 					</div>
 				</a>
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
-					<div class="service-1 col-xs-4" style="padding: 5px;">
+					<div class="service-1 col-xs-4" style="padding: 4px;">
 						<div class="back-img col-xs-12"  style="background-image: url('https://www.limpiezaslm2.com/wp-content/uploads/2019/06/externalizaci%C3%B3n-de-la-limpieza-1200x900.jpg'); ">
 							<div>
 								<span class="name-service">limpieza</span>
@@ -185,7 +186,7 @@
 			</div>
 		</div>
 
-		<div class="row-section col-xs-12">
+		<div class="row-section col-xs-12" style="display: none;">
 			<div class="header-section">
 				<span>Trending</span>
 			</div>
