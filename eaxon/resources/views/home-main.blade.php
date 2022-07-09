@@ -122,6 +122,7 @@
 		margin: 5px 0px;
 		padding-top: 10px;
 	}
+	.pt { padding-top: 10px; }
 </style>  
 
 </head>
@@ -158,7 +159,7 @@
 			<div class="content-services">
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
 					<div class="service-1 col-xs-4" style="padding: 5px;">
-						<div class="back-img col-xs-12"  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPolWrfvDPzEEm3KR6cV4ejqTX5PeidHfFf9nwvgAlt5TPVz0VQQXuiKbJckc6K_THvao&usqp=CAU'); ">
+						<div class="back-img col-xs-12 np pt"  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPolWrfvDPzEEm3KR6cV4ejqTX5PeidHfFf9nwvgAlt5TPVz0VQQXuiKbJckc6K_THvao&usqp=CAU'); ">
 							<div>
 								<span class="name-service">spa</span>
 							</div>
@@ -167,7 +168,7 @@
 				</a>
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
 					<div class="service-1 col-xs-4" style="padding: 5px;">
-						<div class="back-img col-xs-12"  style="background-image: url('https://media.gq.com.mx/photos/6155f165f3951529d43a0743/16:9/w_2560%2Cc_limit/GettyImages-56807633-lo-que-no-debes-pedir-de-room-service.jpg'); ">
+						<div class="back-img col-xs-12 np pt"  style="background-image: url('https://media.gq.com.mx/photos/6155f165f3951529d43a0743/16:9/w_2560%2Cc_limit/GettyImages-56807633-lo-que-no-debes-pedir-de-room-service.jpg'); ">
 							<div>
 								<span class="name-service">restaurante</span>
 							</div>
@@ -176,7 +177,7 @@
 				</a>
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
 					<div class="service-1 col-xs-4" style="padding: 4px;">
-						<div class="back-img col-xs-12"  style="background-image: url('https://www.limpiezaslm2.com/wp-content/uploads/2019/06/externalizaci%C3%B3n-de-la-limpieza-1200x900.jpg'); ">
+						<div class="back-img col-xs-12 np pt"  style="background-image: url('https://www.limpiezaslm2.com/wp-content/uploads/2019/06/externalizaci%C3%B3n-de-la-limpieza-1200x900.jpg'); ">
 							<div>
 								<span class="name-service">limpieza</span>
 							</div>
