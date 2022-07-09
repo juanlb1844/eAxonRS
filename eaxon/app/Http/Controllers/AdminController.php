@@ -224,9 +224,9 @@ class AdminController extends BaseController
     public function loadGuest( Request $data ) {
         $id = $data->input('idguest'); 
         
-        $guest = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest WHERE G.idguest = $id")[0];
+        $guest = DB::select("SELECT * FROM guest G INNER JOIN event E ON G.idguest = E.guest_idguest WHERE G.idguest = $id")[0];
         foreach ($guest as $k => $g) {
-            $guest->events = DB::select("SELECT * FROM EVENT WHERE guest_idguest = $id");  
+            $guest->events = DB::select("SELECT * FROM event WHERE guest_idguest = $id");  
         }
 
         print_r(json_encode($guest) ); 
@@ -278,7 +278,7 @@ class AdminController extends BaseController
     public function editGuest( $id ) {  
         $hotels = DB::select("SELECT * FROM hotel"); 
         $client_types = DB::table("guest_types")->get();  
-        $guest = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest WHERE G.idguest = $id");  
+        $guest = DB::select("SELECT * FROM guest G INNER JOIN event E ON G.idguest = E.guest_idguest WHERE G.idguest = $id");  
 
         /* 
         print_r( json_encode($guest) ); 
@@ -371,12 +371,12 @@ class AdminController extends BaseController
 
         $allRooms = DB::select("SELECT * FROM room"); 
 
-        $remove_from = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE from_date BETWEEN '$from_n' AND '$to_n'");  
+        $remove_from = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE from_date BETWEEN '$from_n' AND '$to_n'");  
 
-        $remove_to = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE to_date BETWEEN '$from_n' AND '$to_n'");  
-
-        $remove_from = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE '$from_n' BETWEEN from_date AND to_date"); 
-        $remove_to = DB::select("SELECT * FROM EVENT E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE '$to_n' BETWEEN from_date AND to_date"); 
+        $remove_to = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE to_date BETWEEN '$from_n' AND '$to_n'");  
+ 
+        $remove_from = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE '$from_n' BETWEEN from_date AND to_date"); 
+        $remove_to = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent WHERE '$to_n' BETWEEN from_date AND to_date"); 
 
 
         //print_r( json_encode($this->deleteIn($allRooms, $remove_from) ) ); return;
@@ -515,7 +515,7 @@ class AdminController extends BaseController
     public function getGuestDetails( Request $data ) {
         $id = $data->input('id'); 
         //$guest = DB::table("guest")->where('idguest', $id)->get();
-        $guests = DB::select("SELECT * FROM guest G INNER JOIN EVENT E ON G.idguest = E.guest_idguest WHERE G.idguest = $id");
+        $guests = DB::select("SELECT * FROM guest G INNER JOIN event E ON G.idguest = E.guest_idguest WHERE G.idguest = $id");
         foreach ($guests as $key => $guest) {
             $guest->rooms = DB::select("SELECT * FROM event E INNER JOIN rooms_relation RR ON E.idevent = RR.event_idevent INNER JOIN room R ON RR.room_idroom = R.idroom WHERE E.idevent = ".$guest->idevent); 
         } 
