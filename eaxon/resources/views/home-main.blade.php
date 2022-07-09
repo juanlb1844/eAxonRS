@@ -156,15 +156,15 @@
 		</div>
 
 		<div class="row-services col-xs-12">
-			<div class="content-services">
-				<a href='{{asset("/client/$hash/perfil/1")}}'>
+			<div class="content-services">   
+				<a href='{{asset("/home-spa/$hash/perfil/1")}}'>
 					<div class="service-1 col-xs-4" style="padding: 5px;">
 						<div class="back-img col-xs-12 np pt"  style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPolWrfvDPzEEm3KR6cV4ejqTX5PeidHfFf9nwvgAlt5TPVz0VQQXuiKbJckc6K_THvao&usqp=CAU'); ">
-							<div>
+							<div> 
 								<span class="name-service">spa</span>
 							</div>
 						</div>
-					</div>
+					</div> 
 				</a>
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
 					<div class="service-1 col-xs-4" style="padding: 5px;">

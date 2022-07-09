@@ -73,6 +73,16 @@ class Controller extends BaseController
         } else {
             return view('client', ['hash' => $hash, 'user' => null]);  
         }
+    } 
+
+    public function homeSpa( $hash ) {
+        $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'"); 
+        if( count($user) > 0 ) {
+            $user = $user[0]; 
+            return view('home-spa', ['hash' => $hash, 'user' => $user]);  
+        } else {
+            return view('home-spa', ['hash' => $hash, 'user' => null]);  
+        }
     }
 
     public function welcome( ) { 

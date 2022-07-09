@@ -121,6 +121,8 @@ Route::get('trys', 'Controller@try');
 Route::get('/home-main/{hash}/perfil/{p}', 'Controller@homeMain'); 
  
 Route::get('/client/{hash}', 'Controller@client'); 
+Route::get('/home-spa/{hash}/perfil/{p}', 'Controller@homeSpa'); 
+
 Route::get('/welcome', 'Controller@welcome');  
 
 Route::get('/client/{hash}/perfil/{p}', 'Controller@clientHome'); 
