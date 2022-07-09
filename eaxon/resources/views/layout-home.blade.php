@@ -182,14 +182,14 @@
 	<div class="container-fluid mobile-content">
 		<div class="header-top">
 			<!-- <span>{{$hash}}</span> --> 
-			<div class="col-lg-6 col-xs-3">
+			<div class="col-lg-6 col-xs-4">
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
 					<!--<span class="header-title pull-left">eAxón</span>--> 
 					<img style="width: 100%;" src="https://demo.eaxon.com.mx/media-admin/eaxon.png">
 				</a> 
 			</div>
-			<div class="col-lg-6 col-xs-6" style="padding-top: 5px;">
-				<span class="header-title" id="MyClockDisplay" style="color: #ff5722; font-size: 22px!important;"></span>
+			<div class="col-lg-6 col-xs-6 np" style="padding-top: 0px;">
+				<span class="header-title" id="MyClockDisplay" style="color: #ff5722; font-size: 22px!important;"></span> 
 			</div>
 			<div class="col-lg-6 col-xs-3">
 				<!-- <span class="header-avatar pull-right"></span> -->
