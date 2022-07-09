@@ -197,7 +197,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="second-menu col-xs-12 np"> 
+		<div class="second-menu col-xs-12 np" style="display: none"> 
 			<ul>
 				<li>
 					<span>comida</span>
