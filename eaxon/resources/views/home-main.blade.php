@@ -143,6 +143,7 @@
 				<div class="col-xs-8 np">
 					<div style="padding-top: 15px; text-align: left;">
 						<span style="color: white; font-weight: 500; font-size: 17px;">{{$user->name}}</span>
+						<p>Las grutas</p>
 					</div>
 				</div>
 			</div>
