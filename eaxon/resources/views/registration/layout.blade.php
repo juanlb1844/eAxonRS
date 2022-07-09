@@ -168,7 +168,9 @@
 				</div>
 				<div class="form-registration row inactive" id="second-step">
 					<div class="col-lg-12 title-block">
-						<span>Datos del administrador <span class="subleyend">(después puedes cambiar estos datos)</span></span>
+						<span>Datos del administrador 
+							<span class="subleyend">(estos datos pueden ser editados desde tu cuenta)</span>
+						</span>
 					</div>
 					<div class="col-lg-12 row-data">
 						<div class="col-lg-6 np" style="padding-right: 10px!important;">
@@ -218,7 +220,7 @@
 					</div>
 					<div class="col-lg-12 np">
 						<span class="title-field">Asigna una contraseña</span>
-						<input class="form-control form-imput" id="client-tel" type="tel" name="tel"> 
+						<input class="form-control form-imput" type="password" id="client-tel" type="tel" name="tel"> 
 					</div>
 					<div class="col-lg-12 row-data reg-info">
 						<p>Al hacer clic en "Regístrate para comenzar la prueba" aceptas el Acuerdo de <a href="">Suscripción General de eAxón</a> y la <a href="">Política de privacidad.</a></p>
