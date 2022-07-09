@@ -184,7 +184,8 @@
 			<!-- <span>{{$hash}}</span> --> 
 			<div class="col-lg-6 col-xs-3">
 				<a href='{{asset("/client/$hash/perfil/1")}}'>
-					<span class="header-title pull-left">eAxón.</span>
+					<!--<span class="header-title pull-left">eAxón</span>--> 
+					<img style="width: 100%;" src="https://demo.eaxon.com.mx/media-admin/eaxon.png">
 				</a> 
 			</div>
 			<div class="col-lg-6 col-xs-6" style="padding-top: 5px;">
