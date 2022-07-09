@@ -188,7 +188,7 @@
 					<img style="width: 100%;" src="https://demo.eaxon.com.mx/media-admin/eaxon.png">
 				</a> 
 			</div>
-			<div class="col-lg-6 col-xs-5" style="padding-top: 5px;">
+			<div class="col-lg-6 col-xs-5" style="padding-top: 7px; padding-left: 0px; padding-right: 0px;">
 				<span class="header-title" id="MyClockDisplay" style="color: #ff5722; font-size: 20px!important;"></span> 
 			</div>
 			<div class="col-lg-6 col-xs-3">
