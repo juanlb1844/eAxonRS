@@ -141,8 +141,8 @@
 					</div>
 				</div>
 				<div class="col-xs-8 np">
-					<div style="padding-top: 15px; text-align: left;">
-						<span style="color: white; font-weight: 500; font-size: 7px;">{{$user->name}}</span>
+					<div style="padding-top: 7px; text-align: left;">
+						<span style="color: white; font-weight: 500; font-size: 17px;">{{$user->name}}</span>
 						<p style="color: #b2b2b2;">Las grutas</p>
 					</div>
 				</div>
