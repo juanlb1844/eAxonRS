@@ -189,7 +189,7 @@
 				</a> 
 			</div>
 			<div class="col-lg-6 col-xs-6 np" style="padding-top: 0px;">
-				<span class="header-title" id="MyClockDisplay" style="color: #ff5722; font-size: 22px!important;"></span> 
+				<span class="header-title" id="MyClockDisplay" style="color: #ff5722; font-size: 20px!important;"></span> 
 			</div>
 			<div class="col-lg-6 col-xs-3">
 				<!-- <span class="header-avatar pull-right"></span> -->
