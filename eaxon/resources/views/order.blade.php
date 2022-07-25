@@ -1,18 +1,20 @@
 @extends('layout-home') 
 
 @section('page')
+
 <!-- 
 	-Programar 
 	-Calificar 
 	-Compartir 
 	-Configurar 
 --> 
+
 <style type="text/css">
-		.mobile-content {
+	.mobile-content {
 		padding: 0px; 
 		background-position: center;
     background-size: cover;
-    background-color: #363530;
+    background-color: #333333;
 	}
   .container-description {
     min-height: 15vh; 
@@ -25,7 +27,6 @@
     background-position: center;
     background-size: cover;
   }
-
   .btn-style-1 {
     border-radius: 12px;
     font-weight: 600;
@@ -73,7 +74,7 @@
 }
 </style>
 
-<div class="col-xs-12" style="background-color: #363530; color: white!important; min-height: 100vh; padding-top: 5vh;">
+<div class="col-xs-12" style="background-color: #333333; color: white!important; min-height: 100vh; padding-top: 5vh;">
     <div class="col-xs-12" style="text-align: center;">
       <span style="font-size: 27px; font-weight: bolder;">estamos haciéndonos cargo de tu pedido..</span>
       <h1></h1>
@@ -111,12 +112,16 @@
       background-position: center;
       text-align: center;
     }
+
+    .order-status {
+      font-size: 12px; 
+    }
   </style>
 
   <div class="col-xs-12">
     <h1>&nbsp;</h1>
   </div>
-  <div class="col-xs-12 np">
+  <div class="col-xs-12 order-status np">
     <div class="col-xs-4 np">
       <p><span class="step" id="status-atender">&nbsp;</span> orden recibida </p>
     </div>
@@ -179,8 +184,6 @@
         }
       }); 
     }
-
-  
 
   function notification(n_body, n_header, n_location) {
           // Let's check if the browser supports notifications

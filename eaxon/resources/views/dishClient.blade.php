@@ -184,6 +184,9 @@
     min-height: 100vh;
     background-color: #363530;
   }
+  .modal-body {
+    display: flow-root;
+  }
 </style>
  
 <!-- Modal -->
@@ -299,6 +302,7 @@
 
 
 <style type="text/css">
+  .list-ingredents { margin-bottom: 0px!important; }
 	.list-ingredents img {
 		width: 55px;
 	}

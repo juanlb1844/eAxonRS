@@ -25,9 +25,9 @@ class AdminController extends BaseController
     public function checkLoginAdmin( Request $data ) {
         $user = $data->input('user'); 
         $pass = $data->input('pass'); 
- 
-        if( $user == 'root' AND $pass == 'root' ) {
-            \Session::put('logueadoAdmin', true); 
+  
+        if( ($user == 'root' AND $pass == 'root') || ($user == 'torandy18@gmail.com' AND $pass = '-Torandy221') || ($user == 'edtaveramusician@gmail.com' AND $pass == '-Edtaveramusician221')) {
+            \Session::put('logueadoAdmin', true);   
             //$request->session()->put('logueadoAdmin',  true);  
         } else {
             echo "error"; 

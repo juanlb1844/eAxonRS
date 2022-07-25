@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
 <title>Client - eAxón</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
- 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Assistant:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/pattern.css">
 
 <style type="text/css">
 	.html {
@@ -31,7 +24,6 @@
 		font-family: 'Archivo Black', sans-serif;
 		font-family: 'Assistant', sans-serif;
 	}
-	
 	.header-top {
 		width: 100%;
 		background-color: #333333;
@@ -46,7 +38,6 @@
 		font-weight: bolder;
 		color: #ccc; 
 	}
-
 	.body-content {
 		text-align: center;
 		padding-top: 17vh; 
@@ -56,15 +47,11 @@
 		font-weight: 600; 
 		color: #ccc;
 	}
-
-	 
 	.line-body {
 		font-size: 32px; 
 		color: white;
 		padding: 20px 10px; 
 	}
-
-
 	.header-avatar {
 		display: inline-block;
 		width: 40px; 
@@ -75,9 +62,6 @@
 		background-position: center;
 		background-size: cover;
 	}
-
-
-
 	/* second menu */ 
 	.second-menu { padding-top: 20px;  }
 	.second-menu ul li {
@@ -88,7 +72,6 @@
 		color: white; 
 		font-size: 17px; 
 	}
-
 	/* banner-img-text */ 
 	.banner-img-text {
 		color: #d15219;
@@ -108,8 +91,6 @@
 		font-weight: 900;
 		letter-spacing: 1px;
 	}
-
-
 	/* slider */ 
 	.dish-content span {
 		z-index: 22;
@@ -130,9 +111,7 @@
 		line-height: 12px; 
 		border-radius: 10px;
 	}
-
 	h2 { font-weight: 900; }
-
 	.courtain {
 		background-color: #00000087;
     	height: 400px;
@@ -155,11 +134,9 @@
 	    left: 0px;
 	    bottom: 0px; 
 	}
-
 	.np {
 		padding: 0px!important;
 	}
-
 	.there-is-no {
 		font-size: 25px; 
 		font-weight: boldeR; 
@@ -237,8 +214,18 @@
 			}
 
 			.control-count { display: inline-block; width: 100%; text-align: center; }
-		</style>
 
+			.arrow-right {
+				background-image: url('{{asset('theme_client/right-arrow.svg')}}'); 
+				background-repeat: no-repeat;
+				text-align: center;
+				background-size: cover;
+				height: 70px; 
+				background-position-y: center;
+				background-position-x: right;
+				background-size: 35px; 
+			}
+		</style>
 
 		@if(\Session::get('dishes'))
 			@php $total = 0; @endphp
@@ -251,7 +238,6 @@
 							<div class="cart-item col-xs-12">
 								<div class="col-xs-4" style="padding-left: 0px;">
 									<div class="img-prev-cart" style="background-image: url('{{$k['image']}}');">
-										
 									</div>
 								</div>
 								<div class="col-xs-6 np">
@@ -381,7 +367,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="col-xs-12 main-control-cart">
 				<div class="container-main-control">
 					<!-- <a href="{{asset('order/1/hash/')}}/{{$hash}}/perfil/1">--> 
@@ -389,7 +374,6 @@
 					<!-- </a> --> 
 				</div>
 			</div>
-
 		@else 
 			<div class="col-xs-12"> 
 				<div class="container-msg">
@@ -397,6 +381,22 @@
 				</div>
 			</div>
 		@endif  
+
+		@if(count($orders))
+				<div calss="row">
+					<div class=""> 
+						<div class="col-xs-12 pattern-dots-sm">
+							<div class="col-xs-10">
+							 <span class="there-is-no">Tiene un pedido en curso</span>
+							</div>
+							<div class="col-xs-2 arrow-right">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			@endif 
+
 	</div>
 
 	<script type="text/javascript">

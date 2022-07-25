@@ -17,6 +17,11 @@ class Controller extends BaseController
         return view('registration/layout'); 
     }
 
+    public function createRegister() {  
+        echo "mensaje"; 
+    }
+    // 
+
     public function homeMain( $hash ) {
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0];
         return view('home-main', ['hash' => $hash, 'user' => $user]); 
@@ -136,8 +141,8 @@ class Controller extends BaseController
  
         $iddish = $dish->iddish;
         $ingredients = DB::select("SELECT idingredients, name, img FROM ingredient_relation IR INNER JOIN ingredients I ON IR.ingredients_idingredients = I.idingredients WHERE IR.dish_iddish = $iddish");
-
-        $guarnicions = DB::select("SELECT * FROM guarnicion_relation GR INNER JOIN guarnicion G ON GR.idguarnicion_relation = G.idguarnicion"); 
+  
+        $guarnicions = DB::select("SELECT * FROM guarnicion_relation GR INNER JOIN guarnicion G ON GR.guarnicion_idguarnicion = G.idguarnicion WHERE GR.dish_iddish = $iddish"); 
 
  
         return view('dishClient', ['id' => $id, 'hash' => $hash, 'user' => $user, 'perfil' => $p, 'dish' => $dish, 'gallery' => $gallery, 'ingredients' => $ingredients, 'guarnicions' => $guarnicions ]);  
@@ -151,7 +156,10 @@ class Controller extends BaseController
 
     public function cart( $id, $hash, $p ) {
         $user = DB::select("SELECT * FROM guest WHERE hash = '$hash'")[0]; 
-        return view('carrito', ['hash' => $hash, 'user' => $user, 'perfil' => $p ]); 
+ 
+        $has_order = DB::select("SELECT * FROM ticket T INNER JOIN guest G ON T.id_client = G.idguest  WHERE G.hash = '$hash' AND T.status != 'recibido'"); 
+ 
+        return view('carrito', ['hash' => $hash, 'user' => $user, 'perfil' => $p, 'orders' => $has_order ]); 
     }
 
     // CART 

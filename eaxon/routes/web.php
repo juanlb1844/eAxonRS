@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 // REGISTRATION 
-
+  
 Route::get('/register', 'Controller@register'); 
+Route::post('/createRegister', 'Controller@createRegister'); 
  
 // LOG IN 
  

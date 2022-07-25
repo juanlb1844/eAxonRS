@@ -159,7 +159,7 @@
 					</div>
 					<div class="col-lg-12 row-data">
 						<span class="title-field">Correo electrónico</span>
-						<input class="form-control form-imput" autocomplete="new-password" id="client-email" type="email" name="email">   
+						<input class="form-control form-imput" autocomplete="off" id="client-email" type="email" name="email">   
 						<span style="color:red" id="mge-1"></span>
 					</div>
 					<div class="col-lg-12 row-data" style="display: contents;">
@@ -206,11 +206,11 @@
 					<div class="col-lg-12 row-data">
 						<div class="col-lg-6 np" style="padding-right: 10px!important;">
 							<span class="title-field">Nombre de la compañía</span>
-							<input class="form-control form-imput" id="client-name" type="text" name="name"> 
+							<input class="form-control form-imput" id="company-name" type="text" name="name"> 
 						</div>
 						<div class="col-lg-6 np">
 							<span class="title-field">Número de habitaciones</span>
-							<select class="form-control form-imput" id="client-lastname" type="text" name="lastname"> 
+							<select class="form-control form-imput" id="cant-employees" type="text" name="employees"> 
 								<option>10-100</option>
 								<option>100-500</option>
 								<option>500-1000</option>
@@ -219,8 +219,8 @@
 						</div>
 					</div>
 					<div class="col-lg-12 np">
-						<span class="title-field">Asigna una contraseña</span> 
-						<input class="form-control form-imput" autocomplete="off" type="password" id="client-tel" type="tel" name="tel"> 
+						<span class="title-field">Asigna una contraseña</span>  
+						<input class="form-control form-imput" autocomplete="off" type="password" id="password" type="tel" name="tel"> 
 					</div>
 					<div class="col-lg-12 row-data reg-info">
 						<p>Al hacer clic en "Regístrate para comenzar la prueba" aceptas el Acuerdo de <a href="">Suscripción General de eAxón</a> y la <a href="">Política de privacidad.</a></p>
@@ -263,10 +263,29 @@
 		var clientTel 		 = ""; 
 		var clientWork       = ""; 
 		var clientDepartment = ""; 
+		//  
+		var companyName      = "";     
+		var cantEmployees    = ""; 
+		var password         = ""; 
 
 		$("#last").click( function() {
 			$(".form-registration").addClass("inactive"); 
 			$(".success-message").removeClass("inactive"); 
+
+			companyName   = $("#company-name").val(); 
+			cantEmployees = $("#cant-employees").val(); 
+			password      = $("#password").val(); 
+
+			console.log(clientEmail); 
+			console.log(clienName); 
+			console.log(lastName); 
+			console.log(clientTel); 
+			console.log(clientWork); 
+			console.log(clientDepartment);  
+			console.log(companyName);
+			console.log(cantEmployees);  
+			console.log(password); 
+
 		}); 
 
 		history.pushState(null, document.title, location.href);

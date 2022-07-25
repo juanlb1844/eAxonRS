@@ -116,6 +116,7 @@
 		background-position: center;
 		background-size: cover; 
 		background-repeat: no-repeat;
+		border: 1px solid #6f6f6f;
 	}
 
 	.header-main {
@@ -131,8 +132,8 @@
 	 
 	<div class="container-fluid np">
 		<div class="header-main col-xs-12">
-			<div class="col-xs-9">
-				<div class="col-xs-4 np">
+			<div class="col-xs-12">
+				<div class="col-xs-3 np">
 					<div class="content-user">
 						@if( strlen($user->url) > 10 )
 							<span class="user-avatar" style="background-image: url('{{$user->url}}')"></span>
@@ -141,16 +142,11 @@
 						@endif 
 					</div>
 				</div>
-				<div class="col-xs-8 np">
+				<div class="col-xs-9 np">
 					<div style="padding-top: 7px; text-align: left;">
-						<span style="color: white; font-weight: 500; font-size: 17px;">{{$user->name}}</span>
+						<span style="color: white; font-weight: 500; font-size: 14px;">{{$user->name}}</span>
 						<p style="color: #b2b2b2;">Las grutas hotel</p>
 					</div>
-				</div>
-			</div>
-			<div class="col-xs-3">
-				<div style="padding-top: 12px;">
-					<span style="font-size: 20px; font-weight: 600;"></span>
 				</div>
 			</div>
 		</div>
